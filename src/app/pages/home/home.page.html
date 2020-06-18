@@ -20,7 +20,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="fondo" *ngIf="!problemas">
+<div class="fondo" *ngIf="!problemas">
   <app-tarjeta
     *ngFor="let c of contratos"
     [contrato]="c"
@@ -33,8 +33,8 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content>
-<ion-content *ngIf="problemas">
+</div>
+<div *ngIf="problemas">
   <ion-card class="tarjeta_fondo">
     <ion-img src="../../../assets/imagenes/lobo1.png"></ion-img>
 
@@ -50,4 +50,4 @@
       </ion-card-header>
     </ion-card-content>
   </ion-card>
-</ion-content>
+</div>

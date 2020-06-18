@@ -10,6 +10,31 @@ const childrenRoutes: VexRoutes = [
     pathMatch: 'full',
   },
   {
+    path: "list",
+    loadChildren: () => import("./pages/list/list.module").then(m => m.ListPageModule)
+  },
+  {
+    path: "archivo",
+    loadChildren: () => import('./pages/archivo/archivo.module').then(m => m.ArchivoPageModule)
+  },
+  {
+    path: "contrato",
+    loadChildren: () => import("./pages/contrato/contrato.module").then(m => m.ContratoPageModule)
+    
+  },
+  { path: "nuevo", 
+    loadChildren: () => import("./pages/nuevo/nuevo.module").then(m => m.NuevoPageModule)
+},
+  {
+    path: "contrato/:id",
+    loadChildren: () => import("./pages/contrato/contrato.module").then(m => m.ContratoPageModule)
+  },
+  {
+    path: "nuevo/:id",
+    loadChildren: () => import("./pages/nuevo/nuevo.module").then(m => m.NuevoPageModule)
+  },
+  { path: "home", loadChildren: "./pages/home/home.module#HomePageModule" },
+  {
     path: 'dashboards/analytics',
     loadChildren: () => import('./pages/dashboards/dashboard-analytics/dashboard-analytics.module').then(m => m.DashboardAnalyticsModule),
   },
@@ -51,7 +76,7 @@ const childrenRoutes: VexRoutes = [
   },
   {
     path: 'pages',
-    children: [
+    children: [      
       {
         path: 'pricing',
         loadChildren: () => import('./pages/pages/pricing/pricing.module').then(m => m.PricingModule)
@@ -140,29 +165,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: childrenRoutes
-  },
-  {
-    path: "list",
-    loadChildren: () => import("./pages/list/list.module").then(m => m.ListPageModule)
-  },
-  {
-    path: "archivo",
-    loadChildren: "./pages/archivo/archivo.module#ArchivoPageModule"
-  },
-  {
-    path: "contrato",
-    loadChildren: "./pages/contrato/contrato.module#ContratoPageModule"
-  },
-  { path: "nuevo", loadChildren: "./pages/nuevo/nuevo.module#NuevoPageModule" },
-  {
-    path: "contrato/:id",
-    loadChildren: "./pages/contrato/contrato.module#ContratoPageModule"
-  },
-  {
-    path: "nuevo/:id",
-    loadChildren: "./pages/nuevo/nuevo.module#NuevoPageModule"
-  },
-  { path: "home", loadChildren: "./pages/home/home.module#HomePageModule" }
+  }
 ];
 
 @NgModule({
