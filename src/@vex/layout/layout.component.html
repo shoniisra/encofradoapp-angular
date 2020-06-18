@@ -1,0 +1,57 @@
+<vex-config-panel-toggle (openConfig)="openConfigPanel()"></vex-config-panel-toggle>
+
+<!-- CONFIGPANEL -->
+<vex-sidebar #configpanel [invisibleBackdrop]="true" position="right">
+  <vex-config-panel></vex-config-panel>
+</vex-sidebar>
+<!-- END CONFIGPANEL -->
+
+<div [class.boxed]="isBoxed$ | async"
+     [class.horizontal-layout]="!(isLayoutVertical$ | async)"
+     [class.is-mobile]="!(isDesktop$ | async)"
+     [class.vertical-layout]="isLayoutVertical$ | async"
+     [class.has-fixed-footer]="(isFooterFixed$ | async) && isFooterVisible$ | async"
+     [class.has-footer]="isFooterVisible$ | async"
+     [class.scroll-disabled]="scrollDisabled$ | async"
+     [class.toolbar-fixed]="isToolbarFixed$ | async"
+     [class.sidenav-collapsed]="sidenavCollapsed$ | async"
+     [class.content-container]="containerEnabled$ | async"
+     [class.with-search]="searchOpen$ | async"
+     class="page-container">
+
+  <vex-progress-bar></vex-progress-bar>
+
+  <vex-search></vex-search>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav
+                 [disableClose]="isDesktop$ | async"
+                 [fixedInViewport]="!(isDesktop$ | async)"
+                 [mode]="!(isDesktop$ | async) || (isLayoutVertical$ | async) ? 'over' : 'side'"
+                 [opened]="(isDesktop$ | async) && !(isLayoutVertical$ | async)"
+                 class="sidenav">
+      <vex-sidenav [collapsed]="sidenavCollapsed$ | async"></vex-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav #quickpanel
+                 [fixedInViewport]="!(isDesktop$ | async)"
+                 class="quickpanel"
+                 mode="over"
+                 position="end">
+      <vex-quickpanel></vex-quickpanel>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenav-content">
+      <vex-toolbar [hasShadow]="toolbarShadowEnabled$ | async"
+                   [mobileQuery]="!(isDesktop$ | async)"
+                   class="toolbar"></vex-toolbar>
+
+      <main class="content">
+        <router-outlet></router-outlet>
+      </main>
+
+      <vex-footer *ngIf="isFooterVisible$ | async" class="footer"></vex-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+

@@ -1,0 +1,158 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="salir()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nuevo Contrato</ion-title>
+    <ion-avatar slot="end">
+      <ion-img src="/../assets/imagenes/lobo3.png"></ion-img>
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="fondo">
+  <ion-card-content class="tarjeta_fondo">
+    <ion-item (click)="BuscarCliente()">
+      <ion-label position="floating">
+        <ion-icon name="md-contact" color="warning"></ion-icon>
+        Cliente:</ion-label
+      >
+      <ion-input
+        required
+        type="string"
+        clearInput
+        readOnly
+        [(ngModel)]="nombrecliente"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        <ion-icon name="paper" color="warning"></ion-icon>Contrato
+        Número:</ion-label
+      >
+      <ion-input
+        required
+        type="number"
+        clearInput
+        [(ngModel)]="contrato.cont_numero"
+      ></ion-input>
+    </ion-item>
+    <!-- ----------------- Fechas Alquiler -->
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">
+              <ion-icon name="ios-calendar" color="warning"></ion-icon
+              >Alquiler</ion-label
+            >
+            <ion-datetime
+              required
+              display-format="DD/MM/YYYY"
+              cancelText="Cancelar!!"
+              [(ngModel)]="contrato.cont_fecha_ini"
+            ></ion-datetime>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label position="floating">
+              <ion-icon name="md-calendar" color="warning"></ion-icon
+              >Devolucion</ion-label
+            >
+            <ion-datetime
+              required
+              display-format="DD/MM/YYYY"
+              cancelText="Cancelar!!"
+              [(ngModel)]="contrato.cont_fecha_ent"
+            ></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- ----------------- Materiales -->
+    <ion-card>
+      <ion-item>
+        <ion-label (click)="AlertEncofrado()">
+          <ion-icon name="construct" color="primary"></ion-icon>
+          Encofrado</ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label (click)="AlertColumnas()">
+          <ion-icon name="construct" color="primary"></ion-icon>
+          Columnas</ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label (click)="AlertAndamios()">
+          <ion-icon name="construct" color="primary"></ion-icon>
+          Andamios</ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label (click)="AlertConcretera()">
+          <ion-icon name="construct" color="primary"></ion-icon>
+          Concretera</ion-label
+        >
+      </ion-item>
+      <ion-item>
+        <ion-label (click)="AlertOtroEncofrado()">
+          <ion-icon name="construct" color="primary"></ion-icon> Otros
+          Materiales</ion-label
+        >
+      </ion-item>
+    </ion-card>
+
+    <!-- ----------------- Entregas -->
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="md-car" color="primary"></ion-icon>Incluye Entrega
+        </ion-label>
+        <ion-toggle slot="end" [(ngModel)]="entrega"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-icon name="ios-car" color="primary"></ion-icon>Incluye Devolucion
+        </ion-label>
+        <ion-toggle slot="end" [(ngModel)]="devolucion"></ion-toggle>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label position="floating">Observaciones</ion-label>
+      <ion-textarea
+        placeholder="Notas y Observaciones..."
+        [(ngModel)]="observaciones"
+      ></ion-textarea>
+    </ion-item>
+  </ion-card-content>
+  <br />
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="salir()" color="danger">
+            <ion-icon name="trash"></ion-icon>
+            Salir
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button type="submit" (click)="AlertCosto()">
+            <ion-icon
+              ios="ios-thumbs-up"
+              md="md-thumbs-up"
+              slot="start"
+            ></ion-icon>
+            Guardar
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

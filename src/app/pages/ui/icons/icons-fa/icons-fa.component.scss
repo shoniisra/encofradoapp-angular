@@ -1,0 +1,19 @@
+.icon-container {
+  display: inline-block !important;
+  margin-top: var(--padding);
+  overflow: hidden;
+  width: 50%;
+
+  @screen sm {
+    width: 25%;
+  }
+
+  .body-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.icon {
+  color: inherit;
+}

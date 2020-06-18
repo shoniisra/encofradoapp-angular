@@ -1,0 +1,8 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { LoadingBarModule } from './core.module';
+export { LoadingBarComponent } from './loading-bar.component';
+export { LoadingBarService } from './loading-bar.service';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BuZ3gtbG9hZGluZy1iYXIvY29yZS8iLCJzb3VyY2VzIjpbInB1YmxpY19hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUNqRCxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUM5RCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSx1QkFBdUIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IExvYWRpbmdCYXJNb2R1bGUgfSBmcm9tICcuL2NvcmUubW9kdWxlJztcbmV4cG9ydCB7IExvYWRpbmdCYXJDb21wb25lbnQgfSBmcm9tICcuL2xvYWRpbmctYmFyLmNvbXBvbmVudCc7XG5leHBvcnQgeyBMb2FkaW5nQmFyU2VydmljZSB9IGZyb20gJy4vbG9hZGluZy1iYXIuc2VydmljZSc7XG4iXX0=

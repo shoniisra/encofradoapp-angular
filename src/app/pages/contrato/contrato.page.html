@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Contrato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card-title>{{ contrato.id_contrato }}</ion-card-title>
+  <ion-card-title>{{ contrato.dias_postergados }}</ion-card-title>
+  <ion-card-title>{{ contrato.estado }}</ion-card-title>
+  <ion-card-title>{{
+    contrato.fecha_ent.seconds * 1000 | date: "MM-dd-yyyy"
+  }}</ion-card-title>
+  <ion-card-title>{{
+    contrato.fecha_ini.seconds * 1000 | date: "MM-dd-yyyy"
+  }}</ion-card-title>
+  <ion-card-title>{{ contrato.id_cliente }}</ion-card-title>
+  <ion-card-title>{{ contrato.id_renovacion }}</ion-card-title>
+  <ion-card-title>{{ contrato.valor_total }}</ion-card-title>
+
+  <ion-card-title>{{ cliente.cli_cedula }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_direccion }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_direccion2 }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_email }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_nombre }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_nombre2 }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_telf1 }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_telf2 }}</ion-card-title>
+  <ion-card-title>{{ cliente.cli_telf3 }}</ion-card-title>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col align-self-start fa-pull-left>
+            <ion-card-subtitle fa-pull-right>032-856599</ion-card-subtitle>
+          </ion-col>
+          <ion-col align-center>
+            <ion-card-subtitle fa-pull-right>N:645625 </ion-card-subtitle>
+          </ion-col>
+          <ion-col align-self-end>
+            <ion-card-subtitle fa-pull-right color="primary"
+              >27/02/98</ion-card-subtitle
+            >
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-card-title>
+        <h1>
+          Juan perez
+        </h1>
+      </ion-card-title>
+      <ion-card-subtitle>Direccion: Unamuncho, via al Conde</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col align-self-start>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon ios="ios-grid" md="md-grid"></ion-icon> T
+            </ion-col>
+
+            <ion-col align-self-end>
+              75
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col align-self-end>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon
+                ios="ios-arrow-round-up"
+                md="md-arrow-round-up"
+              ></ion-icon>
+              P
+            </ion-col>
+
+            <ion-col align-self-end>
+              23
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col align-self-start>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon ios="ios-code-working" md="md-code-working"></ion-icon>V
+            </ion-col>
+
+            <ion-col align-self-end>
+              75
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col align-self-end>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon ios="ios-close" md="md-close"></ion-icon> CL
+            </ion-col>
+
+            <ion-col align-self-end>
+              23
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col align-self-start>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon ios="ios-information" md="md-information"></ion-icon> D
+            </ion-col>
+
+            <ion-col align-self-end>
+              15
+            </ion-col>
+          </ion-row>
+        </ion-col>
+
+        <ion-col align-self-end>
+          <ion-row>
+            <ion-col align-self-start>
+              <ion-icon ios="ios-close" md="ios-close"></ion-icon> CC
+            </ion-col>
+
+            <ion-col align-self-end>
+              15
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-label>
+        Notas:
+      </ion-label>
+      <ion-textarea>
+        El contrato es renovacion de :
+      </ion-textarea>
+    </ion-card-content>
+    <ion-card-content>
+      <ion-button
+        fill="outline"
+        slot="end"
+        expand="block"
+        (click)="presentAlert()"
+      >
+        <ion-icon
+          ios="ios-notifications-off"
+          md="md-notifications-off"
+        ></ion-icon>
+        Postergar
+      </ion-button>
+      <ion-button fill="outline" slot="end" expand="block" (click)="accion1()">
+        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+        Renovar Contrato
+      </ion-button>
+      <ion-button fill="outline" slot="end" expand="block" (click)="accion1()">
+        <ion-icon ios="ios-thumbs-up" md="md-thumbs-up"></ion-icon>
+        Entregado
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

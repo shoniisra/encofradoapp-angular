@@ -1,0 +1,199 @@
+<ion-card class="tarjeta_fondo">
+  <ion-card-header>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="5">
+          <ion-icon name="call" color="success"></ion-icon>
+          {{ cliente.cli_telf1 }} </ion-col
+        ><ion-col size="3">
+          <ion-icon ios="ios-flag" md="md-flag" color="primary"></ion-icon>
+          {{ contrato.cont_numero }} </ion-col
+        ><ion-col size="3">
+          <ion-icon
+            ios="ios-calendar"
+            md="md-calendar"
+            color="warning"
+            outline="true"
+          ></ion-icon
+          >{{ contrato.cont_fecha_ent | date: "dd/MM" }} </ion-col
+        ><ion-col size="1">
+          <ion-badge mode="ios" color="danger">{{
+            contrato.cont_dias_postergados
+          }}</ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-card-title>{{ cliente.cli_nombre }}</ion-card-title>
+    <ion-card-subtitle>{{ cliente.cli_direccion }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content *ngIf="ocultar1">
+    <ion-row>
+      <ion-col align-self-start>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon ios="ios-grid" md="md-grid"></ion-icon> T
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_tableros }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col align-self-end>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon
+                  ios="ios-arrow-round-up"
+                  md="md-arrow-round-up"
+                ></ion-icon>
+                P
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_puntales }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col align-self-start>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon ios="ios-code-working" md="md-code-working"></ion-icon
+                >V
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_viguetasL }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col align-self-end>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon ios="ios-close" md="md-close"></ion-icon> CL
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_crucetasL }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col align-self-start>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon ios="ios-information" md="md-information"></ion-icon>
+                D
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_distanciadores }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col align-self-end>
+        <ion-row>
+          <ion-col align-self-start>
+            <ion-item>
+              <ion-label color="primary">
+                <ion-icon ios="ios-close" md="ios-close"></ion-icon> CC
+              </ion-label>
+            </ion-item>
+          </ion-col>
+
+          <ion-col align-self-end>
+            <ion-item>
+              <ion-label>
+                {{ contrato.cont_detalle.det_crucetasC }}
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+
+  <ion-card-content>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="3">
+          <ion-button
+            fill="outline"
+            routerLink="/contrato"
+            routerDirection="root"
+          >
+            <ion-icon ios="ios-eye" md="md-eye"></ion-icon> </ion-button
+        ></ion-col>
+        <ion-col size="3">
+          <ion-button fill="outline" (click)="presentAlert()">
+            <ion-icon
+              ios="ios-notifications-off"
+              md="md-notifications-off"
+            ></ion-icon> </ion-button
+        ></ion-col>
+        <ion-col size="3">
+          <ion-button fill="outline" (click)="accion1()">
+            <ion-icon
+              ios="ios-thumbs-up"
+              md="md-thumbs-up"
+            ></ion-icon> </ion-button
+        ></ion-col>
+        <ion-col size="3">
+          <ion-button fill="outline" (click)="accion1()">
+            <ion-icon
+              ios="ios-arrow-dropup-circle"
+              md="md-arrow-dropup-circle"
+            ></ion-icon> </ion-button
+        ></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

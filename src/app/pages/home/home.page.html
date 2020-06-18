@@ -1,0 +1,53 @@
+<ion-header no-border translucent="true">
+  <ion-toolbar color="primary">
+    <ion-buttons *ngIf="search" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="search">Encofrados El Progreso</ion-title>
+
+    <ion-buttons *ngIf="search" slot="end">
+      <ion-button (click)="showSearchBar()">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons *ngIf="!search" slot="start">
+      <ion-button (click)="showSearchBar()">
+        <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar mode="ios" *ngIf="!search"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="fondo" *ngIf="!problemas">
+  <app-tarjeta
+    *ngFor="let c of contratos"
+    [contrato]="c"
+    class="tarjeta_fondo"
+  ></app-tarjeta>
+
+  <!-- Crear Nuevo Contrato -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/nuevo" routerDirection="root">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<ion-content *ngIf="problemas">
+  <ion-card class="tarjeta_fondo">
+    <ion-img src="../../../assets/imagenes/lobo1.png"></ion-img>
+
+    <ion-card-content>
+      <ion-card-header>
+        <ion-card-subtitle color="danger"
+          >PROBLEMAS DE CONEXIÓN !</ion-card-subtitle
+        >
+        <ion-card-title color="primary">
+          No se han encontrado resultados. No tiene conexión. Compruebe el
+          estado de su red y vuelva a intentarlo.</ion-card-title
+        >
+      </ion-card-header>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

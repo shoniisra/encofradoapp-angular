@@ -1,0 +1,27 @@
+ion-avatar {
+  margin-left: 3%;
+}
+ion-button {
+  text-align: center;
+  font-size: 20px;
+}
+.fondo {
+  background: #f0f0f0;
+  color: #f0f0f0;
+  background-color: #f0f0f0;
+  --ion-background-color: #f0f0f0;
+}
+.tarjeta_fondo {
+  background: #ffffff;
+  color: #ffffff;
+  background-color: #ffffff;
+  --ion-background-color: #ffffff;
+}
+.absolutecenter {
+  text-align: center;
+  align-content: center;
+  align-items: center;
+  // display: flex!important;
+  align-content: center !important;
+  align-items: center !important;
+}

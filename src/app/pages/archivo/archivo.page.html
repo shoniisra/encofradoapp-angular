@@ -1,0 +1,17 @@
+<ion-header translucent="true">
+  <ion-toolbar translucent="true" transparent>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Contratos Archivados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+  <app-tarjeta-archivo
+    *ngFor="let item of [1, 1, 1, 1, 1, 1]"
+  ></app-tarjeta-archivo>
+</ion-content>
