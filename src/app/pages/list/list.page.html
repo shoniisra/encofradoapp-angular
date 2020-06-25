@@ -1,15 +1,6 @@
 hola
 
-
-  <div *ngIf="loading">
-    Loading...
-  </div>
-  <div *ngIf="error">
-    Error :(
-  </div>
-  <div *ngIf="clientes">
-    <div *ngFor="let rate of clientes">
-      <!-- <p>{{rate.nombre}}: {{rate.direccion}}</p> -->
-      funciono
-    </div>
-  </div>
+  
+  <ul *ngFor="let entry of data | async ">
+    Score: {{entry.nombre}}
+  </ul>

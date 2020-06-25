@@ -8,11 +8,18 @@ import { VexModule } from "../@vex/vex.module";
 import { HttpClientModule } from "@angular/common/http";
 
 // <<<<<<<<<<<<<<<<<<<<<Mis dependencias>>>>>>>>>>>>>>>>>>>>>>>
-import { GraphqlModule } from "./graphql.module";
+// import { GraphqlModule } from "./graphql.module";
 
 import { environment } from "src/environments/environment";
 import { AngularFireModule } from "angularfire2";
 import { AngularFirestoreModule } from "angularfire2/firestore";
+//<<<<APOLLO DEPENDENCIES>>>>>>>>>
+import { ApolloModule, APOLLO_OPTIONS } from "apollo-angular";
+import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { WebSocketLink } from 'apollo-link-ws';
+import { ApolloClient } from 'apollo-client';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,8 +33,22 @@ import { AngularFirestoreModule } from "angularfire2/firestore";
     // Vex
     VexModule,
     //Apollo
-    GraphqlModule,
+    // GraphqlModule,
+    ApolloModule,
+    HttpLinkModule
   ],
+  providers: [{
+    provide: APOLLO_OPTIONS,
+    useFactory: (httpLink: HttpLink) => {
+      return {
+        cache: new InMemoryCache(),
+        link: httpLink.create({
+          uri: "https://encofrado-app.herokuapp.com/v1/graphql"
+        })
+      }
+    },    
+    deps: [HttpLink]
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
