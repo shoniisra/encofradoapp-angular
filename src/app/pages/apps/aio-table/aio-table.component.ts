@@ -28,6 +28,28 @@ import icPhone from '@iconify/icons-ic/twotone-phone';
 import icMail from '@iconify/icons-ic/twotone-mail';
 import icMap from '@iconify/icons-ic/twotone-map';
 
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+import { map } from "rxjs/operators";
+
+const GetClientes = gql`
+  query allPosts {
+    cliente {
+      id
+      cedula
+      direccion
+      direccion2
+      email
+      nombre
+      nombre2
+      observacion
+      telf1
+      telf2
+      telf3
+    }
+  }
+`;
+
 @Component({
   selector: 'vex-aio-table',
   templateUrl: './aio-table.component.html',
@@ -46,7 +68,10 @@ import icMap from '@iconify/icons-ic/twotone-map';
   ]
 })
 export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
-
+  data: Observable<any>;
+  loading: boolean;
+  currentUser: any;
+  error: any;
   layoutCtrl = new FormControl('boxed');
 
   /**
@@ -97,7 +122,7 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private apollo: Apollo) {
   }
 
   get visibleColumns() {
@@ -113,6 +138,10 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.data = this.apollo
+    .watchQuery({ query: GetClientes })
+    .valueChanges.pipe(map(({ data }) => data.cliente));
+
     this.getData().subscribe(customers => {
       this.subject$.next(customers);
     });

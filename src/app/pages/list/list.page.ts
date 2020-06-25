@@ -35,8 +35,8 @@ export class ListPage implements OnInit {
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
-    this.data = this.apollo
-      .watchQuery({ query: GetClientes })
-      .valueChanges.pipe(map(({ data }) => data.Cliente));
+    // this.data = this.apollo
+    //   .watchQuery({ query: GetClientes })
+    //   .valueChanges.pipe(map(({ data }) => data.Cliente));
   }
 }
