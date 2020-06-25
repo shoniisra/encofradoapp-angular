@@ -14,7 +14,6 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatDialog } from "@angular/material/dialog";
 import { TableColumn } from "../../../../@vex/interfaces/table-column.interface";
-import { aioTableLabels } from "../../../../static-data/aio-table-data";
 import { CustomerCreateUpdateComponent } from "./customer-create-update/customer-create-update.component";
 import icEdit from "@iconify/icons-ic/twotone-edit";
 import icDelete from "@iconify/icons-ic/twotone-delete";
@@ -59,6 +58,14 @@ const GetClientes = gql`
     }
   }
 `;
+export type Query = {
+  cliente : Clientes,
+}
+export type Clientes = {
+  count: number,
+  data : Cliente[],
+}
+
 
 @Component({
   selector: "vex-aio-table",
@@ -75,7 +82,7 @@ const GetClientes = gql`
   ],
 })
 export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  data: Observable<any>;
+  data: Observable<Cliente[]>;
   loading: boolean;
   currentUser: any;
   error: any;
@@ -118,7 +125,6 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: "telf1", property: "telf1", type: "text", visible: true },
     { label: "telf2", property: "telf2", type: "text", visible: true },
     { label: "telf3", property: "telf3", type: "text", visible: true },
-    { label: "Labels", property: "labels", type: "button", visible: true },
     { label: "Actions", property: "actions", type: "button", visible: true },
   ];
   pageSize = 10;
@@ -126,8 +132,6 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   dataSource: MatTableDataSource<Cliente> | null;
   selection = new SelectionModel<Cliente>(true, []);
   searchCtrl = new FormControl();
-
-  labels = aioTableLabels;
 
   icPhone = icPhone;
   icMail = icMail;
@@ -155,9 +159,8 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getData() {
     this.data = this.apollo
-      .watchQuery({ query: GetClientes })
+      .watchQuery<Query>({ query: GetClientes })
       .valueChanges.pipe(map(({ data }) => data.cliente));
-
     return this.data;
   }
 
@@ -280,12 +283,6 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   trackByProperty<T>(index: number, column: TableColumn<T>) {
     return column.property;
-  }
-
-  onLabelChange(change: MatSelectChange, row: Cliente) {
-    const index = this.customers.findIndex((c) => c === row);
-    this.customers[index].labels = change.value;
-    this.subject$.next(this.customers);
   }
 
   ngOnDestroy() {}
