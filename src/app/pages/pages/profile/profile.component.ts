@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Link } from '../../../../@vex/interfaces/link.interface';
-import icWork from '@iconify/icons-ic/twotone-work';
-import icPhone from '@iconify/icons-ic/twotone-phone';
-import { friendSuggestions } from '../../../../static-data/friend-suggestions';
-import icPersonAdd from '@iconify/icons-ic/twotone-person-add';
-import icCheck from '@iconify/icons-ic/twotone-check';
-import { fadeInUp400ms } from '../../../../@vex/animations/fade-in-up.animation';
-import { scaleIn400ms } from '../../../../@vex/animations/scale-in.animation';
-import { fadeInRight400ms } from '../../../../@vex/animations/fade-in-right.animation';
-import { stagger40ms } from '../../../../@vex/animations/stagger.animation';
-import icMail from '@iconify/icons-ic/twotone-mail';
-import icAccessTime from '@iconify/icons-ic/twotone-access-time';
-import icAdd from '@iconify/icons-ic/twotone-add';
-import icWhatshot from '@iconify/icons-ic/twotone-whatshot';
+import { Component, OnInit } from "@angular/core";
+import { Link } from "../../../../@vex/interfaces/link.interface";
+import icWork from "@iconify/icons-ic/twotone-work";
+import icPhone from "@iconify/icons-ic/twotone-phone";
+import { friendSuggestions } from "../../../../static-data/friend-suggestions";
+import icPersonAdd from "@iconify/icons-ic/twotone-person-add";
+import icCheck from "@iconify/icons-ic/twotone-check";
+import { fadeInUp400ms } from "../../../../@vex/animations/fade-in-up.animation";
+import { scaleIn400ms } from "../../../../@vex/animations/scale-in.animation";
+import { fadeInRight400ms } from "../../../../@vex/animations/fade-in-right.animation";
+import { stagger40ms } from "../../../../@vex/animations/stagger.animation";
+import icMail from "@iconify/icons-ic/twotone-mail";
+import icAccessTime from "@iconify/icons-ic/twotone-access-time";
+import icAdd from "@iconify/icons-ic/twotone-add";
+import icWhatshot from "@iconify/icons-ic/twotone-whatshot";
 
+import { Subscription } from "rxjs";
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
 export interface FriendSuggestion {
   name: string;
   imageSrc: string;
@@ -21,39 +24,46 @@ export interface FriendSuggestion {
   added: boolean;
 }
 
+type Hero = {
+  currency: string;
+  rate: string;
+};
+
+type Response = {
+  hero: Hero;
+};
+
 @Component({
-  selector: 'vex-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  animations: [
-    fadeInUp400ms,
-    fadeInRight400ms,
-    scaleIn400ms,
-    stagger40ms
-  ]
+  selector: "vex-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
+  animations: [fadeInUp400ms, fadeInRight400ms, scaleIn400ms, stagger40ms],
 })
 export class ProfileComponent implements OnInit {
+  rates: Hero[];
+  loading = true;
+  error: any;
 
   links: Link[] = [
     {
-      label: 'ABOUT',
-      route: './'
+      label: "ABOUT",
+      route: "./",
     },
     {
-      label: 'TIMELINE',
-      route: '',
-      disabled: true
+      label: "TIMELINE",
+      route: "",
+      disabled: true,
     },
     {
-      label: 'FRIENDS',
-      route: '',
-      disabled: true
+      label: "FRIENDS",
+      route: "",
+      disabled: true,
     },
     {
-      label: 'PHOTOS',
-      route: '',
-      disabled: true
-    }
+      label: "PHOTOS",
+      route: "",
+      disabled: true,
+    },
   ];
 
   suggestions = friendSuggestions;
@@ -67,10 +77,27 @@ export class ProfileComponent implements OnInit {
   icAdd = icAdd;
   icWhatshot = icWhatshot;
 
-  constructor() { }
+  constructor(private apollo: Apollo) {
+    apollo
+      .watchQuery<Hero[]>({
+        query: gql`
+          {
+            rates(currency: "USD") {
+              currency
+              rate
+            }
+          }
+        `,
+      })
+      .valueChanges.subscribe((result) => {
+        this.rates =result.data;
+        console.log(result.data); // no TypeScript errors
+      });
+  }
 
   ngOnInit() {
-  }
+    
+     }
 
   addFriend(friend: FriendSuggestion) {
     friend.added = true;
