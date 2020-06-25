@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { TableColumn } from '../../../../@vex/interfaces/table-column.interface';
-import { aioTableData, aioTableLabels } from '../../../../static-data/aio-table-data';
+import { aioTableLabels } from '../../../../static-data/aio-table-data';
 import { CustomerCreateUpdateComponent } from './customer-create-update/customer-create-update.component';
 import icEdit from '@iconify/icons-ic/twotone-edit';
 import icDelete from '@iconify/icons-ic/twotone-delete';
@@ -133,18 +133,13 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
    * Example on how to get data and pass it to the table - usually you would want a dedicated service with a HTTP request for this
    * We are simulating this request here.
    */
-  getData() {
-    return of(aioTableData.map(customer => new Customer(customer)));
-  }
-
+ 
   ngOnInit() {
     this.data = this.apollo
     .watchQuery({ query: GetClientes })
     .valueChanges.pipe(map(({ data }) => data.cliente));
 
-    this.getData().subscribe(customers => {
-      this.subject$.next(customers);
-    });
+   
 
     this.dataSource = new MatTableDataSource();
 
