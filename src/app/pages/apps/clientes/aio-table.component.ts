@@ -43,7 +43,8 @@ import { map } from "rxjs/operators";
 
 //Modelo
 import { Cliente } from "src/app/models/cliente.model";
-import { queryGetClientes } from 'src/app/services/clientes';
+import { queryGetClientes } from "src/app/services/clientes";
+import { DeleteClienteGQL } from "./graphql/DeleteClienteGQL";
 
 export type Query = {
   cliente: Cliente[];
@@ -65,7 +66,7 @@ const GetClientes = queryGetClientes;
   ],
 })
 export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  layoutCtrl = new FormControl("boxed");  
+  layoutCtrl = new FormControl("boxed");
   subject$: ReplaySubject<Cliente[]> = new ReplaySubject<Cliente[]>(1);
   data$: Observable<Cliente[]> = this.subject$.asObservable();
   data: Observable<Cliente[]>;
@@ -124,7 +125,11 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  constructor(private dialog: MatDialog, private apollo: Apollo) {}
+  constructor(
+    private dialog: MatDialog,
+    private apollo: Apollo,
+    private deleteClienteGQL: DeleteClienteGQL
+  ) {}
 
   get visibleColumns() {
     return this.columns
@@ -205,10 +210,8 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteCustomer(customer: Cliente) {
-    /**
-     * Here we are updating our local array.
-     * You would probably make an HTTP request here.
-     */
+    this.deleteClienteGQL.mutate({ id: customer.id }).subscribe();
+
     this.customers.splice(
       this.customers.findIndex(
         (existingCustomer) => existingCustomer.id === customer.id
