@@ -85,56 +85,18 @@ export class AppComponent {
         label: 'Inicio',
         route: '/dashboards/analytics',
         icon: icLayers
-      },
-      {
-        type: 'link',
-        label: "Home",
-        route: "/home",
-        icon: icAssigment
-      },
-      {
-        type: 'link',
-        label: "Archivos",
-        route: "/archivo",
-        icon: icAssigment
-      },
+      },       
       {
         type: 'link',
         label: "Clientes",
-        route: "/clientes",
+        route: "/apps/aio-table",
         icon: icAssigment
       },
-      {
-        type: 'link',
-        label: "Resumen",
-        route: "/list",
-        icon: icAssigment
-      },
-      {
-        type: 'link',
-        label: "Calculadora",
-        route: "/list",
-        icon: icAssigment
-      },
-
-
-
+      
       {
         type: 'subheading',
         label: 'Funcionalidad',
         children: [
-          {
-            type: 'link',
-            label: 'Clientes',
-            route: '/apps/aio-table',
-            icon: icAssigment
-          },
-          {
-            type: 'link',
-            label: 'Contratos',
-            route: '/apps/aio-table',
-            icon: icAssigment
-          },
           {
             type: 'link',
             label: 'Calendario',
@@ -163,12 +125,7 @@ export class AppComponent {
         type: 'subheading',
         label: 'Apps',
         children: [
-          {
-            type: 'link',
-            label: 'All-In-One Table',
-            route: '/apps/aio-table',
-            icon: icAssigment
-          },
+          
           {
             type: 'dropdown',
             label: 'Help Center',

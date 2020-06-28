@@ -1,180 +1,222 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from '../@vex/layout/layout.component';
-import { VexRoutes } from '../@vex/interfaces/vex-route.interface';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { LayoutComponent } from "../@vex/layout/layout.component";
+import { VexRoutes } from "../@vex/interfaces/vex-route.interface";
 
 const childrenRoutes: VexRoutes = [
   {
-    path: '',
-    redirectTo: 'dashboards/analytics',
-    pathMatch: 'full',
+    path: "",
+    redirectTo: "dashboards/analytics",
+    pathMatch: "full",
+  },  
+  {
+    path: "dashboards/analytics",
+    loadChildren: () =>
+      import(
+        "./pages/dashboards/dashboard-analytics/dashboard-analytics.module"
+      ).then((m) => m.DashboardAnalyticsModule),
   },
   {
-    path: "list",
-    loadChildren: () => import("./pages/list/list.module").then(m => m.ListPageModule)
-  },
-  {
-    path: "archivo",
-    loadChildren: () => import('./pages/archivo/archivo.module').then(m => m.ArchivoPageModule)
-  },
-  {
-    path: "contrato",
-    loadChildren: () => import("./pages/contrato/contrato.module").then(m => m.ContratoPageModule)
-    
-  },
-  { path: "nuevo", 
-    loadChildren: () => import("./pages/nuevo/nuevo.module").then(m => m.NuevoPageModule)
-},
-  {
-    path: "contrato/:id",
-    loadChildren: () => import("./pages/contrato/contrato.module").then(m => m.ContratoPageModule)
-  },
-  {
-    path: "nuevo/:id",
-    loadChildren: () => import("./pages/nuevo/nuevo.module").then(m => m.NuevoPageModule)
-  },
-  { path: "home", loadChildren: "./pages/home/home.module#HomePageModule" },
-  {
-    path: 'dashboards/analytics',
-    loadChildren: () => import('./pages/dashboards/dashboard-analytics/dashboard-analytics.module').then(m => m.DashboardAnalyticsModule),
-  },
-  {
-    path: 'apps',
+    path: "apps",
     children: [
       {
-        path: 'chat',
-        loadChildren: () => import('./pages/apps/chat/chat.module').then(m => m.ChatModule),
+        path: "chat",
+        loadChildren: () =>
+          import("./pages/apps/chat/chat.module").then((m) => m.ChatModule),
         data: {
-          toolbarShadowEnabled: true
-        }
+          toolbarShadowEnabled: true,
+        },
       },
       {
-        path: 'contacts',
-        loadChildren: () => import('./pages/apps/contacts/contacts.module').then(m => m.ContactsModule)
+        path: "contacts",
+        loadChildren: () =>
+          import("./pages/apps/contacts/contacts.module").then(
+            (m) => m.ContactsModule
+          ),
       },
       {
-        path: 'calendar',
-        loadChildren: () => import('./pages/apps/calendar/calendar.module').then(m => m.CalendarModule),
+        path: "calendar",
+        loadChildren: () =>
+          import("./pages/apps/calendar/calendar.module").then(
+            (m) => m.CalendarModule
+          ),
         data: {
-          toolbarShadowEnabled: true
-        }
+          toolbarShadowEnabled: true,
+        },
       },
       {
-        path: 'aio-table',
-        loadChildren: () => import('./pages/apps/aio-table/aio-table.module').then(m => m.AioTableModule),
+        path: "aio-table",
+        loadChildren: () =>
+          import("./pages/apps/aio-table/aio-table.module").then(
+            (m) => m.AioTableModule
+          ),
       },
       {
-        path: 'help-center',
-        loadChildren: () => import('./pages/apps/help-center/help-center.module').then(m => m.HelpCenterModule),
+        path: "help-center",
+        loadChildren: () =>
+          import("./pages/apps/help-center/help-center.module").then(
+            (m) => m.HelpCenterModule
+          ),
       },
       {
-        path: 'scrumboard',
-        loadChildren: () => import('./pages/apps/scrumboard/scrumboard.module').then(m => m.ScrumboardModule),
+        path: "scrumboard",
+        loadChildren: () =>
+          import("./pages/apps/scrumboard/scrumboard.module").then(
+            (m) => m.ScrumboardModule
+          ),
       },
-     
-    ]
+    ],
   },
   {
-    path: 'pages',
-    children: [      
-      {
-        path: 'pricing',
-        loadChildren: () => import('./pages/pages/pricing/pricing.module').then(m => m.PricingModule)
-      },
-      {
-        path: 'faq',
-        loadChildren: () => import('./pages/pages/faq/faq.module').then(m => m.FaqModule)
-      },
-      {
-        path: 'guides',
-        loadChildren: () => import('./pages/pages/guides/guides.module').then(m => m.GuidesModule)
-      },
-      {
-        path: 'profile',
-        loadChildren: () => import('./pages/pages/profile/profile.module').then(m => m.ProfileModule)
-      },
-      {
-        path: 'invoice',
-        loadChildren: () => import('./pages/pages/invoice/invoice.module').then(m => m.InvoiceModule)
-      },
-      {
-        path: 'error-404',
-        loadChildren: () => import('./pages/pages/errors/error-404/error-404.module').then(m => m.Error404Module)
-      },
-      {
-        path: 'error-500',
-        loadChildren: () => import('./pages/pages/errors/error-500/error-500.module').then(m => m.Error500Module)
-      }
-    ]
-  },
-  {
-    path: 'ui',
+    path: "pages",
     children: [
       {
-        path: 'components',
-        loadChildren: () => import('./pages/ui/components/components.module').then(m => m.ComponentsModule),
+        path: "pricing",
+        loadChildren: () =>
+          import("./pages/pages/pricing/pricing.module").then(
+            (m) => m.PricingModule
+          ),
       },
       {
-        path: 'forms/form-elements',
-        loadChildren: () => import('./pages/ui/forms/form-elements/form-elements.module').then(m => m.FormElementsModule),
-        data: {
-          containerEnabled: true
-        }
+        path: "faq",
+        loadChildren: () =>
+          import("./pages/pages/faq/faq.module").then((m) => m.FaqModule),
       },
       {
-        path: 'forms/form-wizard',
-        loadChildren: () => import('./pages/ui/forms/form-wizard/form-wizard.module').then(m => m.FormWizardModule),
-        data: {
-          containerEnabled: true
-        }
+        path: "guides",
+        loadChildren: () =>
+          import("./pages/pages/guides/guides.module").then(
+            (m) => m.GuidesModule
+          ),
       },
       {
-        path: 'icons',
-        loadChildren: () => import('./pages/ui/icons/icons.module').then(m => m.IconsModule)
+        path: "profile",
+        loadChildren: () =>
+          import("./pages/pages/profile/profile.module").then(
+            (m) => m.ProfileModule
+          ),
       },
       {
-        path: 'page-layouts',
-        loadChildren: () => import('./pages/ui/page-layouts/page-layouts.module').then(m => m.PageLayoutsModule),
+        path: "invoice",
+        loadChildren: () =>
+          import("./pages/pages/invoice/invoice.module").then(
+            (m) => m.InvoiceModule
+          ),
       },
-    ]
+      {
+        path: "error-404",
+        loadChildren: () =>
+          import("./pages/pages/errors/error-404/error-404.module").then(
+            (m) => m.Error404Module
+          ),
+      },
+      {
+        path: "error-500",
+        loadChildren: () =>
+          import("./pages/pages/errors/error-500/error-500.module").then(
+            (m) => m.Error500Module
+          ),
+      },
+    ],
   },
   {
-    path: '**',
-    loadChildren: () => import('./pages/pages/errors/error-404/error-404.module').then(m => m.Error404Module)
-  }
+    path: "ui",
+    children: [
+      {
+        path: "components",
+        loadChildren: () =>
+          import("./pages/ui/components/components.module").then(
+            (m) => m.ComponentsModule
+          ),
+      },
+      {
+        path: "forms/form-elements",
+        loadChildren: () =>
+          import("./pages/ui/forms/form-elements/form-elements.module").then(
+            (m) => m.FormElementsModule
+          ),
+        data: {
+          containerEnabled: true,
+        },
+      },
+      {
+        path: "forms/form-wizard",
+        loadChildren: () =>
+          import("./pages/ui/forms/form-wizard/form-wizard.module").then(
+            (m) => m.FormWizardModule
+          ),
+        data: {
+          containerEnabled: true,
+        },
+      },
+      {
+        path: "icons",
+        loadChildren: () =>
+          import("./pages/ui/icons/icons.module").then((m) => m.IconsModule),
+      },
+      {
+        path: "page-layouts",
+        loadChildren: () =>
+          import("./pages/ui/page-layouts/page-layouts.module").then(
+            (m) => m.PageLayoutsModule
+          ),
+      },
+    ],
+  },
+  {
+    path: "**",
+    loadChildren: () =>
+      import("./pages/pages/errors/error-404/error-404.module").then(
+        (m) => m.Error404Module
+      ),
+  },
 ];
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () => import('./pages/pages/auth/login/login.module').then(m => m.LoginModule),
+    path: "login",
+    loadChildren: () =>
+      import("./pages/pages/auth/login/login.module").then(
+        (m) => m.LoginModule
+      ),
   },
   {
-    path: 'register',
-    loadChildren: () => import('./pages/pages/auth/register/register.module').then(m => m.RegisterModule),
+    path: "register",
+    loadChildren: () =>
+      import("./pages/pages/auth/register/register.module").then(
+        (m) => m.RegisterModule
+      ),
   },
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./pages/pages/auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule),
+    path: "forgot-password",
+    loadChildren: () =>
+      import("./pages/pages/auth/forgot-password/forgot-password.module").then(
+        (m) => m.ForgotPasswordModule
+      ),
   },
   {
-    path: 'coming-soon',
-    loadChildren: () => import('./pages/pages/coming-soon/coming-soon.module').then(m => m.ComingSoonModule),
+    path: "coming-soon",
+    loadChildren: () =>
+      import("./pages/pages/coming-soon/coming-soon.module").then(
+        (m) => m.ComingSoonModule
+      ),
   },
   {
-    path: '',
+    path: "",
     component: LayoutComponent,
-    children: childrenRoutes
-  }
+    children: childrenRoutes,
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    // preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'corrected',
-    anchorScrolling: 'enabled'
-  })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, {
+      // preloadingStrategy: PreloadAllModules,
+      scrollPositionRestoration: "enabled",
+      relativeLinkResolution: "corrected",
+      anchorScrolling: "enabled",
+    }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
