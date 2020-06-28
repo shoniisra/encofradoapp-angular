@@ -58,12 +58,8 @@ const GetClientes = gql`
     }
   }
 `;
-export type Query = {
-  cliente : Clientes,
-}
-export type Clientes = {
-  count: number,
-  data : Cliente[],
+ export type Query = {
+   cliente : Cliente[]
 }
 
 
