@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Customer } from 'src/app/models/customer.model';
+//icons
 import icMoreVert from '@iconify/icons-ic/twotone-more-vert';
 import icClose from '@iconify/icons-ic/twotone-close';
 import icPrint from '@iconify/icons-ic/twotone-print';
@@ -12,6 +12,8 @@ import icPerson from '@iconify/icons-ic/twotone-person';
 import icMyLocation from '@iconify/icons-ic/twotone-my-location';
 import icLocationCity from '@iconify/icons-ic/twotone-location-city';
 import icEditLocation from '@iconify/icons-ic/twotone-edit-location';
+//model
+import { Cliente } from 'src/app/models/cliente.model';
 
 @Component({
   selector: 'vex-customer-create-update',
@@ -47,19 +49,21 @@ export class CustomerCreateUpdateComponent implements OnInit {
     if (this.defaults) {
       this.mode = 'update';
     } else {
-      this.defaults = {} as Customer;
+      this.defaults = {} as Cliente;
     }
 
     this.form = this.fb.group({
       id: [CustomerCreateUpdateComponent.id++],
-      imageSrc: this.defaults.imageSrc,
-      firstName: [this.defaults.firstName || ''],
-      lastName: [this.defaults.lastName || ''],
-      street: this.defaults.street || '',
-      city: this.defaults.city || '',
-      zipcode: this.defaults.zipcode || '',
-      phoneNumber: this.defaults.phoneNumber || '',
-      notes: this.defaults.notes || ''
+      cedula: [this.defaults.cedula || ''],
+      direccion: [this.defaults.direccion || ''],
+      direccion2: [this.defaults.direccion2 || ''],
+      email: [this.defaults.email || ''],
+      nombre: [this.defaults.nombre || ''],
+      nombre2: [this.defaults.nombre2 || ''],
+      observacion: [this.defaults.observacion || ''],
+      telf1: [this.defaults.telf1 || ''],
+      telf2: [this.defaults.telf2 || ''],
+      telf3: [this.defaults.telf3 || '']
     });
   }
 
