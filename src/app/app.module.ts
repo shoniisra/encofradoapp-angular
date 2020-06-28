@@ -7,18 +7,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { VexModule } from "../@vex/vex.module";
 import { HttpClientModule } from "@angular/common/http";
 
-// <<<<<<<<<<<<<<<<<<<<<Mis dependencias>>>>>>>>>>>>>>>>>>>>>>>
-// import { GraphqlModule } from "./graphql.module";
-
-import { environment } from "src/environments/environment";
-import { AngularFireModule } from "angularfire2";
-import { AngularFirestoreModule } from "angularfire2/firestore";
 //<<<<APOLLO DEPENDENCIES>>>>>>>>>
 import { ApolloModule, APOLLO_OPTIONS } from "apollo-angular";
 import { HttpLinkModule, HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { WebSocketLink } from 'apollo-link-ws';
-import { ApolloClient } from 'apollo-client';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,14 +18,10 @@ import { ApolloClient } from 'apollo-client';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
-    //Angular
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
+    HttpClientModule,   
     // Vex
     VexModule,
-    //Apollo
-    // GraphqlModule,
+    //Apollo   
     ApolloModule,
     HttpLinkModule
   ],

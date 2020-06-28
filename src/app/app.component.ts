@@ -89,7 +89,7 @@ export class AppComponent {
       {
         type: 'link',
         label: "Clientes",
-        route: "/apps/aio-table",
+        route: "/apps/clientes",
         icon: icAssigment
       },
       
