@@ -16,15 +16,6 @@
     </h2>
 
     <button
-      [matMenuTriggerFor]="settingsMenu"
-      class="text-secondary"
-      mat-icon-button
-      type="button"
-    >
-      <mat-icon [icIcon]="icMoreVert"></mat-icon>
-    </button>
-
-    <button
       class="text-secondary"
       mat-dialog-close
       mat-icon-button
@@ -40,7 +31,7 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
       <mat-form-field class="mt-6" fxFlex>
         <mat-label>Nombre</mat-label>
-        <input cdkFocusInitial formControlName="nombre" matInput required/>
+        <input cdkFocusInitial formControlName="nombre" matInput required />
 
         <mat-icon [icIcon]="icPerson" class="mr-3" matPrefix></mat-icon>
       </mat-form-field>
@@ -55,7 +46,13 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
       <mat-form-field fxFlex>
         <mat-label>Cédula</mat-label>
-        <input formControlName="cedula" matInput type="text" (keypress)="onlyNumberKey($event)" required/>
+        <input
+          formControlName="cedula"
+          matInput
+          type="text"
+          (keypress)="onlyNumberKey($event)"
+          required
+        />
 
         <mat-icon [icIcon]="icMyLocation" class="mr-3" matPrefix></mat-icon>
       </mat-form-field>
@@ -117,20 +114,3 @@
     </button>
   </mat-dialog-actions>
 </form>
-
-<mat-menu #settingsMenu="matMenu" xPosition="before" yPosition="below">
-  <button mat-menu-item>
-    <mat-icon [icIcon]="icPrint"></mat-icon>
-    <span>Print</span>
-  </button>
-
-  <button mat-menu-item>
-    <mat-icon [icIcon]="icDownload"></mat-icon>
-    <span>Export</span>
-  </button>
-
-  <button mat-menu-item>
-    <mat-icon [icIcon]="icDelete"></mat-icon>
-    <span>Delete</span>
-  </button>
-</mat-menu>
