@@ -66,7 +66,7 @@ const GetClientes = queryGetClientes;
   ],
 })
 export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
-  layoutCtrl = new FormControl("boxed");
+  layoutCtrl = new FormControl("fullwidth");
   subject$: ReplaySubject<Cliente[]> = new ReplaySubject<Cliente[]>(1);
   data$: Observable<Cliente[]> = this.subject$.asObservable();
   data: Observable<Cliente[]>;
@@ -81,25 +81,25 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
       visible: true,
     },
     { label: "cedula", property: "cedula", type: "text", visible: true },
+    { label: "nombre", property: "nombre", type: "text", visible: true },
+    { label: "nombre2", property: "nombre2", type: "text", visible: true },
+    { label: "email", property: "email", type: "text", visible: false },
+    { label: "telf1", property: "telf1", type: "text", visible: true },
+    { label: "telf2", property: "telf2", type: "text", visible: true },
+    { label: "telf3", property: "telf3", type: "text", visible: false },
     { label: "direccion", property: "direccion", type: "text", visible: true },
     {
       label: "direccion2",
       property: "direccion2",
       type: "text",
-      visible: true,
+      visible: false,
     },
-    { label: "email", property: "email", type: "text", visible: true },
-    { label: "nombre", property: "nombre", type: "text", visible: true },
-    { label: "nombre2", property: "nombre2", type: "text", visible: true },
     {
       label: "observacion",
       property: "observacion",
       type: "text",
       visible: true,
     },
-    { label: "telf1", property: "telf1", type: "text", visible: true },
-    { label: "telf2", property: "telf2", type: "text", visible: true },
-    { label: "telf3", property: "telf3", type: "text", visible: true },
     { label: "Actions", property: "actions", type: "button", visible: true },
   ];
 
@@ -167,18 +167,12 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createCustomer() {
+    console.log(this.searchCtrl.value);
     this.dialog
       .open(CustomerCreateUpdateComponent)
       .afterClosed()
       .subscribe((customer: Cliente) => {
-        /**
-         * Customer is the updated customer (if the user pressed Save - otherwise it's null)
-         */
         if (customer) {
-          /**
-           * Here we are updating our local array.
-           * You would probably make an HTTP request here.
-           */
           this.customers.unshift(new Cliente(customer));
           this.subject$.next(this.customers);
         }

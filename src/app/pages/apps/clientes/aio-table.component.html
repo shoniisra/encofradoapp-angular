@@ -13,11 +13,6 @@
         <h1 class="title mt-0 mb-1">Lista de Clientes</h1>
         <vex-breadcrumbs [crumbs]="['App', 'Clientes']"></vex-breadcrumbs>
       </div>
-
-      <mat-button-toggle-group [formControl]="layoutCtrl">
-        <mat-button-toggle value="boxed">Ajustar</mat-button-toggle>
-        <mat-button-toggle value="fullwidth">Extender</mat-button-toggle>
-      </mat-button-toggle-group>
     </div>
   </vex-page-layout-header>
 
@@ -43,8 +38,8 @@
               *ngIf="selection.selected.length > 1"
               >s</span
             >
-            seleccionado</span
-          >
+            seleccionado<span *ngIf="selection.selected.length > 1">s</span>
+          </span>
         </h2>
 
         <div
@@ -61,15 +56,6 @@
           >
             <mat-icon [icIcon]="icDelete"></mat-icon>
           </button>
-
-          <button
-            color="primary"
-            mat-icon-button
-            matTooltip="Another action"
-            type="button"
-          >
-            <mat-icon [icIcon]="icFolder"></mat-icon>
-          </button>
         </div>
 
         <div
@@ -84,11 +70,21 @@
           <input
             [formControl]="searchCtrl"
             class="px-4 py-3 border-0 outline-none w-full bg-transparent"
-            placeholder="Search..."
+            placeholder="Buscar..."
             type="search"
           />
         </div>
-
+        <button
+          (click)="createCustomer()"
+          class="ml-4"
+          color="primary"
+          fxFlex="none"
+          mat-mini-fab
+          matTooltip="Crear Cliente"
+          type="button"
+        >
+          <mat-icon [icIcon]="icAdd"></mat-icon>
+        </button>
         <span fxFlex></span>
 
         <button
@@ -106,22 +102,10 @@
           class="ml-4"
           fxFlex="none"
           mat-icon-button
-          matTooltip="Filter Columns"
+          matTooltip="Editar Columnas"
           type="button"
         >
           <mat-icon [icIcon]="icFilterList"></mat-icon>
-        </button>
-
-        <button
-          (click)="createCustomer()"
-          class="ml-4"
-          color="primary"
-          fxFlex="none"
-          mat-mini-fab
-          matTooltip="Add Customer"
-          type="button"
-        >
-          <mat-icon [icIcon]="icAdd"></mat-icon>
         </button>
       </div>
 
