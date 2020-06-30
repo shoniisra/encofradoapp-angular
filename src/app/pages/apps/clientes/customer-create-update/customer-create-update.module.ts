@@ -12,6 +12,7 @@ import { CustomerCreateUpdateComponent } from './customer-create-update.componen
 import { MatMenuModule } from '@angular/material/menu';
 import { IconModule } from '@visurel/iconify-angular';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSelectModule,
     MatMenuModule,
     IconModule,
+    MatSnackBarModule,
     MatDividerModule
   ],
   declarations: [CustomerCreateUpdateComponent],

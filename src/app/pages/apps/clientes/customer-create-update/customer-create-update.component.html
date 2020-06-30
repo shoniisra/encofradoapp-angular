@@ -40,7 +40,7 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
       <mat-form-field class="mt-6" fxFlex>
         <mat-label>Nombre</mat-label>
-        <input cdkFocusInitial formControlName="nombre" matInput />
+        <input cdkFocusInitial formControlName="nombre" matInput required/>
 
         <mat-icon [icIcon]="icPerson" class="mr-3" matPrefix></mat-icon>
       </mat-form-field>
@@ -55,19 +55,39 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
       <mat-form-field fxFlex>
         <mat-label>Cédula</mat-label>
-        <input formControlName="cedula" matInput />
+        <input formControlName="cedula" matInput type="text" (keypress)="onlyNumberKey($event)" required/>
 
         <mat-icon [icIcon]="icMyLocation" class="mr-3" matPrefix></mat-icon>
       </mat-form-field>
 
       <mat-form-field fxFlex>
         <mat-label>Email</mat-label>
-        <input formControlName="email" matInput />
+        <input formControlName="email" matInput type="email" />
 
         <mat-icon [icIcon]="icLocationCity" class="mr-3" matPrefix></mat-icon>
       </mat-form-field>
     </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field fxFlex>
+        <mat-label>telf1</mat-label>
+        <input formControlName="telf1" matInput type="number" />
 
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>telf2</mat-label>
+        <input formControlName="telf2" matInput type="number" />
+
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>telf3</mat-label>
+        <input formControlName="telf3" matInput type="number" />
+
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+    </div>
     <mat-form-field>
       <mat-label>Direccion</mat-label>
       <input formControlName="direccion" matInput />
@@ -80,28 +100,6 @@
       <input formControlName="direccion2" matInput />
 
       <mat-icon [icIcon]="icEditLocation" class="mr-3" matPrefix></mat-icon>
-    </mat-form-field>
-
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
-      <mat-form-field fxFlex>
-        <mat-label>telf1</mat-label>
-        <input formControlName="telf1" matInput />
-
-        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
-      </mat-form-field>
-
-      <mat-form-field fxFlex>
-        <mat-label>telf2</mat-label>
-        <input formControlName="telf2" matInput />
-
-        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
-      </mat-form-field>
-    </div>
-    <mat-form-field fxFlex>
-      <mat-label>telf3</mat-label>
-      <input formControlName="telf3" matInput />
-
-      <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Notas</mat-label>
