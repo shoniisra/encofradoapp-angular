@@ -2,6 +2,15 @@
 <h2 style="height: 60px; line-height: 60px; margin-left: 70px; font-weight: 500; border: none;">VEX</h2>
 
 # Introduction
+# desacrgar modelo de hasura
+gq https://encofrado-app.herokuapp.com/v1/graphql -H 'X-Hasura-Admin-Secret: R@10v1lL@c12' --introspect > schema.graphql
+
+gq https://encofrado-app.herokuapp.com/v1/graphql -H 'X-Hasura-Admin-Secret: R@10v1lL@c12' --introspect --format json> schema.json
+# generar json 
+npx apollo-codegen introspect-schema src/app/models/schema.graphql --output schema.json
+# generar typescript a partir de json
+npx apollo-codegen generate **/*.graphql --schema schema.json --target typescript --output operation-result-types.ts
+
 
 Vex is a Creative, Responsive Material Design Admin Template built with Angular 8+ and the Angular-CLI. It extends the Material Design components built by the Angular team and it offers you everything you need to get started with your next CRM, CMS, Project Management, or other projects.
 

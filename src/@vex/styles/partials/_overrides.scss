@@ -1,0 +1,19 @@
+
+.ic-inline > svg {
+  display: inline-block;
+}
+
+ic-icon:not(.ic-inline) > svg,
+.iconify:not(.ic-inline) > svg {
+  margin: 0 auto;
+  vertical-align: middle;
+}
+
+.vex-scrollbar {
+  min-height: 0;
+}
+
+.vex-scrollblock {
+  position: fixed;
+  width: 100%;
+}
