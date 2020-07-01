@@ -41,20 +41,20 @@ import gql from "graphql-tag";
 import { map } from "rxjs/operators";
 
 //Modelo
-import { Cliente } from "src/app/models/cliente.model";
-import { queryGetClientes } from "src/app/services/clientes";
-import { DeleteClienteGQL } from "./graphql/DeleteClienteGQL";
-import { CustomerCreateUpdateComponent } from "./customer-create-update/customer-create-update.component";
+// import { CustomerCreateUpdateComponent } from "./customer-create-update/customer-create-update.component";xdxd
+ import { Contrato } from "src/app/models/contratoalquiler.model";
+import { queryGetContratos } from 'src/app/services/contratos';
+// import { DeleteContratoGQL } from "./graphql/DeleteContratoGQL";
 
 export type Query = {
-  cliente: Cliente[];
+  contrato: Contrato[];
 };
-const GetClientes = queryGetClientes;
+const GetContratos = queryGetContratos;
 
 @Component({
-  selector: "vex-aio-table",
-  templateUrl: "./aio-table.component.html",
-  styleUrls: ["./aio-table.component.scss"],
+  selector: 'vex-contratos',
+  templateUrl: './contratos.component.html',
+  styleUrls: ['./contratos.component.scss'],
   animations: [fadeInUp400ms, stagger40ms],
   providers: [
     {
@@ -63,17 +63,18 @@ const GetClientes = queryGetClientes;
         appearance: "standard",
       } as MatFormFieldDefaultOptions,
     },
-  ],
+  ]
 })
-export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
+
   layoutCtrl = new FormControl("fullwidth");
-  subject$: ReplaySubject<Cliente[]> = new ReplaySubject<Cliente[]>(1);
-  data$: Observable<Cliente[]> = this.subject$.asObservable();
-  data: Observable<Cliente[]>;
-  customers: Cliente[];
+  subject$: ReplaySubject<Contrato[]> = new ReplaySubject<Contrato[]>(1);
+  data$: Observable<Contrato[]> = this.subject$.asObservable();
+  data: Observable<Contrato[]>;
+  customers: Contrato[];
 
   @Input()
-  columns: TableColumn<Cliente>[] = [
+  columns: TableColumn<Contrato>[] = [
     {
       label: "Checkbox",
       property: "checkbox",
@@ -105,8 +106,8 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   pageSize = 10;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  dataSource: MatTableDataSource<Cliente> | null;
-  selection = new SelectionModel<Cliente>(true, []);
+  dataSource: MatTableDataSource<Contrato> | null;
+  selection = new SelectionModel<Contrato>(true, []);
   searchCtrl = new FormControl();
 
   icPhone = icPhone;
@@ -127,8 +128,8 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private dialog: MatDialog,
-    private apollo: Apollo,
-    private deleteClienteGQL: DeleteClienteGQL
+    private apollo: Apollo
+    // private deleteContratoGQL: DeleteContratoGQL
   ) {}
 
   get visibleColumns() {
@@ -139,8 +140,8 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getData() {
     this.data = this.apollo
-      .watchQuery<Query>({ query: GetClientes })
-      .valueChanges.pipe(map(({ data }) => data.cliente));
+      .watchQuery<Query>({ query: GetContratos })
+      .valueChanges.pipe(map(({ data }) => data.contrato));
     return this.data;
   }
 
@@ -151,7 +152,7 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.dataSource = new MatTableDataSource();
 
-    this.data$.pipe(filter<Cliente[]>(Boolean)).subscribe((customers) => {
+    this.data$.pipe(filter<Contrato[]>(Boolean)).subscribe((customers) => {
       this.customers = customers;
       this.dataSource.data = customers;
     });
@@ -167,56 +168,56 @@ export class AioTableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createCustomer() {
-    console.log(this.searchCtrl.value);
-    this.dialog
-      .open(CustomerCreateUpdateComponent)
-      .afterClosed()
-      .subscribe((customer: Cliente) => {
-        if (customer) {
-          this.customers.unshift(new Cliente(customer));
-          this.subject$.next(this.customers);
-        }
-      });
+    // console.log(this.searchCtrl.value);
+    // this.dialog
+      // .open(CustomerCreateUpdateComponent)
+      // .afterClosed()
+      // .subscribe((customer: Contrato) => {
+        // if (customer) {
+          // this.customers.unshift(new Contrato(customer));
+          // this.subject$.next(this.customers);
+        // }
+      // });
   }
 
-  updateCustomer(customer: Cliente) {
-    this.dialog
-      .open(CustomerCreateUpdateComponent, {
-        data: customer,
-      })
-      .afterClosed()
-      .subscribe((updatedCustomer) => {
-        /**
-         * Customer is the updated customer (if the user pressed Save - otherwise it's null)
-         */
-        if (updatedCustomer) {
-          /**
-           * Here we are updating our local array.
-           * You would probably make an HTTP request here.
-           */
-          const index = this.customers.findIndex(
-            (existingCustomer) => existingCustomer.id === updatedCustomer.id
-          );
-          this.customers[index] = new Cliente(updatedCustomer);
-          this.subject$.next(this.customers);
-        }
-      });
+  updateCustomer(customer: Contrato) {
+    // this.dialog
+    //   .open(CustomerCreateUpdateComponent, {
+    //     data: customer,
+    //   })
+    //   .afterClosed()
+    //   .subscribe((updatedCustomer) => {
+    //     /**
+    //      * Customer is the updated customer (if the user pressed Save - otherwise it's null)
+    //      */
+    //     if (updatedCustomer) {
+    //       /**
+    //        * Here we are updating our local array.
+    //        * You would probably make an HTTP request here.
+    //        */
+    //       const index = this.customers.findIndex(
+    //         (existingCustomer) => existingCustomer.id === updatedCustomer.id
+    //       );
+    //       this.customers[index] = new Contrato(updatedCustomer);
+    //       this.subject$.next(this.customers);
+    //     }
+    //   });
   }
 
-  deleteCustomer(customer: Cliente) {
-    this.deleteClienteGQL.mutate({ id: customer.id }).subscribe();
+  deleteCustomer(customer: Contrato) {
+    // this.deleteContratoGQL.mutate({ id: customer.id }).subscribe();
 
-    this.customers.splice(
-      this.customers.findIndex(
-        (existingCustomer) => existingCustomer.id === customer.id
-      ),
-      1
-    );
-    this.selection.deselect(customer);
-    this.subject$.next(this.customers);
+    // this.customers.splice(
+    //   this.customers.findIndex(
+    //     (existingCustomer) => existingCustomer.id === customer.id
+    //   ),
+    //   1
+    // );
+    // this.selection.deselect(customer);
+    // this.subject$.next(this.customers);
   }
 
-  deleteCustomers(customers: Cliente[]) {
+  deleteCustomers(customers: Contrato[]) {
     customers.forEach((c) => this.deleteCustomer(c));
   }
 
