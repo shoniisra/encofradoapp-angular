@@ -5,12 +5,17 @@ export const queryGetContratos = gql`
     contrato_alquiler {
       cliente {
         id
-        nombre
-        nombre2
         cedula
         direccion
+        direccion2
+        email
+        nombre
+        nombre2
+        observacion
         telf1
-      }     
+        telf2
+        telf3
+      }
       fecha
       id
       lugar_obra

@@ -9,8 +9,8 @@ export class Contrato {
     area:string;
     metraje:string;
     observacion:string;
-    cliente_id:Cliente;
-    estado_id:EstadoActual;
+    cliente:Cliente;
+    estado_actual:EstadoActual;
   
     constructor(customer) {
       this.id = customer.id;      
@@ -20,8 +20,8 @@ export class Contrato {
       this.area=customer.area;
       this.metraje=customer.metraje;
       this.observacion=customer.observacion;
-      this.cliente_id=customer.cliente_id;
-      this.estado_id=customer.estado_id;     
+      this.cliente=customer.cliente;
+      this.estado_actual=customer.estado_actual;     
     } 
   }
   

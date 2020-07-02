@@ -42,19 +42,19 @@ import { map } from "rxjs/operators";
 
 //Modelo
 // import { CustomerCreateUpdateComponent } from "./customer-create-update/customer-create-update.component";xdxd
- import { Contrato } from "src/app/models/contratoalquiler.model";
-import { queryGetContratos } from 'src/app/services/contratos';
+import { Contrato } from "src/app/models/contratoalquiler.model";
+import { queryGetContratos } from "src/app/services/contratos";
 // import { DeleteContratoGQL } from "./graphql/DeleteContratoGQL";
 
 export type Query = {
-  contrato: Contrato[];
+  contrato_alquiler: Contrato[];
 };
 const GetContratos = queryGetContratos;
 
 @Component({
-  selector: 'vex-contratos',
-  templateUrl: './contratos.component.html',
-  styleUrls: ['./contratos.component.scss'],
+  selector: "vex-contratos",
+  templateUrl: "./contratos.component.html",
+  styleUrls: ["./contratos.component.scss"],
   animations: [fadeInUp400ms, stagger40ms],
   providers: [
     {
@@ -63,10 +63,9 @@ const GetContratos = queryGetContratos;
         appearance: "standard",
       } as MatFormFieldDefaultOptions,
     },
-  ]
+  ],
 })
 export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
-
   layoutCtrl = new FormControl("fullwidth");
   subject$: ReplaySubject<Contrato[]> = new ReplaySubject<Contrato[]>(1);
   data$: Observable<Contrato[]> = this.subject$.asObservable();
@@ -83,10 +82,17 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
     },
     { label: "numero", property: "numero", type: "text", visible: true },
     { label: "fecha", property: "fecha", type: "text", visible: true },
+    { label: "nombre", property: "cliente.nombre", type: "text", visible: true },
     { label: "lugar", property: "lugar_obra", type: "text", visible: true },
     { label: "area", property: "area", type: "text", visible: true },
     { label: "metraje", property: "metraje", type: "text", visible: true },
-    { label: "observacion", property: "observacion", type: "text", visible: true },   
+    {
+      label: "observacion",
+      property: "observacion",
+      type: "text",
+      visible: true,
+    },
+
     { label: "Actions", property: "actions", type: "button", visible: true },
   ];
 
@@ -113,10 +119,9 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-    // private dialog: MatDialog,
     private apollo: Apollo
-    // private deleteContratoGQL: DeleteContratoGQL
-  ) {}
+  ) // private deleteContratoGQL: DeleteContratoGQL
+  {}
 
   get visibleColumns() {
     return this.columns
@@ -125,16 +130,22 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getData() {
-    this.data = this.apollo
+    this.data =  this.apollo
       .watchQuery<Query>({ query: GetContratos })
-      .valueChanges.pipe(map(({ data }) => data.contrato));
+      .valueChanges.pipe(
+        map(({ data }) => 
+          data.contrato_alquiler
+        )
+      );
     return this.data;
   }
 
   ngOnInit() {
     this.getData().subscribe((customers) => {
       this.subject$.next(customers);
+      console.log(customers);
     });
+   
 
     this.dataSource = new MatTableDataSource();
 
@@ -156,14 +167,14 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   createCustomer() {
     // console.log(this.searchCtrl.value);
     // this.dialog
-      // .open(CustomerCreateUpdateComponent)
-      // .afterClosed()
-      // .subscribe((customer: Contrato) => {
-        // if (customer) {
-          // this.customers.unshift(new Contrato(customer));
-          // this.subject$.next(this.customers);
-        // }
-      // });
+    // .open(CustomerCreateUpdateComponent)
+    // .afterClosed()
+    // .subscribe((customer: Contrato) => {
+    // if (customer) {
+    // this.customers.unshift(new Contrato(customer));
+    // this.subject$.next(this.customers);
+    // }
+    // });
   }
 
   updateCustomer(customer: Contrato) {
@@ -192,7 +203,6 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   deleteCustomer(customer: Contrato) {
     // this.deleteContratoGQL.mutate({ id: customer.id }).subscribe();
-
     // this.customers.splice(
     //   this.customers.findIndex(
     //     (existingCustomer) => existingCustomer.id === customer.id
