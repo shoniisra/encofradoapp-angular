@@ -13,7 +13,7 @@ import {
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { MatDialog } from "@angular/material/dialog";
+// import { MatDialog } from "@angular/material/dialog";
 import { SelectionModel } from "@angular/cdk/collections";
 import { FormControl } from "@angular/forms";
 //vex
@@ -81,26 +81,12 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
       type: "checkbox",
       visible: true,
     },
-    { label: "cedula", property: "cedula", type: "text", visible: true },
-    { label: "nombre", property: "nombre", type: "text", visible: true },
-    { label: "nombre2", property: "nombre2", type: "text", visible: true },
-    { label: "email", property: "email", type: "text", visible: false },
-    { label: "telf1", property: "telf1", type: "text", visible: true },
-    { label: "telf2", property: "telf2", type: "text", visible: true },
-    { label: "telf3", property: "telf3", type: "text", visible: false },
-    { label: "direccion", property: "direccion", type: "text", visible: true },
-    {
-      label: "direccion2",
-      property: "direccion2",
-      type: "text",
-      visible: false,
-    },
-    {
-      label: "observacion",
-      property: "observacion",
-      type: "text",
-      visible: true,
-    },
+    { label: "numero", property: "numero", type: "text", visible: true },
+    { label: "fecha", property: "fecha", type: "text", visible: true },
+    { label: "lugar", property: "lugar_obra", type: "text", visible: true },
+    { label: "area", property: "area", type: "text", visible: true },
+    { label: "metraje", property: "metraje", type: "text", visible: true },
+    { label: "observacion", property: "observacion", type: "text", visible: true },   
     { label: "Actions", property: "actions", type: "button", visible: true },
   ];
 
@@ -127,7 +113,7 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
-    private dialog: MatDialog,
+    // private dialog: MatDialog,
     private apollo: Apollo
     // private deleteContratoGQL: DeleteContratoGQL
   ) {}

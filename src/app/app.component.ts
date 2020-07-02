@@ -92,6 +92,12 @@ export class AppComponent {
         route: "/apps/clientes",
         icon: icAssigment
       },
+      {
+        type: 'link',
+        label: "Contratos",
+        route: "/apps/contratos",
+        icon: icAssigment
+      },
       
       {
         type: 'subheading',

@@ -52,6 +52,13 @@ const childrenRoutes: VexRoutes = [
           ),
       },
       {
+        path: "contratos",
+        loadChildren: () =>
+          import("./pages/apps/contratos/contratos.module").then(
+            (m) => m.ContratosModule
+          ),
+      },
+      {
         path: "help-center",
         loadChildren: () =>
           import("./pages/apps/help-center/help-center.module").then(
