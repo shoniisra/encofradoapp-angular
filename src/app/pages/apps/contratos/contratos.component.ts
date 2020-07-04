@@ -74,16 +74,14 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input()
   columns: TableColumn<Contrato>[] = [
-    {
-      label: "Checkbox",
-      property: "checkbox",
-      type: "checkbox",
-      visible: true,
-    },
+    { label: "Checkbox",property: "checkbox",type: "checkbox",visible: true,},
+    { label: "cliente.nombre", property: "cliente.nombre", type: "text", visible: true },
     { label: "numero", property: "numero", type: "text", visible: true },
     { label: "fecha", property: "fecha", type: "text", visible: true },
-    { label: "nombre", property: "cliente.nombre", type: "text", visible: true },
+    { label: "Actions", property: "actions", type: "button", visible: true },
+    
     { label: "lugar", property: "lugar_obra", type: "text", visible: true },
+    { label: "estado", property: "estado_actual.descripcion", type: "text", visible: true },
     { label: "area", property: "area", type: "text", visible: true },
     { label: "metraje", property: "metraje", type: "text", visible: true },
     {
@@ -92,8 +90,6 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
       type: "text",
       visible: true,
     },
-
-    { label: "Actions", property: "actions", type: "button", visible: true },
   ];
 
   pageSize = 10;
@@ -143,7 +139,8 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.getData().subscribe((customers) => {
       this.subject$.next(customers);
-      console.log(customers);
+      // console.log(customers);
+      // console.log(customers[0].cliente.nombre);
     });
    
 
@@ -152,7 +149,10 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.data$.pipe(filter<Contrato[]>(Boolean)).subscribe((customers) => {
       this.customers = customers;
       this.dataSource.data = customers;
+      console.log(this.customers);
+      console.log(this.dataSource.data);
     });
+   
 
     this.searchCtrl.valueChanges
       .pipe(untilDestroyed(this))
