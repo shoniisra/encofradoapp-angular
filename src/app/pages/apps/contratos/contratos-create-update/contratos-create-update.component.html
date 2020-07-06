@@ -1,13 +1,13 @@
-<!-- <vex-secondary-toolbar current="Form Wizard">
+<vex-secondary-toolbar current="Form Wizard">
   <vex-breadcrumbs
-    [crumbs]="['Forms', 'Form Wizard']"
+    [crumbs]="['contratos', 'crear']"
     fxFlex="auto"
   ></vex-breadcrumbs>
 
   <button class="ml-2" color="primary" mat-icon-button type="button">
     <mat-icon [icIcon]="icMoreVert"></mat-icon>
   </button>
-</vex-secondary-toolbar> -->
+</vex-secondary-toolbar> 
 
 <div @stagger class="p-gutter" vexContainer>
   <h2 class="title mt-6 mb-4" fxLayout="row" fxLayoutAlign="start center">
@@ -18,7 +18,7 @@
     >
       <ic-icon [icon]="icVerticalSplit" height="20px" width="20px"></ic-icon>
     </span>
-    <span @fadeInRight class="block">Vertical Form Wizard</span>
+    <span @fadeInRight class="block">Nuevo Contrato</span>
   </h2>
 
   <div @fadeInUp class="card overflow-hidden">
@@ -33,16 +33,16 @@
 
       <mat-step [stepControl]="verticalAccountFormGroup">
         <form [formGroup]="verticalAccountFormGroup">
-          <ng-template matStepLabel>Create Account</ng-template>
+          <ng-template matStepLabel>Elige un Cliente</ng-template>
 
-          <div class="title m-0">Create Account</div>
+          <div class="title m-0">Agrega un Cliente</div>
           <div class="subheading-1">
-            Set up your account for testing purposes.
+            Busca al cliente por su cédula, y si no exíste registra uno
           </div>
 
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
-              <mat-label>Account Username</mat-label>
+              <mat-label>Nombre Cliente</mat-label>
               <input formControlName="username" matInput required />
               <mat-hint>This will be your unique login name.</mat-hint>
             </mat-form-field>
