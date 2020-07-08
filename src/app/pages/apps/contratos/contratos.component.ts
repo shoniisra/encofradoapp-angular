@@ -84,7 +84,7 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: "lugar", property: "lugar_obra", type: "text", visible: true },
     { label: "estado", property: "estado_actual.descripcion", type: "text", visible: true },
     { label: "area", property: "area", type: "text", visible: true },
-    { label: "metraje", property: "metraje", type: "text", visible: true },
+    { label: "metros", property: "metros", type: "text", visible: true },
     {
       label: "observacion",
       property: "observacion",

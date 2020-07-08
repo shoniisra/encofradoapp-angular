@@ -8,14 +8,15 @@ import gql from "graphql-tag";
 export class CreateContratoGQL extends Mutation {
   document = gql`
     mutation MyMutation(
-      $numero: String!
-      $fecha: Date!
-      $lugar_obra: String!
-      $area: String!
-      $metros: String!
-      $observacion: String!
-      $estado_id: number!
-      $cliente_id: number!
+      $cedula: contrato_alquiler_insert_input!
+      # $numero: String!
+      #  $fecha: Date!
+      #  $lugar_obra: String!
+      # $area: String!
+      # $metros: String!
+      # $observacion: String!
+      # $estado_id: number!
+      # $cliente_id: number!
     ) {
       insert_contrato_alquiler_one(
         object: {

@@ -7,7 +7,7 @@ export class Contrato {
     fecha:Date;
     lugar_obra:string;
     area:string;
-    metraje:string;
+    metros:string;
     observacion:string;
     cliente:Cliente;
     estado_actual:EstadoActual;
@@ -18,7 +18,7 @@ export class Contrato {
       this.fecha=customer.fecha;
       this.lugar_obra=customer.lugar_obra;
       this.area=customer.area;
-      this.metraje=customer.metraje;
+      this.metros=customer.metros;
       this.observacion=customer.observacion;
       this.cliente=customer.cliente;
       this.estado_actual=customer.estado_actual;     

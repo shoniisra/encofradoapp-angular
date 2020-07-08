@@ -87,7 +87,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
       fecha: [null, Validators.required],
       lugar_obra: [null],
       area: [null],
-      metraje: [null],
+      metros: [null],
       observacion: [null],
       estado_id: [
         null,
@@ -120,8 +120,18 @@ export class ContratosCreateUpdateComponent implements OnInit {
     //Aqui validaciones
     // if (this.validateForm(customer)) {
     this.createContratoGQL
-      .mutate({       
-        area=this.contrato;
+      .mutate({
+        //  cedula: customer.cedula,
+        //  direccion: customer.direccion,
+        //  direccion2: customer.direccion2,
+        // email: customer.email,
+        // nombre: customer.nombre,
+        // nombre2: customer.nombre2,
+        // observacion: customer.observacion,
+        // telf1: customer.telf1,
+        // telf2: customer.telf2,
+        // telf3: customer.telf3,
+      cedula: this.contrato
     
       })
       .subscribe(
