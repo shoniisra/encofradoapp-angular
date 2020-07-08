@@ -5,10 +5,10 @@ import gql from "graphql-tag";
 @Injectable({
   providedIn: "root",
 })
-export class DeleteClienteGQL extends Mutation {
+export class DeleteContratoGQL extends Mutation {
   document = gql`
     mutation MyMutation($id: Int!) {
-        delete_cliente_by_pk(id: $id) {
+        delete_contrato_by_pk(id: $id) {
         id
       }
     }

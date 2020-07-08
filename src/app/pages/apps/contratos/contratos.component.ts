@@ -16,6 +16,7 @@ import { MatSort } from "@angular/material/sort";
 // import { MatDialog } from "@angular/material/dialog";
 import { SelectionModel } from "@angular/cdk/collections";
 import { FormControl } from "@angular/forms";
+import { Router } from '@angular/router';
 //vex
 import { TableColumn } from "../../../../@vex/interfaces/table-column.interface";
 import { fadeInUp400ms } from "../../../../@vex/animations/fade-in-up.animation";
@@ -115,6 +116,7 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
+    private router: Router,
     private apollo: Apollo
   ) // private deleteContratoGQL: DeleteContratoGQL
   {}
@@ -165,16 +167,7 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   createCustomer() {
-    // console.log(this.searchCtrl.value);
-    // this.dialog
-    // .open(CustomerCreateUpdateComponent)
-    // .afterClosed()
-    // .subscribe((customer: Contrato) => {
-    // if (customer) {
-    // this.customers.unshift(new Contrato(customer));
-    // this.subject$.next(this.customers);
-    // }
-    // });
+    this.router.navigate(['apps/contratos/create']);    
   }
 
   updateCustomer(customer: Contrato) {

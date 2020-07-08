@@ -5,9 +5,10 @@ import gql from "graphql-tag";
 @Injectable({
   providedIn: "root",
 })
-export class CreateClienteGQL extends Mutation {
+export class UpdateContratoGQL extends Mutation {
   document = gql`
     mutation MyMutation(
+      $id: Int!
       $cedula: String!
       $direccion: String!
       $direccion2: String!
@@ -19,21 +20,24 @@ export class CreateClienteGQL extends Mutation {
       $telf2: String!
       $telf3: String!
     ) {
-      insert_cliente_one(
-        object: {
-          cedula: $cedula,
-          direccion: $direccion ,
-          direccion2: $direccion2 ,
-          email: $email ,
-          nombre: $nombre ,
-          nombre2: $nombre2 ,
-          observacion: $observacion,
-          telf1: $telf1,
-          telf2: $telf2,
+      update_contrato(
+        _set: {
+          cedula: $cedula
+          direccion: $direccion
+          direccion2: $direccion2
+          email: $email
+          nombre: $nombre
+          nombre2: $nombre2
+          observacion: $observacion
+          telf1: $telf1
+          telf2: $telf2
           telf3: $telf3
         }
+        where: { id: { _eq: $id } }
       ) {
-        id
+        returning {
+          id
+        }
       }
     }
   `;

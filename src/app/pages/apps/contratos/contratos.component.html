@@ -10,8 +10,8 @@
       class="w-full flex justify-between"
     >
       <div>
-        <h1 class="title mt-0 mb-1">Lista de Clientes</h1>
-        <vex-breadcrumbs [crumbs]="['App', 'Clientes']"></vex-breadcrumbs>
+        <h1 class="title mt-0 mb-1">Lista de Contratos</h1>
+        <vex-breadcrumbs [crumbs]="['App', 'Contratos']"></vex-breadcrumbs>
       </div>
     </div>
   </vex-page-layout-header>
@@ -32,9 +32,9 @@
           fxFlex="none"
           fxHide.xs
         >
-          <span *ngIf="selection.isEmpty()">Clientes</span>
+          <span *ngIf="selection.isEmpty()">Contratos</span>
           <span *ngIf="selection.hasValue()"
-            >{{ selection.selected.length }} Cliente<span
+            >{{ selection.selected.length }} Contrato<span
               *ngIf="selection.selected.length > 1"
               >s</span
             >
@@ -80,7 +80,7 @@
           color="primary"
           fxFlex="none"
           mat-mini-fab
-          matTooltip="Crear Cliente"
+          matTooltip="Crear Contrato"
           type="button"
         >
           <mat-icon [icIcon]="icAdd"></mat-icon>

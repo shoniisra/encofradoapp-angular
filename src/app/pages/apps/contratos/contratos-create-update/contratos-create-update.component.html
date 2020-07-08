@@ -1,14 +1,3 @@
-<vex-secondary-toolbar current="Form Wizard">
-  <vex-breadcrumbs
-    [crumbs]="['contratos', 'crear']"
-    fxFlex="auto"
-  ></vex-breadcrumbs>
-
-  <button class="ml-2" color="primary" mat-icon-button type="button">
-    <mat-icon [icIcon]="icMoreVert"></mat-icon>
-  </button>
-</vex-secondary-toolbar> 
-
 <div @stagger class="p-gutter" vexContainer>
   <h2 class="title mt-6 mb-4" fxLayout="row" fxLayoutAlign="start center">
     <span
@@ -42,48 +31,10 @@
 
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
-              <mat-label>Nombre Cliente</mat-label>
+              <mat-label>Id Cliente</mat-label>
               <input formControlName="username" matInput required />
-              <mat-hint>This will be your unique login name.</mat-hint>
+              <mat-hint>Este es el nombre que se asociará al contrato</mat-hint>
             </mat-form-field>
-
-            <mat-form-field fxFlex="auto">
-              <mat-label>Name</mat-label>
-              <input formControlName="name" matInput required />
-              <mat-hint>How may we call you?</mat-hint>
-            </mat-form-field>
-
-            <div
-              fxLayout="column"
-              fxLayout.gt-xs="row"
-              fxLayoutGap="8px"
-              fxLayoutGap.gt-xs="24px"
-            >
-              <mat-form-field fxFlex="auto">
-                <mat-label>E-Mail</mat-label>
-                <input formControlName="email" matInput required />
-                <mat-hint align="end">example@example.com</mat-hint>
-              </mat-form-field>
-
-              <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
-                <mat-form-field class="vex-flex-form-field" fxFlex="none">
-                  <mat-label>Code</mat-label>
-                  <mat-select formControlName="phonePrefix">
-                    <mat-option
-                      *ngFor="let option of phonePrefixOptions"
-                      [value]="option"
-                      >{{ option }}</mat-option
-                    >
-                  </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-                  <mat-label>Phone Number</mat-label>
-                  <input formControlName="phone" matInput />
-                  <mat-hint align="end"></mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
           </div>
 
           <div
@@ -106,6 +57,7 @@
               color="primary"
               mat-raised-button
               matStepperNext
+              (click)="submit1()"
             >
               NEXT
             </button>
@@ -113,75 +65,67 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="verticalPasswordFormGroup">
-        <form [formGroup]="verticalPasswordFormGroup">
-          <ng-template matStepLabel>Select a Password</ng-template>
+      <mat-step [stepControl]="verticalContratoFormGroup">
+        <form [formGroup]="verticalContratoFormGroup">
+          <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
 
-          <div class="title m-0">Select a Password</div>
+          <div class="title m-0">
+            Esta informacion es la cabecera del contrato
+          </div>
           <div class="subheading-1">
-            Enter your password you will use to log in.
+            llena esta información
           </div>
 
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
-              <mat-label>Password</mat-label>
-              <input
-                [type]="passwordInputType"
-                formControlName="password"
-                matInput
-                required
-              />
-              <button
-                (click)="showPassword()"
-                *ngIf="passwordInputType === 'password'"
-                mat-icon-button
-                matSuffix
-                type="button"
-              >
-                <mat-icon [icIcon]="icVisibility"></mat-icon>
-              </button>
-              <button
-                (click)="hidePassword()"
-                *ngIf="passwordInputType === 'text'"
-                mat-icon-button
-                matSuffix
-                type="button"
-              >
-                <mat-icon [icIcon]="icVisibilityOff"></mat-icon>
-              </button>
-              <mat-hint
-                >Your password should be atleast 6 characters long.</mat-hint
-              >
+              <mat-label>numero</mat-label>
+              <input formControlName="numero" matInput required />
+              <mat-hint>numero contrato</mat-hint>
             </mat-form-field>
 
             <mat-form-field fxFlex="auto">
-              <mat-label>Confirm Password</mat-label>
-              <input
-                [type]="passwordInputType"
-                formControlName="passwordConfirm"
-                matInput
-                required
-              />
-              <button
-                (click)="showPassword()"
-                *ngIf="passwordInputType === 'password'"
-                mat-icon-button
-                matSuffix
-                type="button"
-              >
-                <mat-icon [icIcon]="icVisibility"></mat-icon>
-              </button>
-              <button
-                (click)="hidePassword()"
-                *ngIf="passwordInputType === 'text'"
-                mat-icon-button
-                matSuffix
-                type="button"
-              >
-                <mat-icon [icIcon]="icVisibilityOff"></mat-icon>
-              </button>
-              <mat-hint>Please type in your password again.</mat-hint>
+              <mat-label>fecha</mat-label>
+              <input formControlName="fecha" matInput required type="date" />
+              <mat-hint>fecha del contrato</mat-hint>
             </mat-form-field>
+            <mat-form-field fxFlex="auto">
+              <mat-label>lugar_obra</mat-label>
+              <input formControlName="lugar_obra" matInput required />
+              <mat-hint>lugar_obra</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="auto">
+              <mat-label>observacion</mat-label>
+              <input formControlName="observacion" matInput required />
+              <mat-hint>observacion</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="auto">
+              <mat-label>estado_id</mat-label>
+              <input formControlName="estado_id" matInput required />
+              <mat-hint>estado_id</mat-hint>
+            </mat-form-field>
+
+            <div
+              fxLayout="column"
+              fxLayout.gt-xs="row"
+              fxLayoutGap="8px"
+              fxLayoutGap.gt-xs="24px"
+            >
+              <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
+                <mat-form-field class="vex-flex-form-field" fxFlex="none">
+                  <mat-label>area</mat-label>
+                  <input formControlName="area" matInput required />
+                  <mat-hint>area</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="vex-flex-form-field" fxFlex="none">
+                  <mat-label>metros</mat-label>
+                  <input formControlName="metraje" matInput required />
+                  <mat-hint>metros</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
 
           <div
@@ -190,14 +134,21 @@
             fxLayoutAlign="end center"
             fxLayoutGap="8px"
           >
-            <button color="primary" mat-button matStepperPrevious type="button">
-              PREVIOUS
+            <button
+              (click)="verticalStepper.reset()"
+              [disabled]="verticalContratoFormGroup.pristine"
+              color="primary"
+              mat-button
+              type="button"
+            >
+              RESET
             </button>
             <button
-              [disabled]="verticalPasswordFormGroup.invalid"
+              [disabled]="verticalContratoFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
+              (click)="submit1()"
             >
               NEXT
             </button>
