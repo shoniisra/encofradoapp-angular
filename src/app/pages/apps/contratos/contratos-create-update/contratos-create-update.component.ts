@@ -19,6 +19,8 @@ import icMoreVert from "@iconify/icons-ic/twotone-more-vert";
 import theme from "../../../../../@vex/utils/tailwindcss";
 import { CreateContratoGQL } from "../graphql/CreateContratoGQL";
 import { Contrato } from "src/app/models/contratoalquiler.model";
+import { Cliente } from "src/app/models/cliente.model";
+import { EstadoActual } from "src/app/models/estadoactual.model";
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -29,17 +31,16 @@ import { Contrato } from "src/app/models/contratoalquiler.model";
 })
 export class ContratosCreateUpdateComponent implements OnInit {
   contrato: Contrato;
+  cliente: Cliente;
 
-  accountFormGroup: FormGroup;
   // contratoFormGroup: FormGroup;
-  confirmFormGroup: FormGroup;
 
   verticalAccountFormGroup: FormGroup;
   // verticalClienteFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
   // verticalContratoFormGroup: FormGroup;
-  verticalConfirmFormGroup: FormGroup;
-
+  productosFormGroup: FormGroup;
+  fecha: Date;
   icDoneAll = icDoneAll;
   icDescription = icDescription;
   icVerticalSplit = icVerticalSplit;
@@ -57,46 +58,36 @@ export class ContratosCreateUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /**
-     * Horizontal Stepper
-     * @type {FormGroup}
-     */
-    this.accountFormGroup = this.fb.group({
-      username: [null, Validators.required],
-      // name: [null, Validators.required],
-      // email: [null, Validators.required]
-    });
-
-    this.confirmFormGroup = this.fb.group({
-      terms: [null, Validators.requiredTrue],
-    });
-
-    /**
-     * Vertical Stepper
-     * @type {FormGroup}
-     */
+    
     this.verticalAccountFormGroup = this.fb.group({
-      username: [null, Validators.required],
+      id: [null, Validators.required],
     });
-
+    
+    this.fecha = new Date();
     this.verticalContratoFormGroup = this.fb.group({
-      numero: [
-        null,
-        Validators.compose([Validators.required, Validators.min(0)]),
-      ],
-      fecha: [null, Validators.required],
+      numero: [null, Validators.min(0)],
+      fecha: [this.fecha, Validators.required],
       lugar_obra: [null],
       area: [null],
       metros: [null],
       observacion: [null],
+      cliente_id: [null],
       estado_id: [
         null,
         Validators.compose([Validators.required, Validators.min(0)]),
       ],
     });
+    this.verticalContratoFormGroup.value.fecha = this.fecha;
 
-    this.verticalConfirmFormGroup = this.fb.group({
-      terms: [null, Validators.requiredTrue],
+    this.productosFormGroup = this.fb.group({
+      descripcion:[null],
+      transporte_entrega:[null],
+      transporte_devolucion:[null],
+      fecha_inicio: [null, Validators.required],
+      fecha_entrega: [null],
+      devuelto:[null],
+      pago_cancelado:[null],
+      valor_total:[null, Validators.required]
     });
   }
 
@@ -113,10 +104,15 @@ export class ContratosCreateUpdateComponent implements OnInit {
     });
   }
   createContrato() {
-    this.contrato = this.verticalContratoFormGroup.value;
+    this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
+    // this.cliente=this.verticalAccountFormGroup.value;
+    // this.cliente.id=2;
+    // this.contrato = this.verticalContratoFormGroup.value;
+    // this.contrato.cliente=this.cliente;
+    // this.contrato.nte=this.cliente;=2;
+    console.log(this.verticalContratoFormGroup.value);
+    // console.log(this.verticalContratoFormGroup.value); cliente;
 
-    // console.log(this.verticalContratoFormGroup.value);
-      
     //Aqui validaciones
     // if (this.validateForm(customer)) {
     this.createContratoGQL
@@ -131,8 +127,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
         // telf1: customer.telf1,
         // telf2: customer.telf2,
         // telf3: customer.telf3,
-      cedula: this.contrato
-    
+        contrato: this.verticalContratoFormGroup.value,
       })
       .subscribe(
         ({ data }) => {

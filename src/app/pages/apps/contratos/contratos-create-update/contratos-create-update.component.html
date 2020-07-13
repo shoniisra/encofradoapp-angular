@@ -24,15 +24,16 @@
         <form [formGroup]="verticalAccountFormGroup">
           <ng-template matStepLabel>Elige un Cliente</ng-template>
 
-          <div class="title m-0">Agrega un Cliente</div>
-          <div class="subheading-1">
-            Busca al cliente por su cédula, y si no exíste registra uno
-          </div>
-
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
               <mat-label>Id Cliente</mat-label>
-              <input formControlName="username" matInput required />
+              <input
+                formControlName="id"
+                matInput
+                required
+                type="number"
+                min="0"
+              />
               <mat-hint>Este es el nombre que se asociará al contrato</mat-hint>
             </mat-form-field>
           </div>
@@ -44,22 +45,13 @@
             fxLayoutGap="8px"
           >
             <button
-              (click)="verticalStepper.reset()"
-              [disabled]="verticalAccountFormGroup.pristine"
-              color="primary"
-              mat-button
-              type="button"
-            >
-              RESET
-            </button>
-            <button
               [disabled]="verticalAccountFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
               (click)="submit1()"
             >
-              NEXT
+              SIGUIENTE
             </button>
           </div>
         </form>
@@ -69,34 +61,41 @@
         <form [formGroup]="verticalContratoFormGroup">
           <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
 
-          <div class="title m-0">
-            Esta informacion es la cabecera del contrato
-          </div>
-          <div class="subheading-1">
-            llena esta información
-          </div>
-
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
               <mat-label>numero</mat-label>
-              <input formControlName="numero" matInput required />
+              <input
+                formControlName="numero"
+                matInput
+                type="number"
+                value="2"
+                min="0"
+              />
               <mat-hint>numero contrato</mat-hint>
             </mat-form-field>
 
             <mat-form-field fxFlex="auto">
-              <mat-label>fecha</mat-label>
-              <input formControlName="fecha" matInput required type="date" />
+              <mat-label>fecha {{ this.fecha }} </mat-label>
+              <input
+                formControlName="fecha"
+                matInput
+                required
+                type="date"
+                [value]="this.fecha"
+                min="2020-01-01"
+                max="2100-12-31"
+              />
               <mat-hint>fecha del contrato</mat-hint>
             </mat-form-field>
             <mat-form-field fxFlex="auto">
-              <mat-label>lugar_obra</mat-label>
-              <input formControlName="lugar_obra" matInput required />
-              <mat-hint>lugar_obra</mat-hint>
+              <mat-label>Dirección</mat-label>
+              <input formControlName="lugar_obra" matInput />
+              <mat-hint>Dirección de la obra</mat-hint>
             </mat-form-field>
 
             <mat-form-field fxFlex="auto">
               <mat-label>observacion</mat-label>
-              <input formControlName="observacion" matInput required />
+              <input formControlName="observacion" matInput />
               <mat-hint>observacion</mat-hint>
             </mat-form-field>
 
@@ -134,14 +133,8 @@
             fxLayoutAlign="end center"
             fxLayoutGap="8px"
           >
-            <button
-              (click)="verticalStepper.reset()"
-              [disabled]="verticalContratoFormGroup.pristine"
-              color="primary"
-              mat-button
-              type="button"
-            >
-              RESET
+            <button color="primary" mat-button matStepperPrevious type="button">
+              ANTERIOR
             </button>
             <button
               [disabled]="verticalContratoFormGroup.invalid"
@@ -150,26 +143,71 @@
               matStepperNext
               (click)="submit1()"
             >
-              NEXT
+              SIGUIENTE
             </button>
           </div>
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="verticalConfirmFormGroup">
-        <form [formGroup]="verticalConfirmFormGroup">
-          <ng-template matStepLabel>Confirm Creation</ng-template>
-
-          <div class="title m-0">You're almost there!</div>
-          <div class="subheading-1">
-            To finish registration, accept our terms of service and click on
-            "Create Account".
-          </div>
+      <mat-step [stepControl]="productosFormGroup">
+        <form [formGroup]="productosFormGroup">
+          <ng-template matStepLabel>Detalle de Alquiler</ng-template>
 
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
-            <mat-checkbox class="checkbox" formControlName="terms">
-              I agree to the terms of service and the usual stuff. *
-            </mat-checkbox>
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>descripcion</mat-label>
+              <input formControlName="descripcion" matInput />
+              <mat-hint>descripcion</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>fecha_inicio</mat-label>
+              <input
+                formControlName="fecha_inicio"
+                matInput
+                required
+                type="date"
+              />
+              <mat-hint>fecha_inicio</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>fecha_entrega</mat-label>
+              <input formControlName="fecha_entrega" matInput type="date" />
+              <mat-hint>fecha_entrega</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>valor_total</mat-label>
+              <input
+                formControlName="valor_total"
+                matInput
+                required
+              
+              />
+              <mat-hint>valor_total</mat-hint>
+            </mat-form-field>
+  
+            <div class="vex-flex-form-field" fxFlex="none">
+              <mat-checkbox class="checkbox" formControlName="transporte_entrega">
+                ¿ Incluye Transporte de entrega?
+              </mat-checkbox>             
+            </div>
+  
+            <div class="vex-flex-form-field" fxFlex="none">          
+              <mat-checkbox class="checkbox" formControlName="transporte_devolucion">
+                ¿ Incluye Transporte de devolucion?
+              </mat-checkbox>              
+            </div>
+          
+            <div class="vex-flex-form-field" fxFlex="none">            
+              <mat-checkbox class="checkbox" formControlName="devuelto">
+                ¿ Devuelto ?
+              </mat-checkbox>
+            </div>
+
+            <div class="vex-flex-form-field" fxFlex="none">
+              <mat-checkbox class="checkbox" formControlName="pago_cancelado">
+                ¿ Pago Cancelado?
+              </mat-checkbox>              
+            </div> 
           </div>
 
           <div
@@ -179,20 +217,20 @@
             fxLayoutGap="8px"
           >
             <button color="primary" mat-button matStepperPrevious type="button">
-              PREVIOUS
+              ANTERIOR
             </button>
             <button
-              (click)="submit()"
-              [disabled]="verticalConfirmFormGroup.invalid"
+              [disabled]="productosFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
+              (click)="submit1()"
             >
-              CREATE ACCOUNT
+              SIGUIENTE
             </button>
           </div>
         </form>
-      </mat-step>
+      </mat-step>    
     </mat-vertical-stepper>
   </div>
 </div>
