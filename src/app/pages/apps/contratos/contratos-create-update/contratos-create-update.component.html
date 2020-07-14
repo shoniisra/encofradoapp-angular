@@ -44,8 +44,8 @@
             fxLayoutAlign="end center"
             fxLayoutGap="8px"
           >
+          <!-- [disabled]="verticalAccountFormGroup.invalid" -->
             <button
-              [disabled]="verticalAccountFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
@@ -72,16 +72,14 @@
                 min="0"
               />
               <mat-hint>numero contrato</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field fxFlex="auto">
-              <mat-label>fecha {{ this.fecha }} </mat-label>
+            </mat-form-field>   
+            <mat-form-field class="vex-flex-form-field"  fxFlex="auto">
+              <mat-label>fecha</mat-label>
               <input
                 formControlName="fecha"
                 matInput
                 required
                 type="date"
-                [value]="this.fecha"
                 min="2020-01-01"
                 max="2100-12-31"
               />
@@ -136,8 +134,8 @@
             <button color="primary" mat-button matStepperPrevious type="button">
               ANTERIOR
             </button>
+            <!-- [disabled]="verticalContratoFormGroup.invalid" -->
             <button
-              [disabled]="verticalContratoFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
@@ -198,7 +196,7 @@
             </div>
           
             <div class="vex-flex-form-field" fxFlex="none">            
-              <mat-checkbox class="checkbox" formControlName="devuelto">
+              <mat-checkbox class="checkbox" formControlName="devuelto" value=false>
                 ¿ Devuelto ?
               </mat-checkbox>
             </div>
@@ -224,7 +222,7 @@
               color="primary"
               mat-raised-button
               matStepperNext
-              (click)="submit1()"
+              (click)="submit()"
             >
               SIGUIENTE
             </button>

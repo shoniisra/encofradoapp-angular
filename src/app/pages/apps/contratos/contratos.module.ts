@@ -27,7 +27,7 @@ import { IconModule } from "@visurel/iconify-angular";
 import { ContratosComponent } from "./contratos.component";
 import { ContratosRoutingModule } from "./contratos.routing.module";
 import { ContratosCreateUpdateComponent } from "./contratos-create-update/contratos-create-update.component";
-
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [ContratosComponent, ContratosCreateUpdateComponent],
@@ -56,6 +56,6 @@ import { ContratosCreateUpdateComponent } from "./contratos-create-update/contra
     MatSelectModule,
     ColorFadeModule,
     MatButtonToggleModule,
-  ],
+  ],providers: [DatePipe]
 })
 export class ContratosModule {}
