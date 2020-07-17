@@ -68,7 +68,6 @@
                 formControlName="numero"
                 matInput
                 type="number"
-                value="2"
                 min="0"
               />
               <mat-hint>numero contrato</mat-hint>
@@ -99,7 +98,9 @@
 
             <mat-form-field fxFlex="auto">
               <mat-label>estado_id</mat-label>
-              <input formControlName="estado_id" matInput required />
+              <input  type="number"
+              value="2"
+              min="0" formControlName="estado_id" matInput required />
               <mat-hint>estado_id</mat-hint>
             </mat-form-field>
 
@@ -147,8 +148,8 @@
         </form>
       </mat-step>
 
-      <mat-step [stepControl]="productosFormGroup">
-        <form [formGroup]="productosFormGroup">
+      <mat-step [stepControl]="detalleAlquilerFormGroup">
+        <form [formGroup]="detalleAlquilerFormGroup">
           <ng-template matStepLabel>Detalle de Alquiler</ng-template>
 
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
@@ -178,6 +179,9 @@
                 formControlName="valor_total"
                 matInput
                 required
+                type="number"
+                min="0"
+                step="0.2"
               
               />
               <mat-hint>valor_total</mat-hint>
@@ -218,7 +222,7 @@
               ANTERIOR
             </button>
             <button
-              [disabled]="productosFormGroup.invalid"
+              [disabled]="detalleAlquilerFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext

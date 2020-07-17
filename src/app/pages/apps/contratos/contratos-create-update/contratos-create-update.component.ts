@@ -43,7 +43,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
   // verticalClienteFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
   // verticalContratoFormGroup: FormGroup;
-  productosFormGroup: FormGroup;
+  detalleAlquilerFormGroup: FormGroup;
   fecha: Date;
   icDoneAll = icDoneAll;
   icDescription = icDescription;
@@ -67,7 +67,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
       id: [null, Validators.required],
     });
     this.fecha = new Date();
-    let fechaActual=this.datePipe.transform( this.fecha ,"yyyy-MM-dd");
+    let fechaActual = this.datePipe.transform(this.fecha, "yyyy-MM-dd");
     this.verticalContratoFormGroup = this.fb.group({
       numero: [null, Validators.min(0)],
       fecha: [fechaActual, Validators.required],
@@ -77,13 +77,13 @@ export class ContratosCreateUpdateComponent implements OnInit {
       observacion: [null],
       cliente_id: [null],
       estado_id: [
-        null,
+        2,
         Validators.compose([Validators.required, Validators.min(0)]),
       ],
     });
     this.verticalContratoFormGroup.value.fecha = this.fecha;
 
-    this.productosFormGroup = this.fb.group({
+    this.detalleAlquilerFormGroup = this.fb.group({
       descripcion: [null],
       transporte_entrega: [false],
       transporte_devolucion: [false],
@@ -91,7 +91,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
       fecha_entrega: [fechaActual],
       devuelto: [false],
       pago_cancelado: [false],
-      valor_total: [null, Validators.required],
+      valor_total: [0, Validators.required],
     });
   }
 
@@ -111,38 +111,46 @@ export class ContratosCreateUpdateComponent implements OnInit {
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     // this.cliente=this.verticalAccountFormGroup.value;
     // this.cliente.id=2;
-    // this.contrato = this.verticalContratoFormGroup.value;
+    this.contrato = this.verticalContratoFormGroup.value;
     // this.contrato.cliente=this.cliente;
     // this.contrato.nte=this.cliente;=2;
-    console.log(this.verticalContratoFormGroup.value);
-    console.log(this.productosFormGroup.value);
+    // console.log(this.detalleAlquilerFormGroup.value);
+    this.detalleAlquilerFormGroup.value.contrato_id=3;
+    let detalle_alquiler = this.detalleAlquilerFormGroup.value;
+    let detalle_aux = JSON.stringify({ detalle_alquiler });
+    // JSON.parse(JSON.stringify(object))
+    console.log(this.verticalContratoFormGroup.value); 
+    console.log(detalle_aux);
     // console.log(this.verticalContratoFormGroup.value); cliente;
-
+    // this.verticalContratoFormGroup.value.detalle_alquiler=this.detalleAlquilerFormGroup.value
+    // console.log(this.verticalContratoFormGroup.value);
     //Aqui validaciones
     // if (this.validateForm(customer)) {
-    // this.createContratoGQL
-    //   .mutate({
-    //     //  cedula: customer.cedula,
-    //     //  direccion: customer.direccion,
-    //     //  direccion2: customer.direccion2,
-    //     // email: customer.email,
-    //     // nombre: customer.nombre,
-    //     // nombre2: customer.nombre2,
-    //     // observacion: customer.observacion,
-    //     // telf1: customer.telf1,
-    //     // telf2: customer.telf2,
-    //     // telf3: customer.telf3,
-    //     contrato: this.verticalContratoFormGroup.value,
-    //   })
-    //   .subscribe(
-    //     ({ data }) => {
-    //       this.openSnackbar("Contrato Guardado Exitosamente");
-    //     },
-    //     (error) => {
-    //       console.log("Error al Guardar el Contrato", error);
-    //       this.openSnackbar("Error al Guardar el Contrato");
-    //     }
-    //   );
+    this.createContratoGQL
+      .mutate({
+        numero: this.verticalContratoFormGroup.value.numero,
+        fecha: this.verticalContratoFormGroup.value.fecha,
+        lugar_obra: this.verticalContratoFormGroup.value.lugar_obra,
+        area: this.verticalContratoFormGroup.value.area,
+        metros: this.verticalContratoFormGroup.value.metros,
+        observacion: this.verticalContratoFormGroup.value.observacion,
+        estado_id: this.verticalContratoFormGroup.value.estado_id,
+        cliente_id: this.verticalContratoFormGroup.value.cliente_id,
+        detalle_alquiler:JSON.stringify({ detalle_alquiler })
+        //     // telf2: customer.telf2,
+        //     // telf3: customer.telf3,
+        // contrato: aux,
+        // detallecontrato:this.detalleAlquilerFormGroup.value
+      })
+      .subscribe(
+        ({ data }) => {
+          this.openSnackbar("Contrato Guardado Exitosamente");
+        },
+        (error) => {
+          console.log("Error al Guardar el Contrato", error);
+          this.openSnackbar("Error al Guardar el Contrato");
+        }
+      );
     // }
   }
   openSnackbar(mensaje: string) {
