@@ -8,30 +8,41 @@ import gql from "graphql-tag";
 export class CreateContratoGQL extends Mutation {
   document = gql`
     mutation MyMutation(
-      # $contrato: jsonb!      
+      # $contrato: jsonb!
       # $detallecontrato:detalle_alquiler_insert_input!
       $numero: Int!
-       $fecha: Date!
-       $lugar_obra: String
+      $lugar_obra: String
       $area: String
       $metros: String
       $observacion: String
       $estado_id: Int!
       $cliente_id: Int!
-      $detalle_alquiler: jsonb
+      $descripcion: String
+      $transporte_entrega: String!
+      $transporte_devolucion: String!
+      $fecha_inicio: Date!
+      $fecha_entrega: Date!
+      $devuelto: String!
+      $pago_cancelado: String!
+      $valor_total: String!
     ) {
       insert_contrato_alquiler_one(
-        object:  
-        {
-          area: $area
-          estado_id: $estado_id
-          fecha: $fecha
+        object: {
+          numero: $numero
           lugar_obra: $lugar_obra
+          area: $area
           metros: $metros
           observacion: $observacion
-          numero: $numero
+          estado_id: $estado_id
           cliente_id: $cliente_id
-          detalle_alquiler: $detalle_alquiler
+          descripcion: $descripcion
+          transporte_entrega: $transporte_entrega
+          transporte_devolucion: $transporte_devolucion
+          fecha_inicio: $fecha_inicio
+          fecha_entrega: $fecha_entrega
+          devuelto: $devuelto
+          pago_cancelado: $pago_cancelado
+          valor_total: $valor_total
         }
       ) {
         id

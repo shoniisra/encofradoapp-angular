@@ -43,7 +43,6 @@ export class ContratosCreateUpdateComponent implements OnInit {
   // verticalClienteFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
   // verticalContratoFormGroup: FormGroup;
-  detalleAlquilerFormGroup: FormGroup;
   fecha: Date;
   icDoneAll = icDoneAll;
   icDescription = icDescription;
@@ -80,15 +79,11 @@ export class ContratosCreateUpdateComponent implements OnInit {
         2,
         Validators.compose([Validators.required, Validators.min(0)]),
       ],
-    });
-    this.verticalContratoFormGroup.value.fecha = this.fecha;
-
-    this.detalleAlquilerFormGroup = this.fb.group({
       descripcion: [null],
       transporte_entrega: [false],
       transporte_devolucion: [false],
       fecha_inicio: [fechaActual, Validators.required],
-      fecha_entrega: [fechaActual],
+      fecha_entrega: [fechaActual, Validators.required],
       devuelto: [false],
       pago_cancelado: [false],
       valor_total: [0, Validators.required],
@@ -114,15 +109,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
     this.contrato = this.verticalContratoFormGroup.value;
     // this.contrato.cliente=this.cliente;
     // this.contrato.nte=this.cliente;=2;
-    // console.log(this.detalleAlquilerFormGroup.value);
-    this.detalleAlquilerFormGroup.value.contrato_id=3;
-    let detalle_alquiler = this.detalleAlquilerFormGroup.value;
-    let detalle_aux = JSON.stringify({ detalle_alquiler });
     // JSON.parse(JSON.stringify(object))
-    console.log(this.verticalContratoFormGroup.value); 
-    console.log(detalle_aux);
+    console.log(this.verticalContratoFormGroup.value);
     // console.log(this.verticalContratoFormGroup.value); cliente;
-    // this.verticalContratoFormGroup.value.detalle_alquiler=this.detalleAlquilerFormGroup.value
     // console.log(this.verticalContratoFormGroup.value);
     //Aqui validaciones
     // if (this.validateForm(customer)) {
@@ -136,11 +125,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
         observacion: this.verticalContratoFormGroup.value.observacion,
         estado_id: this.verticalContratoFormGroup.value.estado_id,
         cliente_id: this.verticalContratoFormGroup.value.cliente_id,
-        detalle_alquiler:JSON.stringify({ detalle_alquiler })
         //     // telf2: customer.telf2,
         //     // telf3: customer.telf3,
         // contrato: aux,
-        // detallecontrato:this.detalleAlquilerFormGroup.value
       })
       .subscribe(
         ({ data }) => {
