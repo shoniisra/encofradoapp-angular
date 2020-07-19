@@ -44,7 +44,7 @@
             fxLayoutAlign="end center"
             fxLayoutGap="8px"
           >
-          <!-- [disabled]="verticalAccountFormGroup.invalid" -->
+            <!-- [disabled]="verticalAccountFormGroup.invalid" -->
             <button
               color="primary"
               mat-raised-button
@@ -64,26 +64,10 @@
           <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field fxFlex="auto">
               <mat-label>numero</mat-label>
-              <input
-                formControlName="numero"
-                matInput
-                type="number"
-                min="0"
-              />
+              <input formControlName="numero" matInput type="number" min="0" />
               <mat-hint>numero contrato</mat-hint>
-            </mat-form-field>   
-            <mat-form-field class="vex-flex-form-field"  fxFlex="auto">
-              <mat-label>fecha</mat-label>
-              <input
-                formControlName="fecha"
-                matInput
-                required
-                type="date"
-                min="2020-01-01"
-                max="2100-12-31"
-              />
-              <mat-hint>fecha del contrato</mat-hint>
             </mat-form-field>
+
             <mat-form-field fxFlex="auto">
               <mat-label>Dirección</mat-label>
               <input formControlName="lugar_obra" matInput />
@@ -98,66 +82,23 @@
 
             <mat-form-field fxFlex="auto">
               <mat-label>estado_id</mat-label>
-              <input  type="number"
-              value="2"
-              min="0" formControlName="estado_id" matInput required />
+              <input
+                type="number"
+                value="2"
+                min="0"
+                formControlName="estado_id"
+                matInput
+                required
+              />
               <mat-hint>estado_id</mat-hint>
             </mat-form-field>
 
-            <div
-              fxLayout="column"
-              fxLayout.gt-xs="row"
-              fxLayoutGap="8px"
-              fxLayoutGap.gt-xs="24px"
-            >
-              <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
-                <mat-form-field class="vex-flex-form-field" fxFlex="none">
-                  <mat-label>area</mat-label>
-                  <input formControlName="area" matInput required />
-                  <mat-hint>area</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field class="vex-flex-form-field" fxFlex="none">
-                  <mat-label>metros</mat-label>
-                  <input formControlName="metros" matInput required />
-                  <mat-hint>metros</mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="actions"
-            fxLayout="row"
-            fxLayoutAlign="end center"
-            fxLayoutGap="8px"
-          >
-            <button color="primary" mat-button matStepperPrevious type="button">
-              ANTERIOR
-            </button>
-            <!-- [disabled]="verticalContratoFormGroup.invalid" -->
-            <button
-              color="primary"
-              mat-raised-button
-              matStepperNext
-              (click)="submit1()"
-            >
-              SIGUIENTE
-            </button>
-          </div>
-        </form>
-      </mat-step>
-
-      <mat-step [stepControl]="detalleAlquilerFormGroup">
-        <form [formGroup]="detalleAlquilerFormGroup">
-          <ng-template matStepLabel>Detalle de Alquiler</ng-template>
-
-          <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
             <mat-form-field class="vex-flex-form-field" fxFlex="none">
               <mat-label>descripcion</mat-label>
               <input formControlName="descripcion" matInput />
               <mat-hint>descripcion</mat-hint>
             </mat-form-field>
+
             <mat-form-field class="vex-flex-form-field" fxFlex="none">
               <mat-label>fecha_inicio</mat-label>
               <input
@@ -182,25 +123,34 @@
                 type="number"
                 min="0"
                 step="0.2"
-              
               />
               <mat-hint>valor_total</mat-hint>
             </mat-form-field>
-  
+
             <div class="vex-flex-form-field" fxFlex="none">
-              <mat-checkbox class="checkbox" formControlName="transporte_entrega">
+              <mat-checkbox
+                class="checkbox"
+                formControlName="transporte_entrega"
+              >
                 ¿ Incluye Transporte de entrega?
-              </mat-checkbox>             
+              </mat-checkbox>
             </div>
-  
-            <div class="vex-flex-form-field" fxFlex="none">          
-              <mat-checkbox class="checkbox" formControlName="transporte_devolucion">
+
+            <div class="vex-flex-form-field" fxFlex="none">
+              <mat-checkbox
+                class="checkbox"
+                formControlName="transporte_devolucion"
+              >
                 ¿ Incluye Transporte de devolucion?
-              </mat-checkbox>              
+              </mat-checkbox>
             </div>
-          
-            <div class="vex-flex-form-field" fxFlex="none">            
-              <mat-checkbox class="checkbox" formControlName="devuelto" value=false>
+
+            <div class="vex-flex-form-field" fxFlex="none">
+              <mat-checkbox
+                class="checkbox"
+                formControlName="devuelto"
+                value="false"
+              >
                 ¿ Devuelto ?
               </mat-checkbox>
             </div>
@@ -208,8 +158,29 @@
             <div class="vex-flex-form-field" fxFlex="none">
               <mat-checkbox class="checkbox" formControlName="pago_cancelado">
                 ¿ Pago Cancelado?
-              </mat-checkbox>              
-            </div> 
+              </mat-checkbox>
+            </div>
+
+            <div
+              fxLayout="column"
+              fxLayout.gt-xs="row"
+              fxLayoutGap="8px"
+              fxLayoutGap.gt-xs="24px"
+            >
+              <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
+                <mat-form-field class="vex-flex-form-field" fxFlex="none">
+                  <mat-label>area</mat-label>
+                  <input formControlName="area" matInput required />
+                  <mat-hint>area</mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="vex-flex-form-field" fxFlex="none">
+                  <mat-label>metros cuadrados</mat-label>
+                  <input formControlName="metros" matInput required />
+                  <mat-hint>metros</mat-hint>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
 
           <div
@@ -222,7 +193,7 @@
               ANTERIOR
             </button>
             <button
-              [disabled]="detalleAlquilerFormGroup.invalid"
+              [disabled]="verticalContratoFormGroup.invalid"
               color="primary"
               mat-raised-button
               matStepperNext
@@ -232,7 +203,7 @@
             </button>
           </div>
         </form>
-      </mat-step>    
+      </mat-step>
     </mat-vertical-stepper>
   </div>
 </div>

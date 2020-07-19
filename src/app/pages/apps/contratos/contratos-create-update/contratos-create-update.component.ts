@@ -36,13 +36,8 @@ import { DatePipe } from "@angular/common";
 export class ContratosCreateUpdateComponent implements OnInit {
   contrato: Contrato;
   cliente: Cliente;
-
-  // contratoFormGroup: FormGroup;
-
   verticalAccountFormGroup: FormGroup;
-  // verticalClienteFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
-  // verticalContratoFormGroup: FormGroup;
   fecha: Date;
   icDoneAll = icDoneAll;
   icDescription = icDescription;
@@ -69,7 +64,6 @@ export class ContratosCreateUpdateComponent implements OnInit {
     let fechaActual = this.datePipe.transform(this.fecha, "yyyy-MM-dd");
     this.verticalContratoFormGroup = this.fb.group({
       numero: [null, Validators.min(0)],
-      fecha: [fechaActual, Validators.required],
       lugar_obra: [null],
       area: [null],
       metros: [null],
@@ -82,11 +76,11 @@ export class ContratosCreateUpdateComponent implements OnInit {
       descripcion: [null],
       transporte_entrega: [false],
       transporte_devolucion: [false],
-      fecha_inicio: [fechaActual, Validators.required],
-      fecha_entrega: [fechaActual, Validators.required],
+      fecha_inicio: [fechaActual],
+      fecha_entrega: [fechaActual],
       devuelto: [false],
       pago_cancelado: [false],
-      valor_total: [0, Validators.required],
+      valor_total: [0, Validators.min(0)],
     });
   }
 
@@ -104,30 +98,10 @@ export class ContratosCreateUpdateComponent implements OnInit {
   }
   createContrato() {
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
-    // this.cliente=this.verticalAccountFormGroup.value;
-    // this.cliente.id=2;
-    this.contrato = this.verticalContratoFormGroup.value;
-    // this.contrato.cliente=this.cliente;
-    // this.contrato.nte=this.cliente;=2;
-    // JSON.parse(JSON.stringify(object))
     console.log(this.verticalContratoFormGroup.value);
-    // console.log(this.verticalContratoFormGroup.value); cliente;
-    // console.log(this.verticalContratoFormGroup.value);
-    //Aqui validaciones
-    // if (this.validateForm(customer)) {
     this.createContratoGQL
       .mutate({
-        numero: this.verticalContratoFormGroup.value.numero,
-        fecha: this.verticalContratoFormGroup.value.fecha,
-        lugar_obra: this.verticalContratoFormGroup.value.lugar_obra,
-        area: this.verticalContratoFormGroup.value.area,
-        metros: this.verticalContratoFormGroup.value.metros,
-        observacion: this.verticalContratoFormGroup.value.observacion,
-        estado_id: this.verticalContratoFormGroup.value.estado_id,
-        cliente_id: this.verticalContratoFormGroup.value.cliente_id,
-        //     // telf2: customer.telf2,
-        //     // telf3: customer.telf3,
-        // contrato: aux,
+        contrato: this.verticalContratoFormGroup.value,
       })
       .subscribe(
         ({ data }) => {
@@ -138,7 +112,6 @@ export class ContratosCreateUpdateComponent implements OnInit {
           this.openSnackbar("Error al Guardar el Contrato");
         }
       );
-    // }
   }
   openSnackbar(mensaje: string) {
     this.snackbar.open(mensaje, "cerrar", {
