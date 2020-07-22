@@ -119,34 +119,6 @@ export class AppComponent {
         type: 'subheading',
         label: 'Apps',
         children: [
-          
-          {
-            type: 'dropdown',
-            label: 'Help Center',
-            icon: icContactSupport,
-            children: [
-              {
-                type: 'link',
-                label: 'Getting Started',
-                route: '/apps/help-center/getting-started'
-              },
-              {
-                type: 'link',
-                label: 'Pricing & Plans',
-                route: '/apps/help-center/pricing'
-              },
-              {
-                type: 'link',
-                label: 'FAQ',
-                route: '/apps/help-center/faq'
-              },
-              {
-                type: 'link',
-                label: 'Guides',
-                route: '/apps/help-center/guides'
-              }
-            ]
-          },
           {
             type: 'link',
             label: 'Calendar',
@@ -243,18 +215,7 @@ export class AppComponent {
             label: 'FAQ',
             icon: icHelp,
             route: '/pages/faq'
-          },
-          {
-            type: 'link',
-            label: 'Guides',
-            icon: icBook,
-            route: '/pages/guides',
-            badge: {
-              value: '18',
-              background: theme.colors.teal['500'],
-              color: theme.textColor['teal-contrast']['500']
-            },
-          },
+          }
         ]
       },
       {

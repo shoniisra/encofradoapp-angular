@@ -49,14 +49,7 @@ const childrenRoutes: VexRoutes = [
           import("./pages/apps/contratos/contratos.module").then(
             (m) => m.ContratosModule
           ),
-      },
-      {
-        path: "help-center",
-        loadChildren: () =>
-          import("./pages/apps/help-center/help-center.module").then(
-            (m) => m.HelpCenterModule
-          ),
-      }     
+      }   
     ],
   },
   {
@@ -73,14 +66,7 @@ const childrenRoutes: VexRoutes = [
         path: "faq",
         loadChildren: () =>
           import("./pages/pages/faq/faq.module").then((m) => m.FaqModule),
-      },
-      {
-        path: "guides",
-        loadChildren: () =>
-          import("./pages/pages/guides/guides.module").then(
-            (m) => m.GuidesModule
-          ),
-      },
+      },      
       {
         path: "profile",
         loadChildren: () =>
