@@ -159,21 +159,10 @@ export class AppComponent {
             },
           },       
           {
-            type: 'dropdown',
+            type: 'link',
             label: 'Contacts',
             icon: icContacts,
-            children: [
-              {
-                type: 'link',
-                label: 'List - Grid',
-                route: '/apps/contacts/grid',
-              },
-              {
-                type: 'link',
-                label: 'List - Table',
-                route: '/apps/contacts/table',
-              }
-            ]
+            route: '/apps/contacts/table',            
           }
         ]
       },

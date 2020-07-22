@@ -6,11 +6,7 @@ import { VexRoutes } from '../../../../@vex/interfaces/vex-route.interface';
 const routes: VexRoutes = [
   {
     path: '',
-    children: [
-      {
-        path: 'grid',
-        loadChildren: () => import('./contacts-grid/contacts-grid.module').then(m => m.ContactsGridModule)
-      },
+    children: [      
       {
         path: 'table',
         loadChildren: () => import('./contacts-table/contacts-table.module').then(m => m.ContactsTableModule)
