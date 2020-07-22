@@ -169,29 +169,7 @@ export class AppComponent {
             label: 'Coming Soon',
             icon: icWatchLater,
             route: '/coming-soon'
-          },
-          {
-            type: 'dropdown',
-            label: 'Errors',
-            icon: icError,
-            badge: {
-              value: '4',
-              background: theme.colors.green['500'],
-              color: theme.textColor['green-contrast']['600']
-            },
-            children: [
-              {
-                type: 'link',
-                label: '404',
-                route: '/pages/error-404'
-              },
-              {
-                type: 'link',
-                label: '500',
-                route: '/pages/error-500'
-              }
-            ]
-          },
+          },        
           {
             type: 'link',
             label: 'Pricing',

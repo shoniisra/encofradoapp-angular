@@ -1,5 +1,5 @@
-<img height="60px" width="60px" style="float: left;" src="src/assets/img/demo/logo.svg" alt="Vex Logo">
-<h2 style="height: 60px; line-height: 60px; margin-left: 70px; font-weight: 500; border: none;">VEX</h2>
+<img height="60px" width="60px" style="float: left;" src="src/assets/img/logo.png" alt="Vex Logo">
+<h2 style="height: 60px; line-height: 60px; margin-left: 70px; font-weight: 500; border: none;">EncofradoApp</h2>
 
 # Introduction
 # desacrgar modelo de hasura
