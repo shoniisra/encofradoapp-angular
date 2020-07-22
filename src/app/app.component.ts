@@ -9,7 +9,6 @@ import icLayers from '@iconify/icons-ic/twotone-layers';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icContactSupport from '@iconify/icons-ic/twotone-contact-support';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
-import icChat from '@iconify/icons-ic/twotone-chat';
 import icContacts from '@iconify/icons-ic/twotone-contacts';
 import icAssessment from '@iconify/icons-ic/twotone-assessment';
 import icLock from '@iconify/icons-ic/twotone-lock';
@@ -169,18 +168,7 @@ export class AppComponent {
               background: theme.colors['deep-purple']['500'],
               color: theme.textColor['deep-purple-contrast']['500']
             },
-          },
-          {
-            type: 'link',
-            label: 'Chat',
-            route: '/apps/chat',
-            icon: icChat,
-            badge: {
-              value: '16',
-              background: theme.colors.cyan['500'],
-              color: theme.textColor['cyan-contrast']['600']
-            },
-          },          
+          },       
           {
             type: 'dropdown',
             label: 'Contacts',
