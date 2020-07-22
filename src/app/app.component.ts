@@ -112,18 +112,7 @@ export class AppComponent {
               background: theme.colors['deep-purple']['500'],
               color: theme.textColor['deep-purple-contrast']['500']
             },
-          },              
-          {
-            type: 'link',
-            label: 'Tablero',
-            route: '/apps/scrumboard',
-            icon: icAssessment,
-            badge: {
-              value: 'NEW',
-              background: theme.colors.primary['500'],
-              color: theme.textColor['primary-contrast']['500']
-            }
-          },
+          }
         ]
       },
       {
@@ -185,18 +174,7 @@ export class AppComponent {
                 route: '/apps/contacts/table',
               }
             ]
-          },
-          {
-            type: 'link',
-            label: 'Scrumboard',
-            route: '/apps/scrumboard',
-            icon: icAssessment,
-            badge: {
-              value: 'NEW',
-              background: theme.colors.primary['500'],
-              color: theme.textColor['primary-contrast']['500']
-            }
-          },
+          }
         ]
       },
       {

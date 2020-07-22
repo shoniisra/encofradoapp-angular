@@ -47,10 +47,10 @@ export class ToolbarUserDropdownComponent implements OnInit {
     {
       id: '2',
       icon: icListAlt,
-      label: 'My Projects',
+      label: 'Mis Contratos',
       description: 'Tasks & Active Projects',
       colorClass: 'text-amber-500',
-      route: '/apps/scrumboard'
+      route: '/apps/contratos'
     },
     {
       id: '3',

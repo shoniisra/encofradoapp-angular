@@ -56,14 +56,7 @@ const childrenRoutes: VexRoutes = [
           import("./pages/apps/help-center/help-center.module").then(
             (m) => m.HelpCenterModule
           ),
-      },
-      {
-        path: "scrumboard",
-        loadChildren: () =>
-          import("./pages/apps/scrumboard/scrumboard.module").then(
-            (m) => m.ScrumboardModule
-          ),
-      },
+      }     
     ],
   },
   {

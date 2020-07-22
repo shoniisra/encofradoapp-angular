@@ -45,13 +45,7 @@ export class MegaMenuComponent implements OnInit {
       icon: icContacts,
       label: 'Contacts',
       route: '/apps/contacts/grid'
-    },
-    {
-      icon: icAssessment,
-      label: 'Scrumboard',
-      route: '/apps/scrumboard/1'
-    }
-    
+    }    
   ];
 
   pages: MegaMenuPage[] = [
@@ -86,10 +80,6 @@ export class MegaMenuComponent implements OnInit {
     {
       label: 'Help Center',
       route: '/apps/help-center'
-    },
-    {
-      label: 'Scrumboard',
-      route: '/apps/scrumboard'
     }
   ];
 
