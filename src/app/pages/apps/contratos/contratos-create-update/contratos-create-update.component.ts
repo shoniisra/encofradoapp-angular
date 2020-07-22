@@ -4,8 +4,9 @@ import {
   Component,
   OnInit,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormArray} from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { DatePipe } from "@angular/common";
 
 import { stagger80ms } from "../../../../../@vex/animations/stagger.animation";
 import { fadeInUp400ms } from "../../../../../@vex/animations/fade-in-up.animation";
@@ -23,8 +24,6 @@ import icMoreVert from "@iconify/icons-ic/twotone-more-vert";
 import { CreateContratoGQL } from "../graphql/CreateContratoGQL";
 import { Contrato } from "src/app/models/contratoalquiler.model";
 import { Cliente } from "src/app/models/cliente.model";
-import { EstadoActual } from "src/app/models/estadoactual.model";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -38,7 +37,17 @@ export class ContratosCreateUpdateComponent implements OnInit {
   cliente: Cliente;
   verticalAccountFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
+  ArticuloAlquilerFormGroup: FormGroup;
+  articulos: Array<FormGroup>;
+
+  demoForm: FormGroup;
+  ArticuloDetalle: {
+    id: number;
+    title: string;
+  }[];
+
   fecha: Date;
+
   icDoneAll = icDoneAll;
   icDescription = icDescription;
   icVerticalSplit = icVerticalSplit;
@@ -82,6 +91,23 @@ export class ContratosCreateUpdateComponent implements OnInit {
       pago_cancelado: [false],
       valor_total: [0, Validators.min(0)],
     });
+
+    this.ArticuloAlquilerFormGroup = this.fb.group({
+      especificaciones_producto: [null],
+      cantidad_entregado: [
+        null,
+        Validators.compose([Validators.required, Validators.min(0)]),
+      ],
+      cantidad_devuelto: [null, Validators.min(0)],
+      contrato_id: [null],
+      articulo_id: [null],
+    });
+
+    this.demoForm = this.fb.group({
+      demoArray: this.fb.array([]),
+    });
+
+    this.ArticuloDetalle = [];
   }
 
   submit() {
@@ -97,6 +123,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
     });
   }
   createContrato() {
+    let numerocontrato;
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     console.log(this.verticalContratoFormGroup.value);
     this.createContratoGQL
@@ -105,6 +132,8 @@ export class ContratosCreateUpdateComponent implements OnInit {
       })
       .subscribe(
         ({ data }) => {
+          numerocontrato = data;
+          console.log(data);
           this.openSnackbar("Contrato Guardado Exitosamente");
         },
         (error) => {
@@ -112,11 +141,24 @@ export class ContratosCreateUpdateComponent implements OnInit {
           this.openSnackbar("Error al Guardar el Contrato");
         }
       );
+    console.log(numerocontrato);
   }
   openSnackbar(mensaje: string) {
     this.snackbar.open(mensaje, "cerrar", {
       duration: 3000,
       horizontalPosition: "right",
     });
+  }
+
+  get demoArray() {
+    return this.demoForm.get("demoArray") as FormArray;
+  }
+  addItem(item) {
+    this.ArticuloDetalle.push(item);
+    this.demoArray.push(this.fb.control(false));
+  }
+  removeItem() {
+    this.ArticuloDetalle.pop();
+    this.demoArray.removeAt(this.demoArray.length - 1);
   }
 }
