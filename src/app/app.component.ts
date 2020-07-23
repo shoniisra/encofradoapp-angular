@@ -9,7 +9,6 @@ import icLayers from '@iconify/icons-ic/twotone-layers';
 import icAssigment from '@iconify/icons-ic/twotone-assignment';
 import icContactSupport from '@iconify/icons-ic/twotone-contact-support';
 import icDateRange from '@iconify/icons-ic/twotone-date-range';
-import icChat from '@iconify/icons-ic/twotone-chat';
 import icContacts from '@iconify/icons-ic/twotone-contacts';
 import icAssessment from '@iconify/icons-ic/twotone-assessment';
 import icLock from '@iconify/icons-ic/twotone-lock';
@@ -113,52 +112,13 @@ export class AppComponent {
               background: theme.colors['deep-purple']['500'],
               color: theme.textColor['deep-purple-contrast']['500']
             },
-          },              
-          {
-            type: 'link',
-            label: 'Tablero',
-            route: '/apps/scrumboard',
-            icon: icAssessment,
-            badge: {
-              value: 'NEW',
-              background: theme.colors.primary['500'],
-              color: theme.textColor['primary-contrast']['500']
-            }
-          },
+          }
         ]
       },
       {
         type: 'subheading',
         label: 'Apps',
         children: [
-          
-          {
-            type: 'dropdown',
-            label: 'Help Center',
-            icon: icContactSupport,
-            children: [
-              {
-                type: 'link',
-                label: 'Getting Started',
-                route: '/apps/help-center/getting-started'
-              },
-              {
-                type: 'link',
-                label: 'Pricing & Plans',
-                route: '/apps/help-center/pricing'
-              },
-              {
-                type: 'link',
-                label: 'FAQ',
-                route: '/apps/help-center/faq'
-              },
-              {
-                type: 'link',
-                label: 'Guides',
-                route: '/apps/help-center/guides'
-              }
-            ]
-          },
           {
             type: 'link',
             label: 'Calendar',
@@ -169,46 +129,13 @@ export class AppComponent {
               background: theme.colors['deep-purple']['500'],
               color: theme.textColor['deep-purple-contrast']['500']
             },
-          },
+          },       
           {
             type: 'link',
-            label: 'Chat',
-            route: '/apps/chat',
-            icon: icChat,
-            badge: {
-              value: '16',
-              background: theme.colors.cyan['500'],
-              color: theme.textColor['cyan-contrast']['600']
-            },
-          },          
-          {
-            type: 'dropdown',
             label: 'Contacts',
             icon: icContacts,
-            children: [
-              {
-                type: 'link',
-                label: 'List - Grid',
-                route: '/apps/contacts/grid',
-              },
-              {
-                type: 'link',
-                label: 'List - Table',
-                route: '/apps/contacts/table',
-              }
-            ]
-          },
-          {
-            type: 'link',
-            label: 'Scrumboard',
-            route: '/apps/scrumboard',
-            icon: icAssessment,
-            badge: {
-              value: 'NEW',
-              background: theme.colors.primary['500'],
-              color: theme.textColor['primary-contrast']['500']
-            }
-          },
+            route: '/apps/contacts/table',            
+          }
         ]
       },
       {
@@ -242,29 +169,7 @@ export class AppComponent {
             label: 'Coming Soon',
             icon: icWatchLater,
             route: '/coming-soon'
-          },
-          {
-            type: 'dropdown',
-            label: 'Errors',
-            icon: icError,
-            badge: {
-              value: '4',
-              background: theme.colors.green['500'],
-              color: theme.textColor['green-contrast']['600']
-            },
-            children: [
-              {
-                type: 'link',
-                label: '404',
-                route: '/pages/error-404'
-              },
-              {
-                type: 'link',
-                label: '500',
-                route: '/pages/error-500'
-              }
-            ]
-          },
+          },        
           {
             type: 'link',
             label: 'Pricing',
@@ -282,24 +187,7 @@ export class AppComponent {
             label: 'Invoice',
             icon: icReceipt,
             route: '/pages/invoice'
-          },
-          {
-            type: 'link',
-            label: 'FAQ',
-            icon: icHelp,
-            route: '/pages/faq'
-          },
-          {
-            type: 'link',
-            label: 'Guides',
-            icon: icBook,
-            route: '/pages/guides',
-            badge: {
-              value: '18',
-              background: theme.colors.teal['500'],
-              color: theme.textColor['teal-contrast']['500']
-            },
-          },
+          }         
         ]
       },
       {
@@ -503,21 +391,10 @@ export class AppComponent {
                 label: 'Blank',
                 icon: icPictureInPicture,
                 route: '/ui/page-layouts/blank'
-              },
+              }
             ]
-          },
+          }
         ]
-      },     
-      {
-        type: 'subheading',
-        label: 'Customize',
-        children: []
-      },
-      {
-        type: 'link',
-        label: 'Configuration',
-        route: () => this.layoutService.openConfigpanel(),
-        icon: icSettings
       }
     ];
   }

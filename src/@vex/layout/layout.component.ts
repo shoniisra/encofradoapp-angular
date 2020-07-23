@@ -49,9 +49,7 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
   searchOpen$ = this.layoutService.searchOpen$;
 
-  @ViewChild('quickpanel', { static: true }) quickpanel: MatSidenav;
   @ViewChild('sidenav', { static: true }) sidenav: MatSidenav;
-  @ViewChild('configpanel', { static: true }) configpanel: SidebarComponent;
   @ViewChild(MatSidenavContainer, { static: true }) sidenavContainer: MatSidenavContainer;
 
   constructor(private cd: ChangeDetectorRef,
@@ -66,19 +64,12 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
       filter(matches => !matches),
       untilDestroyed(this)
     ).subscribe(() => this.layoutService.expandSidenav());
-
-    this.layoutService.quickpanelOpen$.pipe(
-      untilDestroyed(this)
-    ).subscribe(open => open ? this.quickpanel.open() : this.quickpanel.close());
+    
 
     this.layoutService.sidenavOpen$.pipe(
       untilDestroyed(this)
     ).subscribe(open => open ? this.sidenav.open() : this.sidenav.close());
-
-    this.layoutService.configpanelOpen$.pipe(
-      untilDestroyed(this)
-    ).subscribe(open => open ? this.configpanel.open() : this.configpanel.close());
-
+    
     this.router.events.pipe(
       filter<NavigationEnd>(event => event instanceof NavigationEnd),
       withLatestFrom(this.isDesktop$),
@@ -127,9 +118,6 @@ export class LayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  openConfigPanel() {
-    this.configpanel.open();
-  }
 
   ngOnDestroy(): void {}
 }

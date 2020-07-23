@@ -28,12 +28,8 @@ export interface Config {
 }
 
 export enum ConfigName {
-  apollo = 'vex-layout-apollo',
-  zeus = 'vex-layout-zeus',
-  hermes = 'vex-layout-hermes',
-  poseidon = 'vex-layout-poseidon',
-  ares = 'vex-layout-ares',
-  ikaros = 'vex-layout-ikaros',
+  zeus = 'vex-layout-zeus'
+  
 }
 
 @Injectable({
@@ -41,69 +37,9 @@ export enum ConfigName {
 })
 export class ConfigService {
 
-  defaultConfig = ConfigName.apollo;
+  defaultConfig = ConfigName.zeus;
 
-  configs: Config[] = [
-    {
-      id: ConfigName.apollo,
-      name: 'Apollo',
-      imgSrc: '//vex.visurel.com/landing/assets/img/layouts/apollo.png',
-      layout: 'horizontal',
-      boxed: false,
-      sidenav: {
-        state: 'expanded'
-      },
-      toolbar: {
-        fixed: true
-      },
-      navbar: {
-        position: 'below-toolbar'
-      },
-      footer: {
-        visible: true,
-        fixed: true
-      }
-    },
-    {
-      id: ConfigName.hermes,
-      name: 'Hermes',
-      imgSrc: '//vex.visurel.com/landing/assets/img/layouts/hermes.png',
-      layout: 'vertical',
-      boxed: true,
-      sidenav: {
-        state: 'expanded'
-      },
-      toolbar: {
-        fixed: false
-      },
-      navbar: {
-        position: 'below-toolbar'
-      },
-      footer: {
-        visible: true,
-        fixed: false
-      }
-    },
-    {
-      id: ConfigName.ares,
-      name: 'Ares',
-      imgSrc: '//vex.visurel.com/landing/assets/img/layouts/ares.png',
-      layout: 'horizontal',
-      boxed: false,
-      sidenav: {
-        state: 'expanded'
-      },
-      toolbar: {
-        fixed: false
-      },
-      navbar: {
-        position: 'in-toolbar'
-      },
-      footer: {
-        visible: true,
-        fixed: false
-      }
-    },
+  configs: Config[] = [   
     {
       id: ConfigName.zeus,
       name: 'Zeus',
@@ -114,36 +50,16 @@ export class ConfigService {
         state: 'collapsed'
       },
       toolbar: {
-        fixed: true
+        fixed: false
       },
       navbar: {
         position: 'below-toolbar'
       },
       footer: {
-        visible: true,
-        fixed: true
-      }
-    },
-    {
-      id: ConfigName.ikaros,
-      name: 'Ikaros',
-      imgSrc: '//vex.visurel.com/landing/assets/img/layouts/ikaros.png',
-      layout: 'vertical',
-      boxed: true,
-      sidenav: {
-        state: 'expanded'
-      },
-      toolbar: {
-        fixed: false
-      },
-      navbar: {
-        position: 'in-toolbar'
-      },
-      footer: {
-        visible: true,
+        visible: false,
         fixed: false
       }
-    },
+    }
   ];
 
   private _configSubject = new BehaviorSubject(this.configs.find(c => c.id === this.defaultConfig));

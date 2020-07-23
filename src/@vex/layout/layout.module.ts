@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidenavModule } from './sidenav/sidenav.module';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { QuickpanelModule } from '../components/quickpanel/quickpanel.module';
-import { ConfigPanelModule } from '../components/config-panel/config-panel.module';
 import { SidebarModule } from '../components/sidebar/sidebar.module';
 import { ProgressBarModule } from '../components/progress-bar/progress-bar.module';
 import { FooterModule } from '../components/footer/footer.module';
@@ -28,7 +27,6 @@ import { SearchModule } from '../components/search/search.module';
     SidenavModule,
     ToolbarModule,
     QuickpanelModule,
-    ConfigPanelModule,
     SidebarModule,
     ProgressBarModule,
     FooterModule,
