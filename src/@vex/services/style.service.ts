@@ -14,7 +14,7 @@ export enum Style {
 })
 export class StyleService implements OnDestroy {
 
-  defaultStyle = Style.default;
+  defaultStyle = Style.light;
 
   private _styleSubject = new BehaviorSubject<Style>(this.defaultStyle);
   style$ = this._styleSubject.asObservable();
