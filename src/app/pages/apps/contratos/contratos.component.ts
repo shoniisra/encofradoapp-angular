@@ -78,7 +78,6 @@ export class ContratosComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: "Checkbox",property: "checkbox",type: "checkbox",visible: true,},
     { label: "cliente.nombre", property: "cliente.nombre", type: "text", visible: true },
     { label: "numero", property: "numero", type: "text", visible: true },
-    { label: "fecha", property: "fecha", type: "text", visible: true },
     { label: "Actions", property: "actions", type: "button", visible: true },
     
     { label: "lugar", property: "lugar_obra", type: "text", visible: true },

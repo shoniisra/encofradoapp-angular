@@ -16,13 +16,20 @@ export const queryGetContratos = gql`
         telf2
         telf3
       }
-      fecha
       id
       lugar_obra
       metros
       numero
       observacion
       area
+      descripcion
+      transporte_entrega
+      transporte_devolucion
+      fecha_inicio
+      fecha_entrega
+      devuelto
+      pago_cancelado
+      valor_total
       estado_actual {
         id
         descripcion
