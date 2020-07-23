@@ -50,10 +50,6 @@ export class MegaMenuComponent implements OnInit {
     {
       label: 'Components',
       route: '/ui/components/overview'
-    },    
-    {
-      label: 'FAQ',
-      route: '/pages/faq'
     },
     {
       label: 'Form Elements',

@@ -61,12 +61,7 @@ const childrenRoutes: VexRoutes = [
           import("./pages/pages/pricing/pricing.module").then(
             (m) => m.PricingModule
           ),
-      },
-      {
-        path: "faq",
-        loadChildren: () =>
-          import("./pages/pages/faq/faq.module").then((m) => m.FaqModule),
-      },      
+      },        
       {
         path: "profile",
         loadChildren: () =>

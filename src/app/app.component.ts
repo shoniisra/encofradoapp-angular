@@ -187,13 +187,7 @@ export class AppComponent {
             label: 'Invoice',
             icon: icReceipt,
             route: '/pages/invoice'
-          },
-          {
-            type: 'link',
-            label: 'FAQ',
-            icon: icHelp,
-            route: '/pages/faq'
-          }
+          }         
         ]
       },
       {
@@ -397,21 +391,10 @@ export class AppComponent {
                 label: 'Blank',
                 icon: icPictureInPicture,
                 route: '/ui/page-layouts/blank'
-              },
+              }
             ]
-          },
+          }
         ]
-      },     
-      {
-        type: 'subheading',
-        label: 'Customize',
-        children: []
-      },
-      {
-        type: 'link',
-        label: 'Configuration',
-        route: () => this.layoutService.openConfigpanel(),
-        icon: icSettings
       }
     ];
   }
