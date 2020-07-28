@@ -4,7 +4,13 @@ import {
   Component,
   OnInit,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormArray,
+} from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DatePipe } from "@angular/common";
 
@@ -33,14 +39,34 @@ import { CreateArticuloAlquilerGQL } from "../graphql/CreateArticuloAlquilerGQL"
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [stagger80ms, fadeInUp400ms, scaleIn400ms, fadeInRight400ms],
 })
-
 export class ContratosCreateUpdateComponent implements OnInit {
   contrato: Contrato;
   cliente: Cliente;
   verticalAccountFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
   ArticuloAlquilerFormGroup: FormGroup;
-    
+
+  pitanjeForm = this.fb.group({
+    articulo_alquiler: this.fb.array([])
+  });
+
+  odgovorForm = this.fb.group({
+    // data: ['', [Validators.required]],
+    // color: 'danger',
+    // especificaciones_producto: [null],
+    // cantidad_entregado: [
+    // null,
+    // Validators.compose([Validators.required, Validators.min(0)]),
+    // ],
+    // cantidad_devuelto: [null, Validators.min(0)],
+    // contrato_id: [null],
+    // articulo_id: [null],
+    cantidad_devuelto: 2,
+    cantidad_entregado: 3,
+    contrato_id: 1,
+    articulo_id: 1,
+    especificaciones_producto: "crucetas",
+  });
 
   fecha: Date;
 
@@ -99,8 +125,17 @@ export class ContratosCreateUpdateComponent implements OnInit {
       contrato_id: [null],
       articulo_id: [null],
     });
+  }
 
-    
+  public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
+  // get odgovori() {
+  //   return this.pitanjeForm.get('odgovori') as FormArray;
+  // }
+
+  addArticulo(): void {
+    // this.info = this.odgovorForm.value;
+    this.articulo_alquiler.push(this.odgovorForm);
+    console.log(this.pitanjeForm.value, this.odgovorForm.value, this.articulo_alquiler);
   }
 
   submit() {
@@ -121,15 +156,14 @@ export class ContratosCreateUpdateComponent implements OnInit {
     //     especificaciones_producto: "crucetas",
     //   }
     // ];
-    
-    
-    this.ArticuloAlquilerFormGroup.value.cantidad_devuelto=2,
-    this.ArticuloAlquilerFormGroup.value.cantidad_entregado=3,
-    this.ArticuloAlquilerFormGroup.value.contrato_id=1,
-    this.ArticuloAlquilerFormGroup.value.articulo_id=1,
-    this.ArticuloAlquilerFormGroup.value.especificaciones_producto="crucetas",
 
-    console.log(this.ArticuloAlquilerFormGroup.value);
+    (this.ArticuloAlquilerFormGroup.value.cantidad_devuelto = 2),
+      (this.ArticuloAlquilerFormGroup.value.cantidad_entregado = 3),
+      (this.ArticuloAlquilerFormGroup.value.contrato_id = 1),
+      (this.ArticuloAlquilerFormGroup.value.articulo_id = 1),
+      (this.ArticuloAlquilerFormGroup.value.especificaciones_producto =
+        "crucetas"),
+      console.log(this.ArticuloAlquilerFormGroup.value);
     // console.log(Array.of(articulo));
 
     // let jsonObject = {};
@@ -172,14 +206,10 @@ export class ContratosCreateUpdateComponent implements OnInit {
     // console.log(numerocontrato);
   }
 
-
-
   openSnackbar(mensaje: string) {
     this.snackbar.open(mensaje, "cerrar", {
       duration: 3000,
       horizontalPosition: "right",
     });
   }
-
-  
 }

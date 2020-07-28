@@ -9,8 +9,27 @@
     </span>
     <span @fadeInRight class="block">CONTRATO DE ARRENDAMIENTO</span>    
   </h1>
+  
+
 
   <div @fadeInUp class="card overflow-hidden">
+   
+    <form [formGroup]="pitanjeForm">
+      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
+     
+      
+
+       <form [formGroup]="odgovorForm">
+        <mat-label>jajaja hola</mat-label>
+         <button (click)="addArticulo()"> Click Me</button>
+       </form>
+      <!-- <div *ngFor="let odgovor of odgovori.value; index as i">
+        
+          <mat-label>numero</mat-label>
+          <input type="radio" value="{{ i }}" />
+      </div> -->
+     </form>
+   
     <form [formGroup]="verticalAccountFormGroup">
       <ng-template>Elige un Cliente</ng-template>
 
