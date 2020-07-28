@@ -1,5 +1,5 @@
 <div @stagger class="p-gutter" vexContainer>
-  <h2 class="title mt-6 mb-4" fxLayout="row" fxLayoutAlign="start center">
+  <h1 class="title mt-6 mb-4" fxLayout="row" fxLayoutAlign="start center">
     <span
       @scaleIn
       [style.background-color]="theme.colors.primary['500'] | colorFade: 0.9"
@@ -7,203 +7,152 @@
     >
       <ic-icon [icon]="icVerticalSplit" height="20px" width="20px"></ic-icon>
     </span>
-    <span @fadeInRight class="block">Nuevo Contrato</span>
-  </h2>
+    <span @fadeInRight class="block">CONTRATO DE ARRENDAMIENTO</span>    
+  </h1>
 
   <div @fadeInUp class="card overflow-hidden">
-    
-      <ng-template matStepperIcon="edit">
-        <mat-icon [icIcon]="icDoneAll"></mat-icon>
-      </ng-template>
+    <form [formGroup]="verticalAccountFormGroup">
+      <ng-template>Elige un Cliente</ng-template>
 
-      <ng-template matStepperIcon="done">
-        <mat-icon [icIcon]="icDoneAll"></mat-icon>
-      </ng-template>
+      <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
+        <mat-form-field fxFlex="auto">
+          <mat-label>Id Cliente</mat-label>
+          <input formControlName="id" matInput required type="number" min="0" />
+          <mat-hint>Este es el nombre que se asociará al contrato</mat-hint>
+        </mat-form-field>
+      </div>     
+    </form>
+    <form [formGroup]="verticalContratoFormGroup">
+      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
+      <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
+        <mat-form-field fxFlex="auto">
+          <mat-label>numero</mat-label>
+          <input formControlName="numero" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
 
-      <mat-step [stepControl]="verticalAccountFormGroup">
-        <form [formGroup]="verticalAccountFormGroup">
-          <ng-template matStepLabel>Elige un Cliente</ng-template>
+        <mat-form-field fxFlex="auto">
+          <mat-label>Dirección</mat-label>
+          <input formControlName="lugar_obra" matInput />
+          <mat-hint>Dirección de la obra</mat-hint>
+        </mat-form-field>
 
-          <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
-            <mat-form-field fxFlex="auto">
-              <mat-label>Id Cliente</mat-label>
-              <input
-                formControlName="id"
-                matInput
-                required
-                type="number"
-                min="0"
-              />
-              <mat-hint>Este es el nombre que se asociará al contrato</mat-hint>
-            </mat-form-field>
-          </div>
+        <mat-form-field fxFlex="auto">
+          <mat-label>observacion</mat-label>
+          <input formControlName="observacion" matInput />
+          <mat-hint>observacion</mat-hint>
+        </mat-form-field>
 
-          <div
-            class="actions"
-            fxLayout="row"
-            fxLayoutAlign="end center"
-            fxLayoutGap="8px"
+        <mat-form-field fxFlex="auto">
+          <mat-label>estado_id</mat-label>
+          <input
+            type="number"
+            value="2"
+            min="0"
+            formControlName="estado_id"
+            matInput
+            required
+          />
+          <mat-hint>estado_id</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="vex-flex-form-field" fxFlex="none">
+          <mat-label>descripcion</mat-label>
+          <input formControlName="descripcion" matInput />
+          <mat-hint>descripcion</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="vex-flex-form-field" fxFlex="none">
+          <mat-label>fecha_inicio</mat-label>
+          <input formControlName="fecha_inicio" matInput required type="date" />
+          <mat-hint>fecha_inicio</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="vex-flex-form-field" fxFlex="none">
+          <mat-label>fecha_entrega</mat-label>
+          <input formControlName="fecha_entrega" matInput type="date" />
+          <mat-hint>fecha_entrega</mat-hint>
+        </mat-form-field>
+        <mat-form-field class="vex-flex-form-field" fxFlex="none">
+          <mat-label>valor_total</mat-label>
+          <input
+            formControlName="valor_total"
+            matInput
+            required
+            type="number"
+            min="0"
+            step="0.2"
+          />
+          <mat-hint>valor_total</mat-hint>
+        </mat-form-field>
+
+        <div class="vex-flex-form-field" fxFlex="none">
+          <mat-checkbox class="checkbox" formControlName="transporte_entrega">
+            ¿ Incluye Transporte de entrega?
+          </mat-checkbox>
+        </div>
+
+        <div class="vex-flex-form-field" fxFlex="none">
+          <mat-checkbox
+            class="checkbox"
+            formControlName="transporte_devolucion"
           >
-            <!-- [disabled]="verticalAccountFormGroup.invalid" -->
-            <button
-              color="primary"
-              mat-raised-button
-              matStepperNext
-              (click)="submit1()"
-            >
-              SIGUIENTE
-            </button>
-          </div>
-        </form>
-      </mat-step>
+            ¿ Incluye Transporte de devolucion?
+          </mat-checkbox>
+        </div>
 
-      <mat-step [stepControl]="verticalContratoFormGroup">
-        <form [formGroup]="verticalContratoFormGroup">
-          <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
-
-          <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
-            <mat-form-field fxFlex="auto">
-              <mat-label>numero</mat-label>
-              <input formControlName="numero" matInput type="number" min="0" />
-              <mat-hint>numero contrato</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field fxFlex="auto">
-              <mat-label>Dirección</mat-label>
-              <input formControlName="lugar_obra" matInput />
-              <mat-hint>Dirección de la obra</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field fxFlex="auto">
-              <mat-label>observacion</mat-label>
-              <input formControlName="observacion" matInput />
-              <mat-hint>observacion</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field fxFlex="auto">
-              <mat-label>estado_id</mat-label>
-              <input
-                type="number"
-                value="2"
-                min="0"
-                formControlName="estado_id"
-                matInput
-                required
-              />
-              <mat-hint>estado_id</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>descripcion</mat-label>
-              <input formControlName="descripcion" matInput />
-              <mat-hint>descripcion</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>fecha_inicio</mat-label>
-              <input
-                formControlName="fecha_inicio"
-                matInput
-                required
-                type="date"
-              />
-              <mat-hint>fecha_inicio</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>fecha_entrega</mat-label>
-              <input formControlName="fecha_entrega" matInput type="date" />
-              <mat-hint>fecha_entrega</mat-hint>
-            </mat-form-field>
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>valor_total</mat-label>
-              <input
-                formControlName="valor_total"
-                matInput
-                required
-                type="number"
-                min="0"
-                step="0.2"
-              />
-              <mat-hint>valor_total</mat-hint>
-            </mat-form-field>
-
-            <div class="vex-flex-form-field" fxFlex="none">
-              <mat-checkbox
-                class="checkbox"
-                formControlName="transporte_entrega"
-              >
-                ¿ Incluye Transporte de entrega?
-              </mat-checkbox>
-            </div>
-
-            <div class="vex-flex-form-field" fxFlex="none">
-              <mat-checkbox
-                class="checkbox"
-                formControlName="transporte_devolucion"
-              >
-                ¿ Incluye Transporte de devolucion?
-              </mat-checkbox>
-            </div>
-
-            <div class="vex-flex-form-field" fxFlex="none">
-              <mat-checkbox
-                class="checkbox"
-                formControlName="devuelto"
-                value="false"
-              >
-                ¿ Devuelto ?
-              </mat-checkbox>
-            </div>
-
-            <div class="vex-flex-form-field" fxFlex="none">
-              <mat-checkbox class="checkbox" formControlName="pago_cancelado">
-                ¿ Pago Cancelado?
-              </mat-checkbox>
-            </div>
-
-            <div
-              fxLayout="column"
-              fxLayout.gt-xs="row"
-              fxLayoutGap="8px"
-              fxLayoutGap.gt-xs="24px"
-            >
-              <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
-                <mat-form-field class="vex-flex-form-field" fxFlex="none">
-                  <mat-label>area</mat-label>
-                  <input formControlName="area" matInput required />
-                  <mat-hint>area</mat-hint>
-                </mat-form-field>
-
-                <mat-form-field class="vex-flex-form-field" fxFlex="none">
-                  <mat-label>metros cuadrados</mat-label>
-                  <input formControlName="metros" matInput required />
-                  <mat-hint>metros</mat-hint>
-                </mat-form-field>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="actions"
-            fxLayout="row"
-            fxLayoutAlign="end center"
-            fxLayoutGap="8px"
+        <div class="vex-flex-form-field" fxFlex="none">
+          <mat-checkbox
+            class="checkbox"
+            formControlName="devuelto"
+            value="false"
           >
-            <button color="primary" mat-button matStepperPrevious type="button">
-              ANTERIOR
-            </button>
-            <button
-              [disabled]="verticalContratoFormGroup.invalid"
-              color="primary"
-              mat-raised-button
-              matStepperNext
-              (click)="submit()"
-            >
-              SIGUIENTE
-            </button>
+            ¿ Devuelto ?
+          </mat-checkbox>
+        </div>
+
+        <div class="vex-flex-form-field" fxFlex="none">
+          <mat-checkbox class="checkbox" formControlName="pago_cancelado">
+            ¿ Pago Cancelado?
+          </mat-checkbox>
+        </div>
+
+        <div
+          fxLayout="column"
+          fxLayout.gt-xs="row"
+          fxLayoutGap="8px"
+          fxLayoutGap.gt-xs="24px"
+        >
+          <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>area</mat-label>
+              <input formControlName="area" matInput required />
+              <mat-hint>area</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="vex-flex-form-field" fxFlex="none">
+              <mat-label>metros cuadrados</mat-label>
+              <input formControlName="metros" matInput required />
+              <mat-hint>metros</mat-hint>
+            </mat-form-field>
           </div>
-        </form>
-      </mat-step>
-   
+        </div>
+      </div>
+
+      <div
+        class="actions"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+        fxLayoutGap="8px"
+      >       
+        <button
+          [disabled]="verticalContratoFormGroup.invalid"
+          color="primary"
+          mat-raised-button       
+          (click)="submit()"
+        >
+          SIGUIENTE
+        </button>
+      </div>
+    </form>
   </div>
 </div>

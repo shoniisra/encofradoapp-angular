@@ -4,7 +4,7 @@ import {
   Component,
   OnInit,
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormArray} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormArray } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DatePipe } from "@angular/common";
 
@@ -24,6 +24,7 @@ import icMoreVert from "@iconify/icons-ic/twotone-more-vert";
 import { CreateContratoGQL } from "../graphql/CreateContratoGQL";
 import { Contrato } from "src/app/models/contratoalquiler.model";
 import { Cliente } from "src/app/models/cliente.model";
+import { CreateArticuloAlquilerGQL } from "../graphql/CreateArticuloAlquilerGQL";
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -32,19 +33,14 @@ import { Cliente } from "src/app/models/cliente.model";
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [stagger80ms, fadeInUp400ms, scaleIn400ms, fadeInRight400ms],
 })
+
 export class ContratosCreateUpdateComponent implements OnInit {
   contrato: Contrato;
   cliente: Cliente;
   verticalAccountFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
   ArticuloAlquilerFormGroup: FormGroup;
-  articulos: Array<FormGroup>;
-
-  demoForm: FormGroup;
-  ArticuloDetalle: {
-    id: number;
-    title: string;
-  }[];
+    
 
   fecha: Date;
 
@@ -62,6 +58,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private snackbar: MatSnackBar,
     private createContratoGQL: CreateContratoGQL,
+    private createArticuloAlquilerGQL: CreateArticuloAlquilerGQL,
     private datePipe: DatePipe
   ) {}
 
@@ -103,46 +100,80 @@ export class ContratosCreateUpdateComponent implements OnInit {
       articulo_id: [null],
     });
 
-    this.demoForm = this.fb.group({
-      demoArray: this.fb.array([]),
-    });
-
-    this.ArticuloDetalle = [];
+    
   }
 
   submit() {
     this.createContrato();
+  }
 
-    this.snackbar.open("Hooray! You successfully created your account.", null, {
-      duration: 5000,
-    });
-  }
-  submit1() {
-    this.snackbar.open("Hooray! accion en boton1.", null, {
-      duration: 5000,
-    });
-  }
   createContrato() {
     let numerocontrato;
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     console.log(this.verticalContratoFormGroup.value);
-    this.createContratoGQL
+
+    // let articulo = [
+    //   {
+    //     cantidad_devuelto: 2,
+    //     cantidad_entregado: 3,
+    //     contrato_id: 1,
+    //     articulo_id: 1,
+    //     especificaciones_producto: "crucetas",
+    //   }
+    // ];
+    
+    
+    this.ArticuloAlquilerFormGroup.value.cantidad_devuelto=2,
+    this.ArticuloAlquilerFormGroup.value.cantidad_entregado=3,
+    this.ArticuloAlquilerFormGroup.value.contrato_id=1,
+    this.ArticuloAlquilerFormGroup.value.articulo_id=1,
+    this.ArticuloAlquilerFormGroup.value.especificaciones_producto="crucetas",
+
+    console.log(this.ArticuloAlquilerFormGroup.value);
+    // console.log(Array.of(articulo));
+
+    // let jsonObject = {};
+    // empArray.forEach((item) => (obj[item.id] = item.name));
+    // let json = JSON.stringify(jsonObject);
+    // console.log(empArray);
+    // console.log(json);
+
+    // this.createContratoGQL
+    //   .mutate({
+    //     contrato: this.verticalContratoFormGroup.value,
+    //   })
+    //   .subscribe(
+    //     ({ data }) => {
+    //       numerocontrato = data;
+    //       console.log(data);
+    //       this.openSnackbar("Contrato Guardado Exitosamente");
+    //     },
+    //     (error) => {
+    //       console.log("Error al Guardar el Contrato", error);
+    //       this.openSnackbar("Error al Guardar el Contrato");
+    //     }
+    //   );
+
+    this.createArticuloAlquilerGQL
       .mutate({
-        contrato: this.verticalContratoFormGroup.value,
+        articulo_alquiler: this.ArticuloAlquilerFormGroup.value,
       })
       .subscribe(
         ({ data }) => {
-          numerocontrato = data;
           console.log(data);
-          this.openSnackbar("Contrato Guardado Exitosamente");
+          this.openSnackbar("Articulo Guardado Exitosamente");
         },
         (error) => {
-          console.log("Error al Guardar el Contrato", error);
-          this.openSnackbar("Error al Guardar el Contrato");
+          console.log("Error al Guardar el Articulo", error);
+          this.openSnackbar("Error al Guardar el Articulo");
         }
       );
-    console.log(numerocontrato);
+
+    // console.log(numerocontrato);
   }
+
+
+
   openSnackbar(mensaje: string) {
     this.snackbar.open(mensaje, "cerrar", {
       duration: 3000,
@@ -150,15 +181,5 @@ export class ContratosCreateUpdateComponent implements OnInit {
     });
   }
 
-  get demoArray() {
-    return this.demoForm.get("demoArray") as FormArray;
-  }
-  addItem(item) {
-    this.ArticuloDetalle.push(item);
-    this.demoArray.push(this.fb.control(false));
-  }
-  removeItem() {
-    this.ArticuloDetalle.pop();
-    this.demoArray.removeAt(this.demoArray.length - 1);
-  }
+  
 }
