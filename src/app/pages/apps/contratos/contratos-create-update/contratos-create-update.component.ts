@@ -135,7 +135,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
   addArticulo(): void {
     // this.info = this.odgovorForm.value;
     this.articulo_alquiler.push(this.odgovorForm);
-    console.log(this.pitanjeForm.value, this.odgovorForm.value, this.articulo_alquiler);
+    console.log(this.pitanjeForm.value.articulo_alquiler);
   }
 
   submit() {
@@ -190,7 +190,8 @@ export class ContratosCreateUpdateComponent implements OnInit {
 
     this.createArticuloAlquilerGQL
       .mutate({
-        articulo_alquiler: this.ArticuloAlquilerFormGroup.value,
+        // articulo_alquiler: this.ArticuloAlquilerFormGroup.value,
+        objects: this.pitanjeForm.value.articulo_alquiler,
       })
       .subscribe(
         ({ data }) => {

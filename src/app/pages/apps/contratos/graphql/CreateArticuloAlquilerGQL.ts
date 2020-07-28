@@ -7,9 +7,11 @@ import gql from "graphql-tag";
 })
 export class CreateArticuloAlquilerGQL extends Mutation {
   document = gql`
-    mutation MyMutation($articulo_alquiler: articulo_alquiler_insert_input!) {
-      insert_articulo_alquiler_one(object: $articulo_alquiler) {
-        id
+    mutation MyMutation($objects: [articulo_alquiler_insert_input!]!) {
+      insert_articulo_alquiler(objects: $objects) {
+        returning {
+          id
+        }
       }
     }
   `;
