@@ -16,17 +16,3 @@ export class CreateArticuloAlquilerGQL extends Mutation {
     }
   `;
 }
-
-// # insert_articulo_alquiler(
-// #   objects: $articulo
-// #   # {
-// #     # articulo_id: 10
-// #     # cantidad_devuelto: 10
-// #     # cantidad_entregado: 10
-// #     # contrato_id: 10
-// #     # especificaciones_producto: ""
-// #     # id: 10
-// #   # }
-// # ){
-// #   id
-// # }

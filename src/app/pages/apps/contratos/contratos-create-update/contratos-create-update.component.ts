@@ -47,25 +47,19 @@ export class ContratosCreateUpdateComponent implements OnInit {
   ArticuloAlquilerFormGroup: FormGroup;
 
   pitanjeForm = this.fb.group({
-    articulo_alquiler: this.fb.array([])
+    articulo_alquiler: this.fb.array([]),
   });
 
   odgovorForm = this.fb.group({
-    // data: ['', [Validators.required]],
-    // color: 'danger',
-    // especificaciones_producto: [null],
-    // cantidad_entregado: [
-    // null,
-    // Validators.compose([Validators.required, Validators.min(0)]),
-    // ],
-    // cantidad_devuelto: [null, Validators.min(0)],
-    // contrato_id: [null],
-    // articulo_id: [null],
-    cantidad_devuelto: 2,
-    cantidad_entregado: 3,
-    contrato_id: 1,
-    articulo_id: 1,
-    especificaciones_producto: "crucetas",
+    especificaciones_producto: [null],
+    cantidad_entregado: [
+      0,
+      Validators.compose([Validators.required, Validators.min(0)]),
+    ],
+    cantidad_devuelto: 0,
+    contrato_id: [null],
+    articulo_id: [null],
+   
   });
 
   fecha: Date;
@@ -128,12 +122,8 @@ export class ContratosCreateUpdateComponent implements OnInit {
   }
 
   public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
-  // get odgovori() {
-  //   return this.pitanjeForm.get('odgovori') as FormArray;
-  // }
 
   addArticulo(): void {
-    // this.info = this.odgovorForm.value;
     this.articulo_alquiler.push(this.odgovorForm);
     console.log(this.pitanjeForm.value.articulo_alquiler);
   }
@@ -146,31 +136,6 @@ export class ContratosCreateUpdateComponent implements OnInit {
     let numerocontrato;
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     console.log(this.verticalContratoFormGroup.value);
-
-    // let articulo = [
-    //   {
-    //     cantidad_devuelto: 2,
-    //     cantidad_entregado: 3,
-    //     contrato_id: 1,
-    //     articulo_id: 1,
-    //     especificaciones_producto: "crucetas",
-    //   }
-    // ];
-
-    (this.ArticuloAlquilerFormGroup.value.cantidad_devuelto = 2),
-      (this.ArticuloAlquilerFormGroup.value.cantidad_entregado = 3),
-      (this.ArticuloAlquilerFormGroup.value.contrato_id = 1),
-      (this.ArticuloAlquilerFormGroup.value.articulo_id = 1),
-      (this.ArticuloAlquilerFormGroup.value.especificaciones_producto =
-        "crucetas"),
-      console.log(this.ArticuloAlquilerFormGroup.value);
-    // console.log(Array.of(articulo));
-
-    // let jsonObject = {};
-    // empArray.forEach((item) => (obj[item.id] = item.name));
-    // let json = JSON.stringify(jsonObject);
-    // console.log(empArray);
-    // console.log(json);
 
     // this.createContratoGQL
     //   .mutate({

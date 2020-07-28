@@ -15,12 +15,33 @@
   <div @fadeInUp class="card overflow-hidden">
    
     <form [formGroup]="pitanjeForm">
-      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
-     
-      
-
+      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>    
        <form [formGroup]="odgovorForm">
-        <mat-label>jajaja hola</mat-label>
+        <mat-form-field fxFlex="auto">
+          <mat-label>cantidad_devuelto</mat-label>
+          <input formControlName="cantidad_devuelto" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
+        <mat-form-field fxFlex="auto">
+          <mat-label>cantidad_entregado</mat-label>
+          <input formControlName="cantidad_entregado" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
+        <mat-form-field fxFlex="auto">
+          <mat-label>contrato_id</mat-label>
+          <input formControlName="contrato_id" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
+        <mat-form-field fxFlex="auto">
+          <mat-label>articulo_id</mat-label>
+          <input formControlName="articulo_id" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
+        <mat-form-field fxFlex="auto">
+          <mat-label>especificaciones_producto</mat-label>
+          <input formControlName="especificaciones_producto" matInput type="text" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
          <button (click)="addArticulo()"> Click Me</button>
        </form>
       <!-- <div *ngFor="let odgovor of odgovori.value; index as i">
