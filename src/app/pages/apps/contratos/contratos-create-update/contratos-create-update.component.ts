@@ -13,6 +13,7 @@ import {
 } from "@angular/forms";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DatePipe } from "@angular/common";
+import { Router } from "@angular/router";
 
 import { stagger80ms } from "../../../../../@vex/animations/stagger.animation";
 import { fadeInUp400ms } from "../../../../../@vex/animations/fade-in-up.animation";
@@ -26,11 +27,13 @@ import icVisiblity from "@iconify/icons-ic/twotone-visibility";
 import icVisibilityOff from "@iconify/icons-ic/twotone-visibility-off";
 import icDoneAll from "@iconify/icons-ic/twotone-done-all";
 import icMoreVert from "@iconify/icons-ic/twotone-more-vert";
+import icClose from "@iconify/icons-ic/twotone-close";
 
 import { CreateContratoGQL } from "../graphql/CreateContratoGQL";
 import { Contrato } from "src/app/models/contratoalquiler.model";
 import { Cliente } from "src/app/models/cliente.model";
 import { CreateArticuloAlquilerGQL } from "../graphql/CreateArticuloAlquilerGQL";
+import { MatDialog, MatDialogRef } from "@angular/material";
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -59,7 +62,6 @@ export class ContratosCreateUpdateComponent implements OnInit {
     cantidad_devuelto: 0,
     contrato_id: [null],
     articulo_id: [null],
-   
   });
 
   fecha: Date;
@@ -74,7 +76,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
   theme = theme;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
+    private dialog: MatDialog,
     private cd: ChangeDetectorRef,
     private snackbar: MatSnackBar,
     private createContratoGQL: CreateContratoGQL,
@@ -124,7 +128,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
   public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
 
   addArticulo(): void {
+    console.log(this.articulo_alquiler);
     this.articulo_alquiler.push(this.odgovorForm);
+    console.log(this.articulo_alquiler);
     console.log(this.pitanjeForm.value.articulo_alquiler);
   }
 
@@ -172,10 +178,62 @@ export class ContratosCreateUpdateComponent implements OnInit {
     // console.log(numerocontrato);
   }
 
+  // volver() {
+  // }
+
+  volver() {
+    this.dialog
+      .open(CloseDialogComponent, {
+        disableClose: false,
+        width: "400px",
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result == "Yes") {
+          this.router.navigate(["apps/contratos"]);
+        }
+      });
+  }
+
   openSnackbar(mensaje: string) {
     this.snackbar.open(mensaje, "cerrar", {
       duration: 3000,
       horizontalPosition: "right",
     });
+  }
+}
+
+@Component({
+  selector: "vex-components-overview-close-dialog",
+  template: `
+    <div mat-dialog-title fxLayout="row" fxLayoutAlign="space-between center">
+      <div>Precaución</div>
+      <button
+        type="button"
+        mat-icon-button
+        (click)="close('No answer')"
+        tabindex="-1"
+      >
+        <mat-icon [icIcon]="icClose"></mat-icon>
+      </button>
+    </div>
+
+    <mat-dialog-content>
+      <p>Seguro, Salir sin guardar?</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="close('No')">NO</button>
+      <button mat-button color="primary" (click)="close('Yes')">YES</button>
+    </mat-dialog-actions>
+  `,
+})
+export class CloseDialogComponent {
+  icClose = icClose;
+
+  constructor(private dialogRef: MatDialogRef<CloseDialogComponent>) {}
+
+  close(answer: string) {
+    this.dialogRef.close(answer);
   }
 }

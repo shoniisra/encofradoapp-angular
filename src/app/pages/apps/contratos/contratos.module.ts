@@ -26,11 +26,14 @@ import { IconModule } from "@visurel/iconify-angular";
 // import { CustomerCreateUpdateModule } from './customer-create-update/customer-create-update.module';
 import { ContratosComponent } from "./contratos.component";
 import { ContratosRoutingModule } from "./contratos.routing.module";
-import { ContratosCreateUpdateComponent } from "./contratos-create-update/contratos-create-update.component";
+import { ContratosCreateUpdateComponent, CloseDialogComponent } from "./contratos-create-update/contratos-create-update.component";
 import {DatePipe} from '@angular/common';
+import { MatDialogModule, MatTabsModule } from '@angular/material';
+import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
+
 
 @NgModule({
-  declarations: [ContratosComponent, ContratosCreateUpdateComponent],
+  declarations: [ContratosComponent, ContratosCreateUpdateComponent,CloseDialogComponent],
   imports: [
     CommonModule,
     ContratosRoutingModule,
@@ -52,10 +55,14 @@ import {DatePipe} from '@angular/common';
     FormsModule,
     MatTooltipModule,
     ReactiveFormsModule,
+    MatDialogModule,
     ContainerModule,
     MatSelectModule,
     ColorFadeModule,
     MatButtonToggleModule,
-  ],providers: [DatePipe]
+    MatTabsModule,
+    HighlightModule
+  ],providers: [DatePipe],
+  entryComponents: [CloseDialogComponent]
 })
 export class ContratosModule {}
