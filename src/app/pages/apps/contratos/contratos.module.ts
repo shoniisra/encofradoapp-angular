@@ -15,6 +15,9 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatStepperModule } from "@angular/material/stepper";
 import { MatInputModule } from "@angular/material/input";
+
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 //vex
 import { PageLayoutModule } from "../../../../@vex/components/page-layout/page-layout.module";
 import { BreadcrumbsModule } from "../../../../@vex/components/breadcrumbs/breadcrumbs.module";
@@ -26,21 +29,30 @@ import { IconModule } from "@visurel/iconify-angular";
 // import { CustomerCreateUpdateModule } from './customer-create-update/customer-create-update.module';
 import { ContratosComponent } from "./contratos.component";
 import { ContratosRoutingModule } from "./contratos.routing.module";
-import { ContratosCreateUpdateComponent, CloseDialogComponent } from "./contratos-create-update/contratos-create-update.component";
-import {DatePipe} from '@angular/common';
-import { MatDialogModule, MatTabsModule } from '@angular/material';
-import { HighlightModule } from 'src/@vex/components/highlight/highlight.module';
+import {
+  ContratosCreateUpdateComponent,
+  CloseDialogComponent,
+} from "./contratos-create-update/contratos-create-update.component";
+import { DatePipe } from "@angular/common";
+import { MatDialogModule, MatTabsModule } from "@angular/material";
+import { HighlightModule } from "src/@vex/components/highlight/highlight.module";
 
-
+import { MatNativeDateModule } from "@angular/material/core";
 @NgModule({
-  declarations: [ContratosComponent, ContratosCreateUpdateComponent,CloseDialogComponent],
+  declarations: [
+    ContratosComponent,
+    ContratosCreateUpdateComponent,
+    CloseDialogComponent,
+  ],
   imports: [
     CommonModule,
     ContratosRoutingModule,
     PageLayoutModule,
     FlexLayoutModule,
+    MatGridListModule,
     BreadcrumbsModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     MatPaginatorModule,
     MatStepperModule,
     MatTableModule,
@@ -61,8 +73,10 @@ import { HighlightModule } from 'src/@vex/components/highlight/highlight.module'
     ColorFadeModule,
     MatButtonToggleModule,
     MatTabsModule,
-    HighlightModule
-  ],providers: [DatePipe],
-  entryComponents: [CloseDialogComponent]
+    HighlightModule,
+    MatNativeDateModule,
+  ],
+  providers: [DatePipe],
+  entryComponents: [CloseDialogComponent],
 })
 export class ContratosModule {}

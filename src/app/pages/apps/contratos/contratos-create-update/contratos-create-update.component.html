@@ -11,34 +11,6 @@
   </h1>
 
   <div @fadeInUp class="card overflow-hidden">
-    <form [formGroup]="pitanjeForm">
-      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
-      <form [formGroup]="odgovorForm">
-        <mat-form-field fxFlex="auto">
-          <mat-label>cantidad_entregado</mat-label>
-          <input
-            formControlName="cantidad_entregado"
-            matInput
-            required
-            type="number"
-            min="0"
-          />
-          <mat-hint>numero contrato</mat-hint>
-        </mat-form-field>
-        <mat-form-field fxFlex="auto">
-          <mat-label>articulo_id</mat-label>
-          <input formControlName="articulo_id" matInput type="number" min="0" />
-          <mat-hint>numero contrato</mat-hint>
-        </mat-form-field>
-        <button (click)="addArticulo()">Click Me</button>
-      </form>
-      <!-- <div *ngFor="let odgovor of odgovori.value; index as i">
-        
-          <mat-label>numero</mat-label>
-          <input type="radio" value="{{ i }}" />
-      </div> -->
-    </form>
-
     <form [formGroup]="verticalAccountFormGroup">
       <ng-template>Elige un Cliente</ng-template>
 
@@ -50,56 +22,93 @@
         </mat-form-field>
       </div>
     </form>
+
     <form [formGroup]="verticalContratoFormGroup">
-      <ng-template matStepLabel>Datos Basicos del Contrato</ng-template>
       <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
         <mat-form-field fxFlex="auto">
           <mat-label>numero</mat-label>
           <input formControlName="numero" matInput type="number" min="0" />
           <mat-hint>numero contrato</mat-hint>
         </mat-form-field>
+        <input
+          type="number"
+          value="2"
+          min="0"
+          formControlName="estado_id"
+          matInput
+          hidden
+        />
+        <input formControlName="descripcion" matInput hidden />
 
         <mat-form-field fxFlex="auto">
-          <mat-label>Dirección</mat-label>
+          <mat-label>Dirección de la obra</mat-label>
           <input formControlName="lugar_obra" matInput />
-          <mat-hint>Dirección de la obra</mat-hint>
         </mat-form-field>
+        <mat-grid-list cols="2" rowHeight="70px">
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Fecha de Alquiler:</mat-label>
+              <input
+                [matDatepicker]="datepickerRef"
+                formControlName="fecha_inicio"
+                matInput
+                required
+              />
+              <mat-datepicker-toggle
+                [for]="datepickerRef"
+                class="block"
+                matPrefix
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepickerRef></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Fecha de Entrega: </mat-label>
+              <input
+                [matDatepicker]="datepickerRef2"
+                formControlName="fecha_entrega"
+                matInput
+              />
+              <mat-datepicker-toggle
+                [for]="datepickerRef2"
+                class="block"
+                matPrefix
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepickerRef></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
 
-        <mat-form-field fxFlex="auto">
-          <mat-label>observacion</mat-label>
-          <input formControlName="observacion" matInput />
-          <mat-hint>observacion</mat-hint>
-        </mat-form-field>
+        <mat-grid-list cols="2" rowHeight="70px">
+          <mat-grid-tile colspan="1" rowspan="1">
+            DESCRIPCION
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            CANTIDAD
+          </mat-grid-tile>
 
-        <mat-form-field fxFlex="auto">
-          <mat-label>estado_id</mat-label>
-          <input
-            type="number"
-            value="2"
-            min="0"
-            formControlName="estado_id"
-            matInput
-            required
-          />
-          <mat-hint>estado_id</mat-hint>
-        </mat-form-field>
+          <mat-grid-tile colspan="1" rowspan="1">
+            Valor/ m2
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+              <input formControlName="metros" matInput required />
+              <mat-hint>metros</mat-hint>
+            </mat-form-field>
+          </mat-grid-tile>
 
-        <mat-form-field class="vex-flex-form-field" fxFlex="none">
-          <mat-label>descripcion</mat-label>
-          <input formControlName="descripcion" matInput />
-          <mat-hint>descripcion</mat-hint>
-        </mat-form-field>
+          <mat-grid-tile colspan="1" rowspan="1">
+            Área
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+              <input formControlName="area" matInput required />
+              <mat-hint>area</mat-hint>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
 
-        <mat-form-field class="vex-flex-form-field" fxFlex="none">
-          <mat-label>fecha_inicio</mat-label>
-          <input formControlName="fecha_inicio" matInput required type="date" />
-          <mat-hint>fecha_inicio</mat-hint>
-        </mat-form-field>
-        <mat-form-field class="vex-flex-form-field" fxFlex="none">
-          <mat-label>fecha_entrega</mat-label>
-          <input formControlName="fecha_entrega" matInput type="date" />
-          <mat-hint>fecha_entrega</mat-hint>
-        </mat-form-field>
         <mat-form-field class="vex-flex-form-field" fxFlex="none">
           <mat-label>valor_total</mat-label>
           <input
@@ -138,32 +147,11 @@
           </mat-checkbox>
         </div>
 
-        <div class="vex-flex-form-field" fxFlex="none">
-          <mat-checkbox class="checkbox" formControlName="pago_cancelado">
-            ¿ Pago Cancelado?
-          </mat-checkbox>
-        </div>
-
-        <div
-          fxLayout="column"
-          fxLayout.gt-xs="row"
-          fxLayoutGap="8px"
-          fxLayoutGap.gt-xs="24px"
-        >
-          <div fxFlex="auto" fxLayout="row" fxLayoutGap="8px">
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>area</mat-label>
-              <input formControlName="area" matInput required />
-              <mat-hint>area</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field class="vex-flex-form-field" fxFlex="none">
-              <mat-label>metros cuadrados</mat-label>
-              <input formControlName="metros" matInput required />
-              <mat-hint>metros</mat-hint>
-            </mat-form-field>
-          </div>
-        </div>
+        <mat-form-field fxFlex="auto">
+          <mat-label>OBSERVACIONES</mat-label>
+          <input formControlName="observacion" matInput />
+          <mat-hint>OBSERVACIONES</mat-hint>
+        </mat-form-field>
       </div>
 
       <div
@@ -172,14 +160,10 @@
         fxLayoutAlign="end center"
         fxLayoutGap="8px"
       >
-      <button
-          color="warn"
-          mat-raised-button
-          (click)="volver()"
-        >
+        <button color="warn" mat-raised-button (click)="volver()">
           CANCELAR
-        </button>  
-      <button
+        </button>
+        <button
           [disabled]="verticalContratoFormGroup.invalid"
           color="primary"
           mat-raised-button
@@ -189,5 +173,39 @@
         </button>
       </div>
     </form>
+
+    <div>
+      <form [formGroup]="pitanjeForm">
+        <form [formGroup]="odgovorForm">
+          <mat-form-field fxFlex="auto">
+            <mat-label>cantidad_entregado</mat-label>
+            <input
+              formControlName="cantidad_entregado"
+              matInput
+              required
+              type="number"
+              min="0"
+            />
+            <mat-hint>numero contrato</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="auto">
+            <mat-label>articulo_id</mat-label>
+            <input
+              formControlName="articulo_id"
+              matInput
+              type="number"
+              min="0"
+            />
+            <mat-hint>numero contrato</mat-hint>
+          </mat-form-field>
+          <button (click)="addArticulo()">Click Me</button>
+        </form>
+        <!-- <div *ngFor="let odgovor of odgovori.value; index as i">
+        
+          <mat-label>numero</mat-label>
+          <input type="radio" value="{{ i }}" />
+      </div> -->
+      </form>
+    </div>
   </div>
 </div>
