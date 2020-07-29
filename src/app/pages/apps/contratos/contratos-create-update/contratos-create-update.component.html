@@ -80,77 +80,77 @@
           </mat-grid-tile>
         </mat-grid-list>
 
+        <table width="100%">
+          <tr>
+            <th width="65%">
+              <mat-grid-list cols="2" rowHeight="70px">
+                <mat-grid-tile colspan="1" rowspan="1">
+                  DESCRIPCION
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  CANTIDAD
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                  Valor/ m2
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                    <input formControlName="metros" matInput />
+                    <mat-hint>metros</mat-hint>
+                  </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile colspan="1" rowspan="1">
+                  Área
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                    <input formControlName="area" matInput />
+                    <mat-hint>area</mat-hint>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  Valor Total
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                    <input
+                      formControlName="valor_total"
+                      matInput
+                      required
+                      type="number"
+                      min="0"
+                      step="0.2"
+                    />
+                    <mat-hint>valor_total</mat-hint>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </th>
+            <th>OBSERVACIONES</th>
+          </tr>
+        </table>
+
         <mat-grid-list cols="2" rowHeight="70px">
           <mat-grid-tile colspan="1" rowspan="1">
-            DESCRIPCION
+            <mat-checkbox class="checkbox" formControlName="transporte_entrega">
+              ¿ Incluye Transporte de entrega?
+            </mat-checkbox>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
-            CANTIDAD
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="1" rowspan="1">
-            Valor/ m2
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1">
-            <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-              <input formControlName="metros" matInput required />
-              <mat-hint>metros</mat-hint>
-            </mat-form-field>
-          </mat-grid-tile>
-
-          <mat-grid-tile colspan="1" rowspan="1">
-            Área
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1" rowspan="1">
-            <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-              <input formControlName="area" matInput required />
-              <mat-hint>area</mat-hint>
-            </mat-form-field>
+            <mat-checkbox
+              class="checkbox"
+              formControlName="transporte_devolucion"
+            >
+              ¿ Incluye Transporte de devolucion?
+            </mat-checkbox>
           </mat-grid-tile>
         </mat-grid-list>
-
-        <mat-form-field class="vex-flex-form-field" fxFlex="none">
-          <mat-label>valor_total</mat-label>
-          <input
-            formControlName="valor_total"
-            matInput
-            required
-            type="number"
-            min="0"
-            step="0.2"
-          />
-          <mat-hint>valor_total</mat-hint>
-        </mat-form-field>
-
-        <div class="vex-flex-form-field" fxFlex="none">
-          <mat-checkbox class="checkbox" formControlName="transporte_entrega">
-            ¿ Incluye Transporte de entrega?
-          </mat-checkbox>
-        </div>
-
-        <div class="vex-flex-form-field" fxFlex="none">
-          <mat-checkbox
-            class="checkbox"
-            formControlName="transporte_devolucion"
-          >
-            ¿ Incluye Transporte de devolucion?
-          </mat-checkbox>
-        </div>
-
-        <div class="vex-flex-form-field" fxFlex="none">
-          <mat-checkbox
-            class="checkbox"
-            formControlName="devuelto"
-            value="false"
-          >
-            ¿ Devuelto ?
-          </mat-checkbox>
-        </div>
 
         <mat-form-field fxFlex="auto">
           <mat-label>OBSERVACIONES</mat-label>
           <input formControlName="observacion" matInput />
-          <mat-hint>OBSERVACIONES</mat-hint>
         </mat-form-field>
       </div>
 
@@ -178,6 +178,15 @@
       <form [formGroup]="pitanjeForm">
         <form [formGroup]="odgovorForm">
           <mat-form-field fxFlex="auto">
+            <mat-label>articulo_id</mat-label>
+            <input
+              formControlName="articulo_id"
+              matInput
+              type="number"
+              min="0"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="auto">
             <mat-label>cantidad_entregado</mat-label>
             <input
               formControlName="cantidad_entregado"
@@ -186,17 +195,6 @@
               type="number"
               min="0"
             />
-            <mat-hint>numero contrato</mat-hint>
-          </mat-form-field>
-          <mat-form-field fxFlex="auto">
-            <mat-label>articulo_id</mat-label>
-            <input
-              formControlName="articulo_id"
-              matInput
-              type="number"
-              min="0"
-            />
-            <mat-hint>numero contrato</mat-hint>
           </mat-form-field>
           <button (click)="addArticulo()">Click Me</button>
         </form>
