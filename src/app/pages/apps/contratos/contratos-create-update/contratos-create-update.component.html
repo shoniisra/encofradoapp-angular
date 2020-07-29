@@ -80,6 +80,31 @@
           </mat-grid-tile>
         </mat-grid-list>
 
+        <form [formGroup]="odgovorForm">
+          <mat-form-field fxFlex="auto">
+            <mat-label>Articulo</mat-label>
+            <input
+              formControlName="articulo_id"
+              matInput
+              type="number"
+              min="0"
+            />
+          </mat-form-field>
+          <mat-form-field fxFlex="auto">
+            <mat-label>Cantidad</mat-label>
+            <input
+              formControlName="cantidad_entregado"
+              matInput
+              required
+              type="number"
+              min="0"
+            />
+          </mat-form-field>
+          <button (click)="addArticulo()" color="primary" mat-raised-button>
+            Agregar
+          </button>
+        </form>
+
         <table width="100%">
           <tr>
             <th width="65%">
@@ -90,6 +115,16 @@
                 <mat-grid-tile colspan="1" rowspan="1">
                   CANTIDAD
                 </mat-grid-tile>
+
+                <div *ngFor="let articulo_alquiler of articulo_alquiler.value; index as i">
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-label>numero</mat-label>
+                    {{articulo_alquiler.articulo_id}}
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    {{articulo_alquiler.cantidad_entregado}}
+                  </mat-grid-tile>
+                </div>
 
                 <mat-grid-tile colspan="1" rowspan="1">
                   Valor/ m2
@@ -173,37 +208,5 @@
         </button>
       </div>
     </form>
-
-    <div>
-      <form [formGroup]="pitanjeForm">
-        <form [formGroup]="odgovorForm">
-          <mat-form-field fxFlex="auto">
-            <mat-label>articulo_id</mat-label>
-            <input
-              formControlName="articulo_id"
-              matInput
-              type="number"
-              min="0"
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="auto">
-            <mat-label>cantidad_entregado</mat-label>
-            <input
-              formControlName="cantidad_entregado"
-              matInput
-              required
-              type="number"
-              min="0"
-            />
-          </mat-form-field>
-          <button (click)="addArticulo()">Click Me</button>
-        </form>
-        <!-- <div *ngFor="let odgovor of odgovori.value; index as i">
-        
-          <mat-label>numero</mat-label>
-          <input type="radio" value="{{ i }}" />
-      </div> -->
-      </form>
-    </div>
   </div>
 </div>

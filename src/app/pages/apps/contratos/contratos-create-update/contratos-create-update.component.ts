@@ -127,13 +127,23 @@ export class ContratosCreateUpdateComponent implements OnInit {
 
   // public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
   get articulo_alquiler() {
-    return this.pitanjeForm.get('articulo_alquiler') as FormArray;
+    return this.pitanjeForm.get("articulo_alquiler") as FormArray;
   }
 
   addArticulo(): void {
-    console.log(this.articulo_alquiler);
-    this.articulo_alquiler.push(this.odgovorForm);
-    console.log(this.articulo_alquiler);
+    let odgovorForm1 = this.fb.group({
+      especificaciones_producto: [null],
+      cantidad_entregado: [
+        0,
+        Validators.compose([Validators.required, Validators.min(0)]),
+      ],
+      cantidad_devuelto: 0,
+      contrato_id: [null],
+      articulo_id: [null],
+    });
+    odgovorForm1.value.cantidad_entregado = this.odgovorForm.value.cantidad_entregado;
+    odgovorForm1.value.articulo_id = this.odgovorForm.value.articulo_id;
+    this.articulo_alquiler.push(odgovorForm1);
     console.log(this.pitanjeForm.value.articulo_alquiler);
   }
 
