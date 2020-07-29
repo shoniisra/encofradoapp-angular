@@ -125,7 +125,10 @@ export class ContratosCreateUpdateComponent implements OnInit {
     });
   }
 
-  public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
+  // public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
+  get articulo_alquiler() {
+    return this.pitanjeForm.get('articulo_alquiler') as FormArray;
+  }
 
   addArticulo(): void {
     console.log(this.articulo_alquiler);
