@@ -218,23 +218,33 @@
             </div>
           </div>
         </div>
-
-        <mat-grid-list cols="2" rowHeight="70px">
+        <h2 class="title m-0">TRANSPORTE</h2>
+        <mat-grid-list cols="2" rowHeight="180px">
           <mat-grid-tile colspan="1" rowspan="1">
-            <mat-checkbox class="checkbox" formControlName="transporte_entrega">
-              ¿ Incluye Transporte de entrega?
-            </mat-checkbox>
+            <img class="h-40" src="assets/img/camion.png" />
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+              <mat-checkbox
+                class="checkbox"
+                formControlName="transporte_entrega"
+              >
+                ¿ Incluye Transporte de entrega?
+              </mat-checkbox>
+            </div>
           </mat-grid-tile>
           <mat-grid-tile colspan="1" rowspan="1">
-            <mat-checkbox
-              class="checkbox"
-              formControlName="transporte_devolucion"
-            >
-              ¿ Incluye Transporte de devolucion?
-            </mat-checkbox>
+            <img class="h-40" src="assets/img/camion.png" />
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+              <mat-checkbox
+                class="checkbox"
+                formControlName="transporte_devolucion"
+              >
+                ¿ Incluye Transporte de devolucion?
+              </mat-checkbox>
+            </div>
           </mat-grid-tile>
         </mat-grid-list>
 
+        <h2 class="title m-0">OBSERVACIONES</h2>
         <mat-form-field fxFlex="auto">
           <mat-label>OBSERVACIONES</mat-label>
           <input formControlName="observacion" matInput />
