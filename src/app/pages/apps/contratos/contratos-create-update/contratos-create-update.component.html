@@ -80,92 +80,144 @@
           </mat-grid-tile>
         </mat-grid-list>
 
-        <form [formGroup]="odgovorForm">
-          <mat-form-field fxFlex="auto">
-            <mat-label>Articulo</mat-label>
-            <input
-              formControlName="articulo_id"
-              matInput
-              type="number"
-              min="0"
-            />
-          </mat-form-field>
-          <mat-form-field fxFlex="auto">
-            <mat-label>Cantidad</mat-label>
-            <input
-              formControlName="cantidad_entregado"
-              matInput
-              required
-              type="number"
-              min="0"
-            />
-          </mat-form-field>
-          <button (click)="addArticulo()" color="primary" mat-raised-button>
-            Agregar
-          </button>
-        </form>
-
-        <table width="100%">
-          <tr>
-            <th width="65%">
-              <mat-grid-list cols="2" rowHeight="70px">
-                <mat-grid-tile colspan="1" rowspan="1">
-                  DESCRIPCION
-                </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="1">
-                  CANTIDAD
-                </mat-grid-tile>
-
-                <div *ngFor="let articulo_alquiler of articulo_alquiler.value; index as i">
+        <div [@stagger]="true" class="p-gutter" vexContainer>
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div @fadeInUp class="card" fxFlex="auto">
+              <div
+                class="px-6 py-4 border-b"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <h2 class="title m-0">PRODUCTOS</h2>
+              </div>
+              <div class="px-6 py-4" fxLayout="column">
+                <mat-grid-list cols="2" rowHeight="70px">
                   <mat-grid-tile colspan="1" rowspan="1">
-                    <mat-label>numero</mat-label>
-                    {{articulo_alquiler.articulo_id}}
+                    <h2 class="title m-0">DESCRIPCION</h2>
                   </mat-grid-tile>
                   <mat-grid-tile colspan="1" rowspan="1">
-                    {{articulo_alquiler.cantidad_entregado}}
+                    <h2 class="title m-0">CANTIDAD</h2>
                   </mat-grid-tile>
-                </div>
 
-                <mat-grid-tile colspan="1" rowspan="1">
-                  Valor/ m2
-                </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="1">
-                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-                    <input formControlName="metros" matInput />
-                    <mat-hint>metros</mat-hint>
-                  </mat-form-field>
-                </mat-grid-tile>
+                  <mat-grid-tile colspan="2" rowspan="1">
+                    <form [formGroup]="odgovorForm">
+                      <!-- <mat-form-field fxFlex="auto">
+                        <mat-label>Articulo</mat-label>
+                        <input
+                          formControlName="articulo_id"
+                          matInput
+                          type="number"
+                          min="0"
+                        />
+                      </mat-form-field> -->
 
-                <mat-grid-tile colspan="1" rowspan="1">
-                  Área
-                </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="1">
-                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-                    <input formControlName="area" matInput />
-                    <mat-hint>area</mat-hint>
-                  </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="1">
-                  Valor Total
-                </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="1">
-                  <mat-form-field class="vex-flex-form-field" fxFlex="auto">
-                    <input
-                      formControlName="valor_total"
-                      matInput
-                      required
-                      type="number"
-                      min="0"
-                      step="0.2"
-                    />
-                    <mat-hint>valor_total</mat-hint>
-                  </mat-form-field>
-                </mat-grid-tile>
-              </mat-grid-list>
-            </th>
-            <th>OBSERVACIONES</th>
-          </tr>
-        </table>
+                      <mat-form-field fxFlex="none">
+                        <mat-label>Producto</mat-label>
+                        <mat-select formControlName="articulo_id">
+                          <mat-option value="1">Andamios</mat-option>
+                          <mat-option value="3">Distanciadores</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="none">
+                        <mat-label>Cantidad</mat-label>
+                        <input
+                          formControlName="cantidad_entregado"
+                          matInput
+                          required
+                          type="number"
+                          min="0"
+                        />
+                      </mat-form-field>
+                      <button
+                        (click)="addArticulo()"
+                        height="50px"
+                        color="primary"
+                        mat-raised-button
+                      >
+                        Agregar
+                      </button>
+                    </form>
+                  </mat-grid-tile>
+
+                  <div
+                    *ngFor="
+                      let articulo_alquiler of articulo_alquiler.value;
+                      index as i
+                    "
+                  >
+                    <mat-grid-tile colspan="1" rowspan="1">
+                      <mat-label *ngIf="articulo_alquiler.articulo_id == 1"
+                        >Andamios</mat-label
+                      >
+                      <mat-label *ngIf="articulo_alquiler.articulo_id == 3"
+                        >Distanciadores</mat-label
+                      >
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                      {{ articulo_alquiler.cantidad_entregado }}
+                    </mat-grid-tile>
+                  </div>
+                </mat-grid-list>
+              </div>
+            </div>
+
+            <div @fadeInUp class="card overflow-hidden" fxFlex="auto">
+              <div
+                class="px-6 py-4 border-b"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <h2 class="title m-0">DETALLES</h2>
+              </div>
+              <div class="px-6 py-4" fxLayout="column">
+                <mat-grid-list cols="2" rowHeight="70px">
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    DESCRIPCION
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    CANTIDAD
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Valor/ m2
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input formControlName="metros" matInput />
+                      <mat-hint>metros</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Área
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input formControlName="area" matInput />
+                      <mat-hint>area</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Valor Total
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input
+                        formControlName="valor_total"
+                        matInput
+                        required
+                        type="number"
+                        min="0"
+                        step="0.2"
+                      />
+                      <mat-hint>valor_total</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                </mat-grid-list>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <mat-grid-list cols="2" rowHeight="70px">
           <mat-grid-tile colspan="1" rowspan="1">
