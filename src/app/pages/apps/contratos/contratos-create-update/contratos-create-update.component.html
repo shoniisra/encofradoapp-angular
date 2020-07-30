@@ -80,8 +80,10 @@
           </mat-grid-tile>
         </mat-grid-list>
 
+        <!-- PRODUCTOS Y DETALLES -->
         <div [@stagger]="true" class="p-gutter" vexContainer>
           <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <!-- PRODUCTOS -->
             <div @fadeInUp class="card" fxFlex="auto">
               <div
                 class="px-6 py-4 border-b"
@@ -141,7 +143,7 @@
 
                   <div
                     *ngFor="
-                      let articulo_alquiler of articulo_alquiler.value;
+                      let articulo_alquiler of articulo_alquilers.value;
                       index as i
                     "
                   >
@@ -160,7 +162,7 @@
                 </mat-grid-list>
               </div>
             </div>
-
+            <!-- DETALLES -->
             <div @fadeInUp class="card overflow-hidden" fxFlex="auto">
               <div
                 class="px-6 py-4 border-b"
@@ -281,7 +283,6 @@
           </div>
         </div>
       </div>
-    </div>
 
       <div
         class="actions"

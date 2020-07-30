@@ -34,6 +34,8 @@ import { Contrato } from "src/app/models/contratoalquiler.model";
 import { Cliente } from "src/app/models/cliente.model";
 import { CreateArticuloAlquilerGQL } from "../graphql/CreateArticuloAlquilerGQL";
 import { MatDialog, MatDialogRef } from "@angular/material";
+import { UpdateContratoGQL } from "../graphql/UpdateContratoGQL";
+import { deepStrictEqual } from 'assert';
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -47,10 +49,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
   cliente: Cliente;
   verticalAccountFormGroup: FormGroup;
   verticalContratoFormGroup: FormGroup;
-  ArticuloAlquilerFormGroup: FormGroup;
 
   pitanjeForm = this.fb.group({
-    articulo_alquiler: this.fb.array([]),
+    articulo_alquilers: this.fb.array([]),
   });
 
   odgovorForm = this.fb.group({
@@ -103,6 +104,7 @@ export class ContratosCreateUpdateComponent implements OnInit {
         2,
         Validators.compose([Validators.required, Validators.min(0)]),
       ],
+      articulo_alquilers: this.fb.array([]),
       descripcion: [null],
       transporte_entrega: [false],
       transporte_devolucion: [false],
@@ -112,22 +114,11 @@ export class ContratosCreateUpdateComponent implements OnInit {
       pago_cancelado: [false],
       valor_total: [0, Validators.min(0)],
     });
-
-    this.ArticuloAlquilerFormGroup = this.fb.group({
-      especificaciones_producto: [null],
-      cantidad_entregado: [
-        null,
-        Validators.compose([Validators.required, Validators.min(0)]),
-      ],
-      cantidad_devuelto: [null, Validators.min(0)],
-      contrato_id: [null],
-      articulo_id: [null],
-    });
   }
 
   // public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
-  get articulo_alquiler() {
-    return this.pitanjeForm.get("articulo_alquiler") as FormArray;
+  get articulo_alquilers() {
+    return this.verticalContratoFormGroup.get("articulo_alquilers") as FormArray;
   }
 
   addArticulo(): void {
@@ -143,8 +134,8 @@ export class ContratosCreateUpdateComponent implements OnInit {
     });
     odgovorForm1.value.cantidad_entregado = this.odgovorForm.value.cantidad_entregado;
     odgovorForm1.value.articulo_id = this.odgovorForm.value.articulo_id;
-    this.articulo_alquiler.push(odgovorForm1);
-    console.log(this.pitanjeForm.value.articulo_alquiler);
+    this.articulo_alquilers.push(odgovorForm1);
+    console.log(this.verticalContratoFormGroup.value.articulo_alquilers);
   }
 
   submit() {
@@ -156,35 +147,56 @@ export class ContratosCreateUpdateComponent implements OnInit {
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     console.log(this.verticalContratoFormGroup.value);
 
-    // this.createContratoGQL
-    //   .mutate({
-    //     contrato: this.verticalContratoFormGroup.value,
-    //   })
-    //   .subscribe(
-    //     ({ data }) => {
-    //       numerocontrato = data;
-    //       console.log(data);
-    //       this.openSnackbar("Contrato Guardado Exitosamente");
-    //     },
-    //     (error) => {
-    //       console.log("Error al Guardar el Contrato", error);
-    //       this.openSnackbar("Error al Guardar el Contrato");
-    //     }
-    //   );
-
-    this.createArticuloAlquilerGQL
+    this.createContratoGQL
       .mutate({
-        // articulo_alquiler: this.ArticuloAlquilerFormGroup.value,
-        objects: this.pitanjeForm.value.articulo_alquiler,
+        area: this.verticalContratoFormGroup.value.area,
+        cliente_id: this.verticalContratoFormGroup.value.cliente_id,
+        descripcion: this.verticalContratoFormGroup.value.descripcion,
+        devuelto: this.verticalContratoFormGroup.value.devuelto,
+        estado_id: this.verticalContratoFormGroup.value.estado_id,
+        fecha_entrega: this.verticalContratoFormGroup.value.fecha_entrega,
+        fecha_inicio: this.verticalContratoFormGroup.value.fecha_inicio,
+        lugar_obra: this.verticalContratoFormGroup.value.lugar_obra,
+        metros: this.verticalContratoFormGroup.value.metros,
+        numero: this.verticalContratoFormGroup.value.numero,
+        observacion: this.verticalContratoFormGroup.value.observacion,
+        pago_cancelado: this.verticalContratoFormGroup.value.pago_cancelado,
+        transporte_devolucion: this.verticalContratoFormGroup.value.transporte_devolucion,
+        transporte_entrega: this.verticalContratoFormGroup.value.transporte_entrega,
+        valor_total: this.verticalContratoFormGroup.value.valor_total,
+        articulo_alquilers: this.verticalContratoFormGroup.value.articulo_alquilers,
       })
       .subscribe(
         ({ data }) => {
           console.log(data);
-          this.openSnackbar("Articulo Guardado Exitosamente");
+          // console.log(data.insert_contrato_alquiler_one.id);        
+          // console.log(this.pitanjeForm.value.articulo_alquiler[0].contrato_id);
+          // console.log(this.pitanjeForm.value.articulo_alquiler[0].contrato_id);
+          this.openSnackbar("Contrato Guardado Exitosamente");          
+          
+        //   for (var _i = 0; _i < this.pitanjeForm.value.articulo_alquiler.length; _i++) {
+            
+        //     this.pitanjeForm.value.articulo_alquiler[i].contrato_id=
+        // }
+
+        //   this.createArticuloAlquilerGQL
+        //     .mutate({
+        //       objects: this.pitanjeForm.value.articulo_alquiler,
+        //     })
+        //     .subscribe(
+        //       ({ data }) => {
+        //         console.log(data);
+        //         this.openSnackbar("Articulo Guardado Exitosamente");
+        //       },
+        //       (error) => {
+        //         console.log("Error al Guardar el Articulo", error);
+        //         this.openSnackbar("Error al Guardar el Articulo");
+        //       }
+        //     );
         },
         (error) => {
-          console.log("Error al Guardar el Articulo", error);
-          this.openSnackbar("Error al Guardar el Articulo");
+          console.log("Error al Guardar el Contrato", error);
+          this.openSnackbar("Error al Guardar el Contrato");
         }
       );
 

@@ -45,7 +45,7 @@ import { map } from "rxjs/operators";
 // import { CustomerCreateUpdateComponent } from "./customer-create-update/customer-create-update.component";xdxd
 import { Contrato } from "src/app/models/contratoalquiler.model";
 import { queryGetContratos } from "src/app/services/contratos";
-// import { DeleteContratoGQL } from "./graphql/DeleteContratoGQL";
+import { DeleteContratoGQL } from "./graphql/DeleteContratoGQL";
 
 export type Query = {
   contrato_alquiler: Contrato[];
