@@ -35,7 +35,7 @@ import { Cliente } from "src/app/models/cliente.model";
 import { CreateArticuloAlquilerGQL } from "../graphql/CreateArticuloAlquilerGQL";
 import { MatDialog, MatDialogRef } from "@angular/material";
 import { UpdateContratoGQL } from "../graphql/UpdateContratoGQL";
-import { deepStrictEqual } from 'assert';
+import { deepStrictEqual } from "assert";
 
 @Component({
   selector: "vex-contratos-create-update",
@@ -118,7 +118,9 @@ export class ContratosCreateUpdateComponent implements OnInit {
 
   // public articulo_alquiler = this.pitanjeForm.controls["articulo_alquiler"];
   get articulo_alquilers() {
-    return this.verticalContratoFormGroup.get("articulo_alquilers") as FormArray;
+    return this.verticalContratoFormGroup.get(
+      "articulo_alquilers"
+    ) as FormArray;
   }
 
   addArticulo(): void {
@@ -147,52 +149,61 @@ export class ContratosCreateUpdateComponent implements OnInit {
     this.verticalContratoFormGroup.value.cliente_id = this.verticalAccountFormGroup.value.id;
     console.log(this.verticalContratoFormGroup.value);
 
+    console.log(this.verticalContratoFormGroup.value.articulo_alquilers);
+    var myJSON = JSON.stringify(
+      this.verticalContratoFormGroup.value.articulo_alquilers
+    );
+    console.log(myJSON);
+
     this.createContratoGQL
       .mutate({
+        // articulo_alquilers: this.verticalContratoFormGroup.value
+        //   .articulo_alquilers,
+        numero: this.verticalContratoFormGroup.value.numero,
+        lugar_obra: this.verticalContratoFormGroup.value.lugar_obra,
         area: this.verticalContratoFormGroup.value.area,
+        metros: this.verticalContratoFormGroup.value.metros,
+        observacion: this.verticalContratoFormGroup.value.observacion,
+        estado_id: this.verticalContratoFormGroup.value.estado_id,
         cliente_id: this.verticalContratoFormGroup.value.cliente_id,
         descripcion: this.verticalContratoFormGroup.value.descripcion,
-        devuelto: this.verticalContratoFormGroup.value.devuelto,
-        estado_id: this.verticalContratoFormGroup.value.estado_id,
-        fecha_entrega: this.verticalContratoFormGroup.value.fecha_entrega,
+        transporte_entrega: this.verticalContratoFormGroup.value
+          .transporte_entrega,
+        transporte_devolucion: this.verticalContratoFormGroup.value
+          .transporte_devolucion,
         fecha_inicio: this.verticalContratoFormGroup.value.fecha_inicio,
-        lugar_obra: this.verticalContratoFormGroup.value.lugar_obra,
-        metros: this.verticalContratoFormGroup.value.metros,
-        numero: this.verticalContratoFormGroup.value.numero,
-        observacion: this.verticalContratoFormGroup.value.observacion,
+        fecha_entrega: this.verticalContratoFormGroup.value.fecha_entrega,
+        devuelto: this.verticalContratoFormGroup.value.devuelto,
         pago_cancelado: this.verticalContratoFormGroup.value.pago_cancelado,
-        transporte_devolucion: this.verticalContratoFormGroup.value.transporte_devolucion,
-        transporte_entrega: this.verticalContratoFormGroup.value.transporte_entrega,
         valor_total: this.verticalContratoFormGroup.value.valor_total,
-        articulo_alquilers: this.verticalContratoFormGroup.value.articulo_alquilers,
       })
       .subscribe(
         ({ data }) => {
           console.log(data);
-          // console.log(data.insert_contrato_alquiler_one.id);        
+          // console.log(data.insert_contrato_alquiler_one.id);
           // console.log(this.pitanjeForm.value.articulo_alquiler[0].contrato_id);
           // console.log(this.pitanjeForm.value.articulo_alquiler[0].contrato_id);
-          this.openSnackbar("Contrato Guardado Exitosamente");          
-          
-        //   for (var _i = 0; _i < this.pitanjeForm.value.articulo_alquiler.length; _i++) {
-            
-        //     this.pitanjeForm.value.articulo_alquiler[i].contrato_id=
-        // }
+          this.openSnackbar("Contrato Guardado Exitosamente");
 
-        //   this.createArticuloAlquilerGQL
-        //     .mutate({
-        //       objects: this.pitanjeForm.value.articulo_alquiler,
-        //     })
-        //     .subscribe(
-        //       ({ data }) => {
-        //         console.log(data);
-        //         this.openSnackbar("Articulo Guardado Exitosamente");
-        //       },
-        //       (error) => {
-        //         console.log("Error al Guardar el Articulo", error);
-        //         this.openSnackbar("Error al Guardar el Articulo");
-        //       }
-        //     );
+          //   for (var _i = 0; _i < this.pitanjeForm.value.articulo_alquiler.length; _i++) {
+
+          //     this.pitanjeForm.value.articulo_alquiler[i].contrato_id=
+          // }
+
+          //   this.createArticuloAlquilerGQL
+          //     .mutate({
+          //       objects: this.pitanjeForm.value.articulo_alquiler,
+          //     })
+          //     .subscribe(
+          //       ({ data }) => {
+          //         console.log(data);
+          //         this.openSnackbar("Articulo Guardado Exitosamente");
+          //       },
+          //       (error) => {
+          //         console.log("Error al Guardar el Articulo", error);
+          //         this.openSnackbar("Error al Guardar el Articulo");
+          //       }
+          //     );
         },
         (error) => {
           console.log("Error al Guardar el Contrato", error);
