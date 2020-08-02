@@ -1,0 +1,311 @@
+<div @stagger class="p-gutter" vexContainer>
+  <h1 class="title mt-6 mb-4" fxLayout="row" fxLayoutAlign="start center">
+    <span
+      @scaleIn
+      [style.background-color]="theme.colors.primary['500'] | colorFade: 0.9"
+      class="w-10 h-10 rounded-full text-primary-500 mr-3 flex items-center justify-center"
+    >
+      <ic-icon [icon]="icVerticalSplit" height="20px" width="20px"></ic-icon>
+    </span>
+    <span @fadeInRight class="block">CONTRATO DE ARRENDAMIENTO</span>
+  </h1>
+
+  <div @fadeInUp class="card overflow-hidden">
+    <form [formGroup]="verticalAccountFormGroup">
+      <ng-template>Elige un Cliente</ng-template>
+
+      <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
+        <mat-form-field fxFlex="auto">
+          <mat-label>Id Cliente</mat-label>
+          <input formControlName="id" matInput required type="number" min="0" />
+          <mat-hint>Este es el nombre que se asociará al contrato</mat-hint>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <form [formGroup]="verticalContratoFormGroup">
+      <div class="mt-4" fxLayout="column" fxLayoutGap="8px">
+        <mat-form-field fxFlex="auto">
+          <mat-label>numero</mat-label>
+          <input formControlName="numero" matInput type="number" min="0" />
+          <mat-hint>numero contrato</mat-hint>
+        </mat-form-field>
+        <input
+          type="number"
+          value="2"
+          min="0"
+          formControlName="estado_id"
+          matInput
+          hidden
+        />
+        <input formControlName="descripcion" matInput hidden />
+
+        <mat-form-field fxFlex="auto">
+          <mat-label>Dirección de la obra</mat-label>
+          <input formControlName="lugar_obra" matInput />
+        </mat-form-field>
+        <mat-grid-list cols="2" rowHeight="70px">
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Fecha de Alquiler:</mat-label>
+              <input
+                formControlName="fecha_inicio"
+                matInput
+                required
+                type="date"
+                min="2020-01-01"
+                max="2100-12-31"
+              />
+              <mat-datepicker-toggle
+                [for]="datepickerRef"
+                class="block"
+                matPrefix
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepickerRef></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile colspan="1" rowspan="1">
+            <mat-form-field fxFlex="auto">
+              <mat-label>Fecha de Entrega: </mat-label>
+              <input
+                formControlName="fecha_entrega"
+                matInput
+                type="date"
+                min="2020-01-01"
+                max="2100-12-31"
+              />
+              <mat-datepicker-toggle
+                [for]="datepickerRef2"
+                class="block"
+                matPrefix
+              ></mat-datepicker-toggle>
+              <mat-datepicker #datepickerRef></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+        <!-- PRODUCTOS Y DETALLES -->
+        <div [@stagger]="true" class="p-gutter" vexContainer>
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <!-- PRODUCTOS -->
+            <div @fadeInUp class="card" fxFlex="auto">
+              <div
+                class="px-6 py-4 border-b"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <h2 class="title m-0">PRODUCTOS</h2>
+              </div>
+              <div class="px-6 py-4" fxLayout="column">
+                <mat-grid-list cols="2" rowHeight="70px">
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <h2 class="title m-0">DESCRIPCION</h2>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <h2 class="title m-0">CANTIDAD</h2>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="2" rowspan="1">
+                    <form [formGroup]="odgovorForm">
+                      <!-- <mat-form-field fxFlex="auto">
+                        <mat-label>Articulo</mat-label>
+                        <input
+                          formControlName="articulo_id"
+                          matInput
+                          type="number"
+                          min="0"
+                        />
+                      </mat-form-field> -->
+
+                      <mat-form-field fxFlex="none">
+                        <mat-label>Producto</mat-label>
+                        <mat-select formControlName="articulo_id">
+                          <mat-option value="1">Andamios</mat-option>
+                          <mat-option value="3">Distanciadores</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field fxFlex="none">
+                        <mat-label>Cantidad</mat-label>
+                        <input
+                          formControlName="cantidad_entregado"
+                          matInput
+                          required
+                          type="number"
+                          min="0"
+                        />
+                      </mat-form-field>
+                      <button
+                        (click)="addArticulo()"
+                        height="50px"
+                        color="primary"
+                        mat-raised-button
+                      >
+                        Agregar
+                      </button>
+                    </form>
+                  </mat-grid-tile>
+
+                  <div
+                    *ngFor="
+                      let articulo_alquiler of articulo_alquilers.value;
+                      index as i
+                    "
+                  >
+                    <mat-grid-tile colspan="1" rowspan="1">
+                      <mat-label *ngIf="articulo_alquiler.articulo_id == 1"
+                        >Andamios</mat-label
+                      >
+                      <mat-label *ngIf="articulo_alquiler.articulo_id == 3"
+                        >Distanciadores</mat-label
+                      >
+                    </mat-grid-tile>
+                    <mat-grid-tile colspan="1" rowspan="1">
+                      {{ articulo_alquiler.cantidad_entregado }}
+                    </mat-grid-tile>
+                  </div>
+                </mat-grid-list>
+              </div>
+            </div>
+            <!-- DETALLES -->
+            <div @fadeInUp class="card overflow-hidden" fxFlex="auto">
+              <div
+                class="px-6 py-4 border-b"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <h2 class="title m-0">DETALLES</h2>
+              </div>
+              <div class="px-6 py-4" fxLayout="column">
+                <mat-grid-list cols="2" rowHeight="70px">
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    DESCRIPCION
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    CANTIDAD
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Valor/ m2
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input formControlName="metros" matInput />
+                      <mat-hint>metros</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Área
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input formControlName="area" matInput />
+                      <mat-hint>area</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    Valor Total
+                  </mat-grid-tile>
+                  <mat-grid-tile colspan="1" rowspan="1">
+                    <mat-form-field class="vex-flex-form-field" fxFlex="auto">
+                      <input
+                        formControlName="valor_total"
+                        matInput
+                        required
+                        type="number"
+                        min="0"
+                        step="0.2"
+                      />
+                      <mat-hint>valor_total</mat-hint>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                </mat-grid-list>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRANSPORTE -->
+        <div [@stagger]="true" class="p-gutter" vexContainer>
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div @fadeInUp class="card" fxFlex="auto">
+              <h2 class="title m-0">TRANSPORTE</h2>
+              <mat-grid-list cols="2" rowHeight="180px">
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <img class="h-40" src="assets/img/camion.png" />
+                  <div
+                    fxLayout="row"
+                    fxLayout.lt-md="column"
+                    fxLayoutGap="20px"
+                  >
+                    <mat-checkbox
+                      class="checkbox"
+                      formControlName="transporte_entrega"
+                    >
+                      ¿ Incluye Transporte de entrega?
+                    </mat-checkbox>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1">
+                  <img class="h-40" src="assets/img/camion.png" />
+                  <div
+                    fxLayout="row"
+                    fxLayout.lt-md="column"
+                    fxLayoutGap="20px"
+                  >
+                    <mat-checkbox
+                      class="checkbox"
+                      formControlName="transporte_devolucion"
+                    >
+                      ¿ Incluye Transporte de devolucion?
+                    </mat-checkbox>
+                  </div>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </div>
+          </div>
+        </div>
+
+        <!-- OBSERVACIONES -->
+        <div [@stagger]="true" class="p-gutter" vexContainer>
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+            <div @fadeInUp class="card" fxFlex="auto">
+              <div
+                class="px-12 py-4 border-b"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <h2 class="title m-0">OBSERVACIONES</h2>
+              </div>
+              <div class="px-12 py-4" fxLayout="column">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>OBSERVACIONES</mat-label>
+                  <input formControlName="observacion" matInput />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="actions"
+        fxLayout="row"
+        fxLayoutAlign="end center"
+        fxLayoutGap="8px"
+      >
+        <button color="warn" mat-raised-button (click)="volver()">
+          CANCELAR
+        </button>
+        <button
+          [disabled]="verticalContratoFormGroup.invalid"
+          color="primary"
+          mat-raised-button
+          (click)="submit()"
+        >
+          GUARDAR
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <h2
+      *ngIf="form.get('nombre').value || form.get('nombre2').value"
+      class="headline m-0"
+      fxFlex="auto"
+    >
+      {{ form.get("nombre").value + " " + form.get("nombre2").value }}
+    </h2>
+    <h2
+      *ngIf="!form.get('nombre').value && !form.get('nombre2').value"
+      class="headline m-0"
+      fxFlex="auto"
+    >
+      Nuevo Cliente
+    </h2>
+
+    <button
+      class="text-secondary"
+      mat-dialog-close
+      mat-icon-button
+      type="button"
+    >
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content fxLayout="column">
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field class="mt-6" fxFlex>
+        <mat-label>Nombre</mat-label>
+        <input cdkFocusInitial formControlName="nombre" matInput required />
+
+        <mat-icon [icIcon]="icPerson" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field class="mt-6" fxFlex>
+        <mat-label>Apellido</mat-label>
+        <input formControlName="nombre2" matInput />
+
+        <mat-icon [icIcon]="icPerson" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field fxFlex>
+        <mat-label>Cédula</mat-label>
+        <input
+          formControlName="cedula"
+          matInput
+          type="text"
+          (keypress)="onlyNumberKey($event)"
+          required
+        />
+
+        <mat-icon [icIcon]="icMyLocation" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput type="email" />
+
+        <mat-icon [icIcon]="icLocationCity" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="24px">
+      <mat-form-field fxFlex>
+        <mat-label>telf1</mat-label>
+        <input formControlName="telf1" matInput type="number" />
+
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+
+      <mat-form-field fxFlex>
+        <mat-label>telf2</mat-label>
+        <input formControlName="telf2" matInput type="number" />
+
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+      <mat-form-field fxFlex>
+        <mat-label>telf3</mat-label>
+        <input formControlName="telf3" matInput type="number" />
+
+        <mat-icon [icIcon]="icPhone" class="mr-3" matPrefix></mat-icon>
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <mat-label>Direccion</mat-label>
+      <input formControlName="direccion" matInput />
+
+      <mat-icon [icIcon]="icEditLocation" class="mr-3" matPrefix></mat-icon>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Direccion 2</mat-label>
+      <input formControlName="direccion2" matInput />
+
+      <mat-icon [icIcon]="icEditLocation" class="mr-3" matPrefix></mat-icon>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Notas</mat-label>
+      <textarea formControlName="observacion" matInput></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCELAR</button>
+    <button *ngIf="isCreateMode()" color="primary" mat-button type="submit">
+      CREAR CLIENTE
+    </button>
+    <button *ngIf="isUpdateMode()" color="primary" mat-button type="submit">
+      GUARDAR CAMBIOS
+    </button>
+  </mat-dialog-actions>
+</form>
