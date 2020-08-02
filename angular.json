@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/encofradoapp-angular",
+            "outputPath": "vex",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -124,8 +124,13 @@
               "devServerTarget": "vex:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "vex"
 }

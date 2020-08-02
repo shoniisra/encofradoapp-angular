@@ -1,0 +1,21 @@
+[
+    {
+        "numero":"001",
+        "fecha_inicio":"28/02/98",
+        "fecha_entrega":"28/03/98",
+        "dias_postergados":"28/02/98",
+        "id_cliente":"1805140348",
+        "valor_total":"1805140348",
+        "detalle":
+        [{
+            "puntales":12,
+            "viguetas":12,
+            "tableros":12,
+            "distanciadores":12,
+            "crucetas_L":12,
+            "crucetas_C":12
+        }]
+        
+    }
+    
+]

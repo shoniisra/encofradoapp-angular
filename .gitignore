@@ -1,15 +1,15 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
-node_modules
+# node_modules
 typings
 jspm_packages
 bower_components
 
 # compiled output
-/dist
-/tmp
-/out-tsc
-dist/
-tmp/
+# /dist
+# /tmp
+# /out-tsc
+# dist/
+# tmp/
 
 # dependencies
 /node_modules
