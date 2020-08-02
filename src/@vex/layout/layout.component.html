@@ -1,11 +1,3 @@
-<vex-config-panel-toggle (openConfig)="openConfigPanel()"></vex-config-panel-toggle>
-
-<!-- CONFIGPANEL -->
-<vex-sidebar #configpanel [invisibleBackdrop]="true" position="right">
-  <vex-config-panel></vex-config-panel>
-</vex-sidebar>
-<!-- END CONFIGPANEL -->
-
 <div [class.boxed]="isBoxed$ | async"
      [class.horizontal-layout]="!(isLayoutVertical$ | async)"
      [class.is-mobile]="!(isDesktop$ | async)"

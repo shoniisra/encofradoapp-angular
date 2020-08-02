@@ -35,23 +35,7 @@ export class MegaMenuComponent implements OnInit {
       icon: icAssigment,
       label: 'AIO-Table',
       route: '/apps/aio-table'
-    },
-    {
-      icon: icContactSupport,
-      label: 'Help Center',
-      route: '/apps/help-center'
-    },
-    {
-      icon: icContacts,
-      label: 'Contacts',
-      route: '/apps/contacts/grid'
-    },
-    {
-      icon: icAssessment,
-      label: 'Scrumboard',
-      route: '/apps/scrumboard/1'
     }
-    
   ];
 
   pages: MegaMenuPage[] = [
@@ -66,10 +50,6 @@ export class MegaMenuComponent implements OnInit {
     {
       label: 'Components',
       route: '/ui/components/overview'
-    },    
-    {
-      label: 'FAQ',
-      route: '/pages/faq'
     },
     {
       label: 'Form Elements',
@@ -78,18 +58,6 @@ export class MegaMenuComponent implements OnInit {
     {
       label: 'Form Wizard',
       route: '/ui/forms/form-wizard'
-    },
-    {
-      label: 'Guides',
-      route: '/pages/guides'
-    },
-    {
-      label: 'Help Center',
-      route: '/apps/help-center'
-    },
-    {
-      label: 'Scrumboard',
-      route: '/apps/scrumboard'
     }
   ];
 
