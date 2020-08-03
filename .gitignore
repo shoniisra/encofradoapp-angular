@@ -1,8 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 # node_modules
-typings
-jspm_packages
-bower_components
+# typings
+# jspm_packages
+# bower_components
 
 # compiled output
 # /dist
@@ -10,6 +10,9 @@ bower_components
 # /out-tsc
 # dist/
 # tmp/
+
+# Only exists if Bazel was run
+/bazel-out
 
 # dependencies
 /node_modules
@@ -29,6 +32,7 @@ bower_components
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+.history/*
 
 # misc
 /.sass-cache
@@ -36,21 +40,10 @@ bower_components
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
-
-
-# e2e
-e2e/*.js
-e2e/*.map
-
-# System Files
-.DS_Store/
