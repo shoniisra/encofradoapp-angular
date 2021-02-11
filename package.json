@@ -32,7 +32,7 @@
     "@ngx-loading-bar/router": "^4.2.0",
     "@visurel/iconify-angular": "^0.0.7",
     "angular-calendar": "^0.27.14",
-    "apexcharts": "^3.8.2",
+    "apexcharts": "^3.24.0",
     "apollo-angular": "^1.9.1",
     "apollo-angular-boost": "^1.8.0",
     "apollo-angular-link-http": "^1.10.0",
